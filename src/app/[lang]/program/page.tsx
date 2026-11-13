@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ApplyLink } from "@/components/ApplyLink";
 import { notFound } from "next/navigation";
 import { Chapter, Rich } from "@/components/ui";
 import { Photo } from "@/components/Photo";
@@ -84,7 +85,7 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href={`/${lang}/program/${p.slug}`} className="btn">{ui.readMore}</Link>
                 {p.state === "open" && (
-                  <Link href={`/${lang}/apply?program=${p.slug}`} className="btn btn-solid">{t.program.highlight.applyLabel}</Link>
+                  <ApplyLink lang={lang} query={`?program=${p.slug}`} className="btn btn-solid">{t.program.highlight.applyLabel}</ApplyLink>
                 )}
               </div>
             </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ApplyLink } from "@/components/ApplyLink";
 import type { Lang, UI } from "@/lib/i18n";
 import type { ProgramView, SessionView } from "@/lib/programs";
 
@@ -40,9 +41,9 @@ export function SessionList({ lang, program, ui }: { lang: Lang; program: Progra
             </p>
           </div>
           {s.state !== "closed" && program.state === "open" && (
-            <Link href={`/${lang}/apply?program=${program.slug}&session=${s.id}`} className="btn btn-sm">
+            <ApplyLink lang={lang} query={`?program=${program.slug}&session=${s.id}`} className="btn btn-sm">
               {s.state === "full" ? ui.applyForm.sessionFull : ui.applyShort}
-            </Link>
+            </ApplyLink>
           )}
         </li>
       ))}

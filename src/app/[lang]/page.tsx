@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { STATIC_SITE } from "@/lib/static-mode";
+import { ApplyLink } from "@/components/ApplyLink";
 import { notFound } from "next/navigation";
 import { Chapter, Paragraphs, Rich, safeHref } from "@/components/ui";
 import { Photo } from "@/components/Photo";
@@ -66,9 +68,9 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
               <Link href={`/${lang}/program`} className="btn btn-light">
                 {ui.explorePrograms}
               </Link>
-              <Link href={`/${lang}/apply`} className="btn btn-light-solid">
+              <ApplyLink lang={lang} className="btn btn-light-solid">
                 {ui.apply}
-              </Link>
+              </ApplyLink>
             </div>
           </div>
         </div>
@@ -302,9 +304,9 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             ))}
           </ol>
           <div className="mt-10">
-            <Link href={`/${lang}/apply`} className="btn btn-solid">
+            <ApplyLink lang={lang} className="btn btn-solid">
               {ui.apply}
-            </Link>
+            </ApplyLink>
           </div>
         </div>
       </section>
@@ -319,14 +321,16 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
       {/* 07 NEWSLETTER + 08 CONTACT */}
       <section id="contact" aria-label={`${ch.newsletter} / ${ch.contact}`} className="wrap grid scroll-mt-24 gap-16 border-t border-[var(--rule-strong)] py-20 md:grid-cols-2 md:py-28">
+        {!STATIC_SITE && (
         <div id="newsletter" className="scroll-mt-24">
           <Chapter no="07" label={ch.newsletter} />
           <div className="mt-8">
             <Newsletter copy={t.hero.subscribeButton} lang={lang} />
           </div>
         </div>
+        )}
         <div>
-          <Chapter no="08" label={ch.contact} />
+          <Chapter no={STATIC_SITE ? "07" : "08"} label={ch.contact} />
           <h2 className={`${titleFont} mt-8 text-2xl md:text-2xl`}>{t.contact.heading}</h2>
           <dl className="mt-6 space-y-4">
             <div>

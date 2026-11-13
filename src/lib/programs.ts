@@ -85,6 +85,36 @@ export const FALLBACK_COVERS: Record<string, string> = {
 };
 export const DEFAULT_COVER = "/images/performances/perf-13.jpg";
 
+const row = (slug: string, sort_order: number, ko: [string, string, string], en: [string, string, string], extra: Partial<ProgramRow> = {}): ProgramRow => ({
+  id: slug, slug, sort_order, is_published: true, recruit_status: "open", apply_deadline: null, cover_image: null, default_capacity: null, fee_amount: null,
+  name_ko: ko[0], name_en: en[0], format_ko: ko[1], format_en: en[1], summary_ko: ko[2], summary_en: en[2],
+  description_ko: "", description_en: "", composition_ko: "", composition_en: "", target_ko: "", target_en: "",
+  duration_ko: "", duration_en: "", location_ko: "", location_en: "", fee_note_ko: "", fee_note_en: "", ...extra,
+});
+
+/** The original five programs. Used when no database is configured (static preview / first local run). */
+export const FALLBACK_PROGRAMS: ProgramRow[] = [
+  row("embodied-listening", 1,
+    ["Didgeridoo Embodied Listening", "원데이 체험", "디저리두의 소리와 진동을 듣고 느끼며 자신의 몸과 감각을 알아차리는 경험"],
+    ["Didgeridoo Embodied Listening", "One-Day Experience", "An experience of listening to and feeling the sound and vibration of the didgeridoo, while noticing your body and senses"],
+    { composition_ko: "호흡 → 소리 → 진동 → 알아차림 → 체화된 경청", composition_en: "Breath → Sound → Vibration → Awareness → Embodied Listening" }),
+  row("ten-week-program", 2,
+    ["10-Week Didgeridoo Program", "10주 과정 (개인의 특성에 따라 유연하게 조정 가능)", "호흡과 신체 인식에서 시작해 소리, 진동, 즉흥연주로 확장하는 단계적 프로그램"],
+    ["10-Week Didgeridoo Program", "10 Weeks (flexibly adjusted to individual needs)", "A step-by-step program that begins with breath and body awareness and expands into sound, vibration, and improvisation"],
+    { composition_ko: "호흡·신체 인식 → 소리 → 진동 → 즉흥연주", composition_en: "Breath & body awareness → Sound → Vibration → Improvisation" }),
+  row("music-therapy", 3,
+    ["Music Therapy", "임상 / 케어 환경", "병원, 요양시설 등에서 개인의 상태와 필요에 맞추어 음악치료적 접근으로 진행"],
+    ["Music Therapy", "Clinical / Care Settings", "Conducted as a music therapy approach tailored to each person's condition and needs in hospitals, care facilities, and similar settings"],
+    { location_ko: "병원, 요양시설 등", location_en: "Hospitals, care facilities, and similar settings" }),
+  row("sound-meditation", 4,
+    ["Sound Meditation with Didgeridoo", "세션 / 리트릿", "디저리두의 지속적인 소리와 진동을 통해 경청과 호흡, 신체 감각에 주의를 기울이는 시간"],
+    ["Sound Meditation with Didgeridoo", "Session / Retreat", "Time spent attending to listening, breath, and bodily sensation through the didgeridoo's continuous sound and vibration"]),
+  row("workshops-collaborations", 5,
+    ["Workshops & Collaborations", "워크숍 / 협업", "기관, 기업, 커뮤니티 등과 협력하여 대상과 목적에 맞는 체험형 프로그램 구성"],
+    ["Workshops & Collaborations", "Workshop / Collaboration", "Experiential programs designed in collaboration with organizations, companies, and communities to fit the audience and purpose"],
+    { target_ko: "기관, 기업, 커뮤니티 등", target_en: "Organizations, companies, and communities" }),
+];
+
 const TZ = "Asia/Seoul";
 
 export function formatDate(lang: Lang, iso: string, withTime = false): string {
@@ -191,7 +221,7 @@ export function toProgramView(
 
 /** All published programs with upcoming sessions and live seat counts. */
 export async function getPrograms(lang: Lang): Promise<ProgramView[]> {
-  if (!supabaseConfigured()) return [];
+  if (!supabaseConfigured()) return FALLBACK_PROGRAMS.map((p) => toProgramView(lang, p, [], new Map()));
   try {
     const db = anonClient();
     const [programs, sessions, seatRows] = await Promise.all([

@@ -11,9 +11,14 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
 ];
 
+const staticExport = process.env.STATIC_EXPORT === "1";
+
 const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
   poweredByHeader: false,
+  ...(staticExport
+    ? { output: "export" as const, basePath: process.env.STATIC_BASE_PATH ?? "", trailingSlash: true }
+    : {}),
   turbopack: {
     rules: {
       "*.css": {
@@ -23,6 +28,7 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
+    ...(staticExport ? { loader: "custom" as const, loaderFile: "./image-loader.ts" } : {}),
     formats: ["image/avif", "image/webp"],
     qualities: [60, 75, 85],
     deviceSizes: [480, 768, 1080, 1440, 1920],
@@ -41,13 +47,13 @@ const nextConfig: NextConfig = {
         : []),
     ],
   },
-  async headers() {
+  ...(staticExport ? {} : { async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
       { source: "/admin/:path*", headers: [{ key: "Cache-Control", value: "no-store" }] },
       { source: "/api/admin/:path*", headers: [{ key: "Cache-Control", value: "no-store" }] },
     ];
-  },
+  } }),
 };
 
 export default nextConfig;

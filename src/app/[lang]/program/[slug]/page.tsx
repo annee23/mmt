@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ApplyLink } from "@/components/ApplyLink";
 import { notFound } from "next/navigation";
 import { Chapter, Paragraphs } from "@/components/ui";
 import { Photo } from "@/components/Photo";
@@ -7,7 +8,11 @@ import { EmbodiedDiagram } from "@/components/EmbodiedDiagram";
 import { SessionList, StateBadge } from "@/components/program";
 import { getContent } from "@/lib/content";
 import { getUI, isLang } from "@/lib/i18n";
-import { getProgram } from "@/lib/programs";
+import { getProgram, getPrograms } from "@/lib/programs";
+
+export async function generateStaticParams() {
+  return (await getPrograms("ko")).map((p) => ({ slug: p.slug }));
+}
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/program/[slug]">): Promise<Metadata> {
   const { lang, slug } = await params;
@@ -72,9 +77,9 @@ export default async function ProgramDetail({ params }: PageProps<"/[lang]/progr
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             {program.state === "open" ? (
-              <Link href={`/${lang}/apply?program=${program.slug}`} className="btn btn-solid">
+              <ApplyLink lang={lang} query={`?program=${program.slug}`} className="btn btn-solid">
                 {ui.apply}
-              </Link>
+              </ApplyLink>
             ) : (
               <span className="btn" aria-disabled="true">
                 {program.state === "upcoming" ? ui.program.upcoming : ui.program.closed}
@@ -120,9 +125,9 @@ export default async function ProgramDetail({ params }: PageProps<"/[lang]/progr
           <SessionList lang={lang} program={program} ui={ui} />
           <div className="mt-8">
             {program.state === "open" ? (
-              <Link href={`/${lang}/apply?program=${program.slug}`} className="btn btn-solid">
+              <ApplyLink lang={lang} query={`?program=${program.slug}`} className="btn btn-solid">
                 {ui.apply}
-              </Link>
+              </ApplyLink>
             ) : (
               <p className="text-brown/70">{program.state === "upcoming" ? ui.program.upcoming : ui.program.closed}</p>
             )}

@@ -10,6 +10,7 @@ import { siteUrl } from "@/lib/env";
 
 // Content, programs and seat counts are editable in /admin, so pages are rendered per request.
 export const dynamic = "force-dynamic";
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const dynamicParams = false;
 export const generateStaticParams = () => LANGS.map((lang) => ({ lang }));
 
@@ -33,10 +34,10 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
       title,
       description,
       locale: lang === "ko" ? "ko_KR" : "en_US",
-      images: [{ url: "/images/videos/instrument.jpg", width: 1600, height: 900 }],
+      images: [{ url: `${BASE}/images/videos/instrument.jpg`, width: 1600, height: 900 }],
     },
     twitter: { card: "summary_large_image" },
-    icons: { icon: "/favicon.png" },
+    icons: { icon: `${BASE}/favicon.png` },
   };
 }
 

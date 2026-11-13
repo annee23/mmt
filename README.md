@@ -7,6 +7,12 @@ Antique-editorial site (Next.js 16 · TypeScript · Tailwind 4 · Supabase) with
 - Original content lives in `src/content/{ko,en}.json`; admins edit it in `/admin/content` (stored as overrides in `site_content`).
   Fields that were placeholders on the old site (thesis summary, performances intro, one workshop description) are left empty for the admin.
 
+## Static landing preview (GitHub Pages)
+
+`node scripts/build-static.mjs` builds a server-less copy of the public pages into `static-out/` (apply buttons point to the original Google Form; newsletter/admin are omitted).
+`.github/workflows/pages.yml` publishes it on every push to `main` — enable it once under **Settings → Pages → Source: GitHub Actions**.
+The full site (apply flow, admin) needs a server: use the Vercel deployment below.
+
 ## Deploy (Supabase + Vercel)
 
 1. **Supabase project** → SQL editor (or `supabase db push`): run the files in `supabase/migrations/` in order

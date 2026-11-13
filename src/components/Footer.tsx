@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { STATIC_SITE } from "@/lib/static-mode";
+import { ApplyLink } from "@/components/ApplyLink";
 import type { Content } from "@/lib/content";
 import type { Lang, UI } from "@/lib/i18n";
 import { safeHref } from "@/components/ui";
@@ -30,9 +32,9 @@ export function Footer({ lang, t, ui }: { lang: Lang; t: Content; ui: UI }) {
               </li>
             ))}
             <li>
-              <Link href={`/${lang}/apply`} className="link-u font-title text-xl tracking-wide">
+              <ApplyLink lang={lang} className="link-u font-title text-xl tracking-wide">
                 {ui.applyShort}
-              </Link>
+              </ApplyLink>
             </li>
           </ul>
         </nav>
@@ -55,7 +57,6 @@ export function Footer({ lang, t, ui }: { lang: Lang; t: Content; ui: UI }) {
       <div className="border-t border-paper/15">
         <div className="wrap space-y-3 py-6 text-sm text-paper/65">
           <div className="space-y-1 text-xs leading-relaxed text-paper/55">
-            <p>© 2025 Sarang Jin. All rights reserved.</p>
             {ui.footer.notice.map((n) => (
               <p key={n}>{n}</p>
             ))}
@@ -64,9 +65,11 @@ export function Footer({ lang, t, ui }: { lang: Lang; t: Content; ui: UI }) {
           <p>
             {t.footer.copyright} · {ui.footer.rights}
           </p>
-          <Link href="/admin" className="hover:text-paper" rel="nofollow">
-            {ui.footer.admin}
-          </Link>
+          {!STATIC_SITE && (
+            <Link href="/admin" className="hover:text-paper" rel="nofollow">
+              {ui.footer.admin}
+            </Link>
+          )}
           </div>
         </div>
       </div>
