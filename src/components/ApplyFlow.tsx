@@ -174,9 +174,9 @@ export function ApplyFlow({
     return (
       <div role="status" className="mx-auto max-w-2xl text-center">
         <p className="chapter justify-center"><b>✓</b></p>
-        <h1 ref={heading} tabIndex={-1} className="font-title-kr mt-6 text-[clamp(1.9rem,4vw,2.8rem)] outline-none">{copy.done.title}</h1>
+        <h1 ref={heading} tabIndex={-1} className="font-title-kr mt-6 text-[clamp(1.37rem,2.9vw,2.02rem)] outline-none">{copy.done.title}</h1>
         <dl className="mt-10 divide-y divide-[var(--rule)] border-y border-[var(--rule-strong)] text-left">
-          <Row k={copy.done.number} v={<strong className="font-title text-2xl tracking-wider">{done.application_no}</strong>} />
+          <Row k={copy.done.number} v={<strong className="font-title text-xl tracking-wider">{done.application_no}</strong>} />
           <Row k={copy.done.program} v={done.program} />
           {session && <Row k={copy.done.session} v={`${session.dateText} ${session.timeText}`.trim()} />}
           <Row k={copy.done.status} v={<span className="badge text-burgundy">{done.status === "waitlist" ? copy.done.statusWaitlist : copy.done.statusValue}</span>} />
@@ -212,7 +212,7 @@ export function ApplyFlow({
 
         {step === 0 && (
           <fieldset>
-            <legend className="font-title-kr text-[clamp(1.7rem,3.4vw,2.4rem)]"><h1 ref={heading} tabIndex={-1} className="outline-none">{copy.pickProgram}</h1></legend>
+            <legend className="font-title-kr text-[clamp(1.22rem,2.4vw,1.73rem)]"><h1 ref={heading} tabIndex={-1} className="outline-none">{copy.pickProgram}</h1></legend>
             <div className="mt-6 space-y-3">
               {programs.map((pr) => {
                 const disabled = pr.state !== "open";
@@ -221,7 +221,7 @@ export function ApplyFlow({
                     <input type="radio" name="program" id={pr.id === programs[0].id ? "f-program" : undefined} disabled={disabled} checked={programId === pr.id}
                       onChange={() => { setProgramId(pr.id); setSessionId(""); setErrors({}); }} />
                     <span>
-                      <span className="font-title block text-[1.45rem] leading-tight">{pr.name}</span>
+                      <span className="font-title block text-[1.25rem] leading-tight">{pr.name}</span>
                       <span className="block text-sm text-bronze-deep">{pr.format}</span>
                       {disabled && <span className="mt-1 block text-sm text-burgundy">{pr.stateText}</span>}
                     </span>
@@ -235,7 +235,7 @@ export function ApplyFlow({
 
         {step === 1 && program && (
           <fieldset>
-            <legend className="font-title-kr text-[clamp(1.7rem,3.4vw,2.4rem)]"><h1 ref={heading} tabIndex={-1} className="outline-none">{copy.pickSession}</h1></legend>
+            <legend className="font-title-kr text-[clamp(1.22rem,2.4vw,1.73rem)]"><h1 ref={heading} tabIndex={-1} className="outline-none">{copy.pickSession}</h1></legend>
             <p className="font-title mt-2 text-xl text-bronze-deep">{program.name}</p>
             <div className="mt-6 space-y-3">
               {program.sessions.map((s, i) => {
@@ -258,7 +258,7 @@ export function ApplyFlow({
 
         {step === 2 && (
           <div className="space-y-8">
-            <h1 ref={heading} tabIndex={-1} className="font-title-kr text-[clamp(1.7rem,3.4vw,2.4rem)] outline-none">{copy.title}</h1>
+            <h1 ref={heading} tabIndex={-1} className="font-title-kr text-[clamp(1.22rem,2.4vw,1.73rem)] outline-none">{copy.title}</h1>
             {program && (
               <p className="font-title -mt-4 text-xl text-bronze-deep">
                 {program.name}{session ? ` — ${session.dateText}` : ""}
@@ -298,7 +298,7 @@ export function ApplyFlow({
 
         {step === 3 && (
           <div className="space-y-8">
-            <h1 ref={heading} tabIndex={-1} className="font-title-kr text-[clamp(1.7rem,3.4vw,2.4rem)] outline-none">{copy.consent.privacyTitle}</h1>
+            <h1 ref={heading} tabIndex={-1} className="font-title-kr text-[clamp(1.22rem,2.4vw,1.73rem)] outline-none">{copy.consent.privacyTitle}</h1>
             <div className="space-y-3 border border-[var(--rule)] bg-paper p-5 text-[0.95rem] leading-relaxed">
               {p.controller && <Line k={copy.consent.controller} v={p.controller} />}
               {p.contactEmail && <Line k={copy.consent.contact} v={p.contactEmail} />}

@@ -9,14 +9,14 @@
     "static/chunks/0qzziwb97mg_9.js",
     "static/chunks/2zc6y0x_65h-v.js",
     "static/chunks/1hmy58lln7q9c.js",
-    "static/chunks/24t9valccz4k6.js",
+    "static/chunks/0zziamq3e8yf_.js",
     "static/chunks/turbopack-2u1d16houkiyo.js"
   ],
   "pages": {},
   "ampFirstPages": [],
   "rootMainFilesTree": {},
   "pagesChunkGroupBootstrapParams": {
-    "/admin/applications/page": {"otherChunks":["static/chunks/0qzziwb97mg_9.js","static/chunks/2zc6y0x_65h-v.js","static/chunks/1hmy58lln7q9c.js","static/chunks/24t9valccz4k6.js"],"runtimeModuleIds":[33775]}
+    "/admin/applications/page": {"otherChunks":["static/chunks/0qzziwb97mg_9.js","static/chunks/2zc6y0x_65h-v.js","static/chunks/1hmy58lln7q9c.js","static/chunks/0zziamq3e8yf_.js"],"runtimeModuleIds":[33775]}
   },
   "chunkLoadingGlobal": "TURBOPACK"
 }

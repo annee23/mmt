@@ -44,7 +44,7 @@ export function Newsletter({ copy, lang }: { copy: Copy; lang: "ko" | "en" }) {
 
   return (
     <form onSubmit={onSubmit} noValidate className="max-w-xl">
-      <label htmlFor="newsletter-email" className="font-title text-3xl md:text-4xl">
+      <label htmlFor="newsletter-email" className="font-title text-2xl md:text-2xl">
         {copy.title}
       </label>
       <p className="mt-3 text-[0.98rem] text-brown/80">{copy.description}</p>

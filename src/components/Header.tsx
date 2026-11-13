@@ -9,13 +9,12 @@ type Props = {
   lang: "ko" | "en";
   nav: { label: string; href: string; key: string }[];
   brand: string;
-  applyLabel: string;
   menuLabel: string;
   closeLabel: string;
   switchLabel: string;
 };
 
-export function Header({ lang, nav, brand, applyLabel, menuLabel, closeLabel, switchLabel }: Props) {
+export function Header({ lang, nav, brand, menuLabel, closeLabel, switchLabel }: Props) {
   const pathname = usePathname() ?? `/${lang}`;
   const [open, setOpen] = useState(false);
   const rest = pathname.replace(/^\/(ko|en)/, "") || "";
@@ -66,7 +65,7 @@ export function Header({ lang, nav, brand, applyLabel, menuLabel, closeLabel, sw
               key={n.key}
               href={n.href}
               aria-current={isActive(n.href) ? "page" : undefined}
-              className={`font-title text-[1.08rem] tracking-[0.14em] uppercase transition-colors hover:text-burgundy ${
+              className={`font-title text-[1.0rem] tracking-[0.14em] uppercase transition-colors hover:text-burgundy ${
                 isActive(n.href) ? "text-burgundy" : "text-brown"
               }`}
             >
@@ -77,9 +76,6 @@ export function Header({ lang, nav, brand, applyLabel, menuLabel, closeLabel, sw
 
         <div className="flex items-center gap-5">
           <div className="hidden lg:block">{langSwitch}</div>
-          <Link href={`/${lang}/apply`} className="btn btn-sm btn-solid hidden sm:inline-flex">
-            {applyLabel}
-          </Link>
           <button
             type="button"
             className="-mr-2 inline-flex h-11 w-11 items-center justify-center lg:hidden"
@@ -118,19 +114,14 @@ export function Header({ lang, nav, brand, applyLabel, menuLabel, closeLabel, sw
               href={n.href}
               onClick={() => setOpen(false)}
               aria-current={isActive(n.href) ? "page" : undefined}
-              className="flex items-baseline gap-4 border-b border-[var(--rule)] py-4 font-title-kr text-[1.7rem] text-brown"
+              className="flex items-baseline gap-4 border-b border-[var(--rule)] py-4 font-title-kr text-[1.35rem] text-brown"
             >
               <span className="font-title w-8 text-base text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
               {n.label}
             </Link>
           ))}
         </nav>
-        <div className="wrap flex items-center justify-between pb-10 pt-6">
-          {langSwitch}
-          <Link href={`/${lang}/apply`} onClick={() => setOpen(false)} className="btn btn-solid">
-            {applyLabel}
-          </Link>
-        </div>
+        <div className="wrap flex items-center justify-between pb-10 pt-6">{langSwitch}</div>
       </div>
     </header>
   );

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Chapter, Paragraphs } from "@/components/ui";
-import { Photo } from "@/components/Photo";
+import { Photo, dimsOf } from "@/components/Photo";
 import { getContent } from "@/lib/content";
 import { isLang } from "@/lib/i18n";
 
@@ -22,23 +22,31 @@ export default async function WorkshopsPage({ params }: PageProps<"/[lang]/works
     <div className="wrap pb-24 pt-14 md:pt-24">
       <header>
         <Chapter no="04" label={t.workshops.eyebrow} />
-        <h1 className={`${titleFont} mt-6 text-[clamp(2.8rem,7vw,5.5rem)]`}>{t.workshops.heading}</h1>
+        <h1 className={`${titleFont} mt-6 text-[clamp(1.62rem,4.1vw,3.19rem)]`}>{t.workshops.heading}</h1>
       </header>
       <ol className="mt-16">
         {t.workshops.items.map((item, i) => {
           const below = "captionBelow" in item && item.captionBelow;
           const images = item.images;
+          // Portrait documents (e.g. certificate letters) stay small next to the larger photos.
           const gallery = (
-            <div className={`grid gap-4 ${images.length > 1 ? "sm:grid-cols-2" : ""} ${images.length === 3 ? "[&>*:first-child]:sm:col-span-2" : ""}`}>
-              {images.map((src, k) => (
-                <Photo key={src} src={src} alt={`${item.title} ${k + 1}`} sizes={images.length > 1 ? "(min-width:768px) 28vw, 100vw" : "(min-width:768px) 50vw, 100vw"} />
-              ))}
+            <div className="flex flex-wrap items-start gap-3 md:gap-4">
+              {images.map((src, k) => {
+                const [w, h] = dimsOf(src);
+                const portrait = h / w > 1.2;
+                const cls = images.length > 1 ? (portrait ? "w-32 sm:w-40" : "min-w-[14rem] flex-1 basis-64") : portrait ? "w-full max-w-xs" : "w-full";
+                return (
+                  <div key={src} className={cls}>
+                    <Photo src={src} alt={`${item.title} ${k + 1}`} sizes={portrait ? "200px" : "(min-width:768px) 40vw, 100vw"} />
+                  </div>
+                );
+              })}
             </div>
           );
           const text = (
             <>
-              <span className="font-title text-2xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
-              <h2 className={`${titleFont} mt-3 text-[clamp(1.6rem,2.8vw,2.3rem)]`}>{item.title}</h2>
+              <span className="font-title text-xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
+              <h2 className={`${titleFont} mt-3 text-[clamp(1.15rem,2.0vw,1.66rem)]`}>{item.title}</h2>
               <Paragraphs text={item.description} className="mt-5 max-w-xl" />
             </>
           );

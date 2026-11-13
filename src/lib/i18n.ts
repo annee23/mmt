@@ -72,7 +72,16 @@ const ko = {
     confirmButton: "구독 취소",
   },
   contact: { email: "이메일", instagram: "인스타그램" },
-  footer: { archive: "An Archive of Sound, Breath & Healing", admin: "관리자", rights: "All rights reserved." },
+  footer: {
+    archive: "An Archive of Sound, Breath & Healing",
+    admin: "관리자",
+    rights: "All rights reserved.",
+    notice: [
+      "이 페이지의 글과 그림은 저작권의 보호를 받습니다.",
+      "본 디저리두 기반 세부 프로그램은 저작권위원회에 등록된 창작물로, 저작권법의 보호를 받습니다.",
+      "저작자의 사전 허가 없이 프로그램의 전체 또는 일부를 복제, 배포, 수정하거나 상업적으로 이용할 수 없습니다.",
+    ] as string[],
+  },
   gallery: { open: "사진 확대", prev: "이전 사진", next: "다음 사진", close: "닫기" },
   notFound: { title: "페이지를 찾을 수 없습니다", back: "홈으로 돌아가기" },
   applyForm: {
@@ -233,7 +242,16 @@ const en: UI = {
     confirmButton: "Unsubscribe",
   },
   contact: { email: "Email", instagram: "Instagram" },
-  footer: { archive: "An Archive of Sound, Breath & Healing", admin: "Admin", rights: "All rights reserved." },
+  footer: {
+    archive: "An Archive of Sound, Breath & Healing",
+    admin: "Admin",
+    rights: "All rights reserved.",
+    notice: [
+      "The text and illustrations on this page are protected by copyright.",
+      "This didgeridoo-based program is a creative work registered with the copyright authority and protected by copyright law.",
+      "No part of the program may be copied, distributed, modified or used commercially without the author's prior permission.",
+    ],
+  },
   gallery: { open: "Enlarge photo", prev: "Previous photo", next: "Next photo", close: "Close" },
   notFound: { title: "Page not found", back: "Back to home" },
   applyForm: {

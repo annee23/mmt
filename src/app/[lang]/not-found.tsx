@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <div className="wrap py-32 text-center">
       <p className="chapter justify-center"><b>404</b></p>
-      <h1 className="font-title-kr mt-6 text-4xl">{ui.notFound.title}</h1>
+      <h1 className="font-title-kr mt-6 text-2xl">{ui.notFound.title}</h1>
       <p className="font-title mt-2 text-xl italic text-bronze-deep">Page not found</p>
       <Link href="/" className="btn mt-10">
         {ui.notFound.back} / Home

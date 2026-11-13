@@ -1,34 +1,12 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Noto_Sans_KR, Noto_Serif_KR } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
+import { fontVars } from "@/fonts";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { getContent } from "@/lib/content";
 import { LANGS, getUI, isLang } from "@/lib/i18n";
 import { siteUrl } from "@/lib/env";
-
-const display = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-const serifKr = Noto_Serif_KR({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-noto-serif-kr",
-  display: "swap",
-  preload: false,
-});
-const sansKr = Noto_Sans_KR({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-noto-sans-kr",
-  display: "swap",
-  preload: false,
-});
 
 // Content, programs and seat counts are editable in /admin, so pages are rendered per request.
 export const dynamic = "force-dynamic";
@@ -55,7 +33,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
       title,
       description,
       locale: lang === "ko" ? "ko_KR" : "en_US",
-      images: [{ url: "/images/videos/intro.jpg", width: 1600, height: 900 }],
+      images: [{ url: "/images/videos/instrument.jpg", width: 1600, height: 900 }],
     },
     twitter: { card: "summary_large_image" },
     icons: { icon: "/favicon.png" },
@@ -67,14 +45,13 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[la
   if (!isLang(lang)) notFound();
   const [t, ui] = [await getContent(lang), getUI(lang)];
   const nav = [
-    { key: "home", label: t.nav.home, href: `/${lang}` },
     { key: "program", label: t.nav.program, href: `/${lang}/program` },
     { key: "research", label: t.nav.research, href: `/${lang}/research` },
     { key: "workshops", label: t.nav.workshops, href: `/${lang}/workshops` },
     { key: "performances", label: t.nav.performances, href: `/${lang}/performances` },
   ];
   return (
-    <html lang={lang} className={`${display.variable} ${serifKr.variable} ${sansKr.variable}`}>
+    <html lang={lang} className={fontVars}>
       <body className="flex min-h-screen flex-col">
         <a
           href="#main"
@@ -86,7 +63,6 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[la
           lang={lang}
           nav={nav}
           brand={t.nav.name}
-          applyLabel={ui.apply}
           menuLabel={ui.menu}
           closeLabel={ui.close}
           switchLabel={ui.language}

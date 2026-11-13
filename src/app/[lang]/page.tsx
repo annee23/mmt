@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Chapter, Paragraphs, Rich, safeHref } from "@/components/ui";
 import { Photo } from "@/components/Photo";
+import { EmbodiedDiagram } from "@/components/EmbodiedDiagram";
 import { Newsletter } from "@/components/Newsletter";
 import { LegacyHashRedirect } from "@/components/LegacyHashRedirect";
 import { StateBadge } from "@/components/program";
@@ -28,7 +29,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
     alternateName: "진사랑",
     jobTitle: ["Music Therapist", "Didgeridoo Artist"],
     url: `${siteUrl()}/${lang}`,
-    image: `${siteUrl()}/images/videos/intro.jpg`,
+    image: `${siteUrl()}/images/videos/instrument.jpg`,
     email: t.contact.email,
     sameAs: [t.contact.instagramUrl, t.research.writing.href],
   };
@@ -41,24 +42,24 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       {/* HERO */}
       <section aria-labelledby="hero-title" className="relative isolate flex min-h-[calc(100svh-4rem)] items-end overflow-hidden bg-brown text-paper md:min-h-[calc(100svh-4.75rem)]">
         <Photo
-          src="/images/videos/intro.jpg"
-          alt={isKo ? "디저리두를 곁에 두고 먼 곳을 바라보는 진사랑" : "Jin Sarang beside her didgeridoo, looking into the distance"}
+          src="/images/videos/instrument.jpg"
+          alt={isKo ? "지하철 승강장에서 디저리두를 든 진사랑의 뒷모습" : "Jin Sarang from behind, holding her didgeridoo on a station platform"}
           priority
           sizes="100vw"
           ratio="16/9"
-          position="68% 30%"
+          position="75% 40%"
           className="!absolute inset-0 -z-10 !aspect-auto h-full w-full"
         />
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-[#241b15]/85 via-[#241b15]/35 to-[#241b15]/5 md:bg-gradient-to-r md:from-[#241b15]/80 md:via-[#241b15]/30 md:to-transparent" />
         <div className="wrap w-full pb-12 pt-32 md:pb-20">
           <p className="rise font-title text-[0.95rem] tracking-[0.32em] text-bronze uppercase">{ui.heroNote}</p>
-          <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[11em] text-[clamp(2.6rem,6.4vw,5.8rem)] leading-[1.02] italic font-medium">
+          <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[16em] text-[clamp(1.9rem,4.2vw,3.6rem)] leading-[1.02] italic font-medium">
             {slogan}
           </h1>
-          <p className="rise rise-3 font-title mt-4 max-w-2xl text-[clamp(1.25rem,2.4vw,1.9rem)] italic text-paper/90">{secondary}</p>
+          <p className="rise rise-3 font-title mt-4 max-w-2xl text-[clamp(1.02rem,2.0vw,1.56rem)] italic text-paper/90">{secondary}</p>
           <div className="rise rise-3 mt-8 flex flex-wrap items-end justify-between gap-8">
             <div>
-              <p className={`${titleFont} text-3xl md:text-4xl`}>{t.hero.name}</p>
+              <p className={`${titleFont} text-2xl md:text-2xl`}>{t.hero.name}</p>
               <p className="mt-1 text-[0.98rem] text-paper/85">{t.hero.role}</p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -95,19 +96,19 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           </div>
           <div className="md:col-span-7 md:pt-6">
             <Chapter no="01" label={ch.journey} />
-            <h2 id="journey-title" className={`${titleFont} mt-6 text-[clamp(2.2rem,4.5vw,3.6rem)]`}>
+            <h2 id="journey-title" className={`${titleFont} mt-6 text-[clamp(1.41rem,2.9vw,2.3rem)]`}>
               {t.hero.name}
               <span className="mt-2 block font-title text-[0.5em] italic font-normal text-bronze-deep">{t.hero.role}</span>
             </h2>
-            <div className="prose-body mt-10 max-w-[38rem] text-[1.04rem] leading-[1.95]">
+            <div className="prose-body mt-10 max-w-[38rem] text-[0.97rem] leading-[1.95]">
               {t.hero.bio.map((p, i) => (
-                <p key={i} className={i === 0 && !isKo ? "dropcap" : i === 0 ? "text-[1.15rem]" : ""}>
+                <p key={i} className={i === 0 && !isKo ? "dropcap" : i === 0 ? "text-[1.05rem]" : ""}>
                   <Rich text={p} />
                 </p>
               ))}
             </div>
             <figure className="mt-12 border-l border-burgundy pl-6">
-              <blockquote className="font-title text-[clamp(1.7rem,3vw,2.5rem)] italic leading-tight text-burgundy">
+              <blockquote className="font-title text-[clamp(1.22rem,2.2vw,1.8rem)] italic leading-tight text-burgundy">
                 {closing.map((l) => (
                   <span key={l} className="block">
                     {l}
@@ -136,40 +137,35 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* 02 PRACTICE */}
-      <section id="practice" aria-labelledby="practice-title" className="scroll-mt-24 bg-olive text-paper">
-        <div className="wrap grid gap-12 py-20 md:grid-cols-12 md:gap-14 md:py-32">
-          <div className="md:col-span-5">
-            <Chapter no="02" label={ch.practice} />
-            <h2 id="practice-title" className={`${titleFont} mt-6 text-[clamp(2.1rem,4vw,3.3rem)]`}>
-              {t.program.approach.heading}
-            </h2>
-            <p className="font-title mt-5 text-lg tracking-[0.2em] text-bronze uppercase">
-              {isKo ? "소리 · 호흡 · 진동 · 신체 감각" : "Sound · Breath · Vibration · Body"}
-            </p>
-            <div className="mt-10 space-y-10">
-              <div>
-                <h3 className="font-title text-2xl italic text-bronze">{t.program.approach.musicTherapyTitle}</h3>
-                <div className="prose-body mt-3 text-paper/90">
-                  {t.program.approach.musicTherapyBody.map((p, i) => (
-                    <p key={i}><Rich text={p} /></p>
-                  ))}
+      <section id="practice" aria-labelledby="practice-title" className="scroll-mt-24 border-y border-[var(--rule)] bg-paper">
+        <div className="wrap py-20 md:py-28">
+          <Chapter no="02" label={ch.practice} />
+          <h2 id="practice-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
+            {t.program.approach.heading}
+          </h2>
+          <div className="mt-12 grid gap-12 border-t border-[var(--rule-strong)] pt-10 lg:grid-cols-12 lg:gap-16">
+            <div className="space-y-10 lg:col-span-4">
+              {[
+                [t.program.approach.musicTherapyTitle, t.program.approach.musicTherapyBody],
+                [t.program.approach.humanisticTitle, t.program.approach.humanisticBody],
+              ].map(([title, body]) => (
+                <div key={title as string}>
+                  <h3 className="font-title text-xl italic">{title as string}</h3>
+                  <div className="prose-body mt-3 text-brown/85">
+                    {(body as string[]).map((p, i) => (
+                      <p key={i}>
+                        <Rich text={p} />
+                      </p>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div>
-                <h3 className="font-title text-2xl italic text-bronze">{t.program.approach.humanisticTitle}</h3>
-                <div className="prose-body mt-3 text-paper/90">
-                  {t.program.approach.humanisticBody.map((p, i) => (
-                    <p key={i}><Rich text={p} /></p>
-                  ))}
-                </div>
+              ))}
+            </div>
+            <div className="lg:col-span-8">
+              <div className="border border-[var(--rule)] bg-ivory p-5 md:p-8">
+                <EmbodiedDiagram lang={lang} />
               </div>
             </div>
-          </div>
-          <div className="md:col-span-7">
-            <div className="border border-bronze/60 bg-ivory p-2 md:p-3">
-              <Photo src={t.program.highlight.image} alt={t.program.highlight.alt} plain sizes="(min-width:768px) 55vw, 100vw" />
-            </div>
-            <p className="plate-caption mt-3 !text-bronze">{ui.plate} II — Didgeridoo-based Embodied Listening</p>
           </div>
         </div>
       </section>
@@ -179,7 +175,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         <div className="grid gap-12 md:grid-cols-12 md:gap-14">
           <div className="md:col-span-4">
             <Chapter no="03" label={ch.research} />
-            <h2 id="research-title" className={`${titleFont} mt-6 text-[clamp(2.1rem,4vw,3.3rem)]`}>
+            <h2 id="research-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
               {t.research.heading}
             </h2>
             <figure className="mt-10 max-w-xs">
@@ -194,9 +190,9 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             <ol className="border-t border-[var(--rule-strong)]">
               {t.research.items.map((item, i) => (
                 <li key={item.title} className="grid gap-3 border-b border-[var(--rule)] py-8 md:grid-cols-[4rem_1fr]">
-                  <span className="font-title text-2xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-title text-xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
                   <div>
-                    <h3 className={`${titleFont} text-2xl`}>{item.title}</h3>
+                    <h3 className={`${titleFont} text-xl`}>{item.title}</h3>
                     <Paragraphs text={item.description} className="mt-3 max-w-2xl" />
                     {"link" in item && item.link && (
                       <a href={safeHref(item.link.href)} target="_blank" rel="noopener noreferrer" className="link-u mt-3 inline-block text-[0.95rem] text-burgundy">
@@ -218,7 +214,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <section id="recommendations" aria-labelledby="rec-title" className="scroll-mt-24 bg-paper">
         <div className="wrap py-20 md:py-32">
           <Chapter no="04" label={ch.recommendations} />
-          <h2 id="rec-title" className={`${titleFont} mt-6 text-[clamp(2.1rem,4vw,3.3rem)]`}>
+          <h2 id="rec-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
             {t.recommendation.heading}
           </h2>
           <p className="mt-5 max-w-2xl text-brown/80">{t.recommendation.intro}</p>
@@ -228,22 +224,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
               const name = isKo ? l.nameKo : l.name;
               const title = isKo ? l.titleKo : l.title;
               const affiliation = isKo ? l.affiliationKo : l.affiliation;
-              const en = (
-                <div lang="en">
-                  <p className="font-title text-sm tracking-[0.2em] text-bronze-deep uppercase">{ui.originalEn}</p>
-                  <div className="prose-body mt-4 font-title text-[1.18rem] leading-[1.7]">
-                    {l.paragraphs.map((p, k) => <p key={k}>{p}</p>)}
-                  </div>
-                </div>
-              );
-              const ko = (
-                <div lang="ko">
-                  <p className="font-title text-sm tracking-[0.2em] text-bronze-deep uppercase">{ui.translationKo}</p>
-                  <div className="prose-body mt-4 leading-[1.95]">
-                    {l.paragraphsKo.map((p, k) => <p key={k}>{p}</p>)}
-                  </div>
-                </div>
-              );
               return (
                 <article key={i} className="grid gap-8 border-t border-[var(--rule-strong)] pt-10 md:grid-cols-12 md:gap-12">
                   <header className="md:col-span-3">
@@ -254,8 +234,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                     <p className="mt-2 text-sm text-brown/75">{title}</p>
                     <p className="mt-1 text-sm text-brown/75">{affiliation}</p>
                   </header>
-                  <div className="grid gap-10 md:col-span-9 md:grid-cols-2 md:gap-12">
-                    {isKo ? <>{ko}{en}</> : <>{en}{ko}</>}
+                  <div lang={lang} className={`prose-body md:col-span-9 md:max-w-3xl ${isKo ? "leading-[1.95]" : "font-title text-[1.15rem] leading-[1.7]"}`}>
+                    {(isKo ? l.paragraphsKo : l.paragraphs).map((p, k) => (
+                      <p key={k}>{p}</p>
+                    ))}
                   </div>
                 </article>
               );
@@ -267,7 +249,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       {/* 05 ADVISORY BOARD */}
       <section id="advisory" aria-labelledby="advisory-title" className="wrap scroll-mt-24 py-20 md:py-32">
         <Chapter no="05" label={ch.advisory} />
-        <h2 id="advisory-title" className={`${titleFont} mt-6 max-w-3xl text-[clamp(2rem,3.6vw,3rem)]`}>
+        <h2 id="advisory-title" className={`${titleFont} mt-6 max-w-3xl text-[clamp(1.28rem,2.3vw,1.92rem)]`}>
           {t.advisoryBoard.heading}
         </h2>
         <p className="mt-5 max-w-2xl text-brown/80">{t.advisoryBoard.description}</p>
@@ -277,7 +259,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             return (
               <li key={i} className="border-t border-[var(--rule-strong)] pt-6">
                 <span className="font-title text-lg text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
-                <p className={`${titleFont} mt-3 text-[1.35rem]`}>{name}</p>
+                <p className={`${titleFont} mt-3 text-[1.2rem]`}>{name}</p>
                 <ul className="mt-4 space-y-1.5 text-[0.95rem] text-brown/80">
                   {rest.map((r) => <li key={r}>{r}</li>)}
                 </ul>
@@ -293,7 +275,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <Chapter no="06" label={ch.programs} />
-              <h2 id="programs-title" className={`${titleFont} mt-6 text-[clamp(2.1rem,4vw,3.3rem)]`}>
+              <h2 id="programs-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
                 {t.program.heading}
               </h2>
             </div>
@@ -305,15 +287,15 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             {programs.map((p, i) => (
               <li key={p.id} className="border-b border-[var(--rule)]">
                 <Link href={`/${lang}/program/${p.slug}`} className="group grid items-baseline gap-2 py-7 md:grid-cols-[4rem_1.2fr_1.4fr_auto] md:gap-8">
-                  <span className="font-title text-2xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-title text-xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
                   <span>
-                    <span className="font-title block text-[1.7rem] leading-tight transition-colors group-hover:text-burgundy md:text-[2rem]">{p.name}</span>
+                    <span className="font-title block text-[1.35rem] leading-tight transition-colors group-hover:text-burgundy md:text-[1.45rem]">{p.name}</span>
                     <span className="mt-1 block text-sm text-bronze-deep">{p.format}</span>
                   </span>
                   <span className="max-w-xl text-[0.97rem] text-brown/80">{p.summary}</span>
                   <span className="flex items-center gap-4">
                     <StateBadge state={p.state} ui={ui} />
-                    <span aria-hidden className="font-title text-2xl transition-transform group-hover:translate-x-1">→</span>
+                    <span aria-hidden className="font-title text-xl transition-transform group-hover:translate-x-1">→</span>
                   </span>
                 </Link>
               </li>
@@ -330,7 +312,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       {/* gratitude */}
       <section aria-label={isKo ? t.culturalRespect.titleKo : t.culturalRespect.titleEn} className="wrap py-20 text-center md:py-28">
         <p className="font-title text-lg tracking-[0.28em] text-bronze-deep uppercase">{isKo ? t.culturalRespect.titleKo : t.culturalRespect.titleEn}</p>
-        <div className="font-title mx-auto mt-6 max-w-3xl space-y-2 text-[clamp(1.4rem,2.6vw,2.1rem)] italic leading-snug">
+        <div className="font-title mx-auto mt-6 max-w-3xl space-y-2 text-[clamp(1.15rem,2.1vw,1.72rem)] italic leading-snug">
           {(isKo ? t.culturalRespect.bodyKo : t.culturalRespect.bodyEn).map((l) => <p key={l}>{l}</p>)}
         </div>
       </section>
@@ -345,18 +327,18 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         </div>
         <div>
           <Chapter no="08" label={ch.contact} />
-          <h2 className={`${titleFont} mt-8 text-3xl md:text-4xl`}>{t.contact.heading}</h2>
+          <h2 className={`${titleFont} mt-8 text-2xl md:text-2xl`}>{t.contact.heading}</h2>
           <dl className="mt-6 space-y-4">
             <div>
               <dt className="text-sm text-bronze-deep">{ui.contact.email}</dt>
               <dd>
-                <a className="link-u font-title text-2xl" href={`mailto:${t.contact.email}`}>{t.contact.email}</a>
+                <a className="link-u font-title text-xl" href={`mailto:${t.contact.email}`}>{t.contact.email}</a>
               </dd>
             </div>
             <div>
               <dt className="text-sm text-bronze-deep">{ui.contact.instagram}</dt>
               <dd>
-                <a className="link-u font-title text-2xl" href={safeHref(t.contact.instagramUrl)} target="_blank" rel="noopener noreferrer">
+                <a className="link-u font-title text-xl" href={safeHref(t.contact.instagramUrl)} target="_blank" rel="noopener noreferrer">
                   @{t.contact.instagramHandle} ↗
                 </a>
               </dd>

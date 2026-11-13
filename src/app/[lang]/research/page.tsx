@@ -26,12 +26,12 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
     <div className="wrap pb-24 pt-14 md:pt-24">
       <header>
         <Chapter no="03" label={t.research.eyebrow} />
-        <h1 className={`${titleFont} mt-6 text-[clamp(2.8rem,7vw,5.5rem)]`}>{t.research.heading}</h1>
+        <h1 className={`${titleFont} mt-6 text-[clamp(1.62rem,4.1vw,3.19rem)]`}>{t.research.heading}</h1>
       </header>
 
       <section aria-label={t.thesis.heading} className="mt-16 grid gap-10 border-t border-[var(--rule-strong)] pt-10 md:grid-cols-12 md:gap-14">
         <div className="md:col-span-4">
-          <h2 className={`${titleFont} text-3xl`}>{t.thesis.heading}</h2>
+          <h2 className={`${titleFont} text-2xl`}>{t.thesis.heading}</h2>
           {t.thesis.eyebrow && <p className="font-title mt-2 tracking-[0.2em] text-bronze-deep uppercase">{t.thesis.eyebrow}</p>}
           {t.thesis.summary && <Paragraphs text={t.thesis.summary} className="mt-5" />}
         </div>
@@ -47,8 +47,8 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
             <li key={item.title} className="mt-16 border-t border-[var(--rule-strong)] pt-10">
               <div className="grid gap-10 md:grid-cols-12 md:gap-14">
                 <div className="md:col-span-5">
-                  <span className="font-title text-2xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
-                  <h2 className={`${titleFont} mt-3 text-[clamp(1.7rem,3vw,2.4rem)]`}>{item.title}</h2>
+                  <span className="font-title text-xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
+                  <h2 className={`${titleFont} mt-3 text-[clamp(1.22rem,2.2vw,1.73rem)]`}>{item.title}</h2>
                   <Paragraphs text={item.description} className="mt-5" />
                   {"link" in item && item.link && (
                     <a href={safeHref(item.link.href)} target="_blank" rel="noopener noreferrer" className="link-u mt-5 inline-block text-[0.95rem] text-burgundy">
@@ -68,7 +68,7 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
       </ol>
 
       <section aria-labelledby="medium" className="mt-20 border-t border-[var(--rule-strong)] pt-10">
-        <h2 id="medium" className="font-title text-3xl">
+        <h2 id="medium" className="font-title text-2xl">
           {t.research.writing.title}
         </h2>
         {posts.length > 0 ? (

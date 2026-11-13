@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Chapter, Paragraphs } from "@/components/ui";
 import { Photo } from "@/components/Photo";
+import { EmbodiedDiagram } from "@/components/EmbodiedDiagram";
 import { SessionList, StateBadge } from "@/components/program";
 import { getContent } from "@/lib/content";
 import { getUI, isLang } from "@/lib/i18n";
@@ -59,8 +60,8 @@ export default async function ProgramDetail({ params }: PageProps<"/[lang]/progr
       <header className="wrap grid gap-10 pb-14 pt-8 md:grid-cols-12 md:gap-14 md:pb-20">
         <div className="md:col-span-7 md:pt-6">
           <Chapter no="—" label={program.format || t.program.heading} />
-          <h1 className="font-title mt-6 text-[clamp(2.4rem,6vw,4.8rem)]">{program.name}</h1>
-          <p className="mt-6 max-w-xl text-[1.1rem] leading-[1.9]">{program.summary}</p>
+          <h1 className="font-title mt-6 text-[clamp(1.39rem,3.5vw,2.78rem)]">{program.name}</h1>
+          <p className="mt-6 max-w-xl text-[1.0rem] leading-[1.9]">{program.summary}</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <StateBadge state={program.state} ui={ui} />
             {program.deadlineText && program.state === "open" && (
@@ -87,11 +88,11 @@ export default async function ProgramDetail({ params }: PageProps<"/[lang]/progr
       </header>
 
       <section aria-labelledby="intro" className="wrap grid gap-10 border-t border-[var(--rule-strong)] py-14 md:grid-cols-12 md:gap-14 md:py-20">
-        <h2 id="intro" className="font-title text-3xl md:col-span-4">
+        <h2 id="intro" className="font-title text-2xl md:col-span-4">
           {ui.program.intro}
         </h2>
         <div className="md:col-span-8">
-          {program.description ? <Paragraphs text={program.description} className="max-w-2xl text-[1.04rem]" /> : <p className="max-w-2xl text-[1.04rem] leading-[1.95]">{program.summary}</p>}
+          {program.description ? <Paragraphs text={program.description} className="max-w-2xl text-[0.97rem]" /> : <p className="max-w-2xl text-[0.97rem] leading-[1.95]">{program.summary}</p>}
           <dl className="mt-10 divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
             {rows.map(([k, v]) => (
               <div key={k} className="grid gap-1 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6">
@@ -105,14 +106,14 @@ export default async function ProgramDetail({ params }: PageProps<"/[lang]/progr
 
       {program.slug === "embodied-listening" && (
         <section aria-label={t.program.highlight.alt} className="wrap pb-14 md:pb-20">
-          <div className="border border-bronze/60 bg-paper p-2 md:p-3">
-            <Photo src={t.program.highlight.image} alt={t.program.highlight.alt} plain sizes="(min-width:1024px) 1100px, 100vw" />
+          <div className="border border-bronze/60 bg-paper p-5 md:p-10">
+            <EmbodiedDiagram lang={lang} />
           </div>
         </section>
       )}
 
       <section aria-labelledby="schedule" className="wrap grid gap-10 border-t border-[var(--rule-strong)] py-14 md:grid-cols-12 md:gap-14 md:py-20">
-        <h2 id="schedule" className="font-title text-3xl md:col-span-4">
+        <h2 id="schedule" className="font-title text-2xl md:col-span-4">
           {ui.program.schedule}
         </h2>
         <div className="md:col-span-8">

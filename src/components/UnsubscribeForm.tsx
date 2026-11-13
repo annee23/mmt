@@ -21,14 +21,14 @@ export function UnsubscribeForm({ token, copy }: { token: string; copy: Copy }) 
     <div className="max-w-xl" role="status" aria-live="polite">
       {state === "done" ? (
         <>
-          <h1 className="font-title-kr text-3xl">{copy.unsubscribed}</h1>
+          <h1 className="font-title-kr text-2xl">{copy.unsubscribed}</h1>
           <p className="mt-4 text-brown/75">{copy.resubscribe}</p>
         </>
       ) : state === "invalid" ? (
-        <h1 className="font-title-kr text-3xl">{copy.unsubscribeInvalid}</h1>
+        <h1 className="font-title-kr text-2xl">{copy.unsubscribeInvalid}</h1>
       ) : (
         <>
-          <h1 className="font-title-kr text-3xl">{copy.confirmTitle}</h1>
+          <h1 className="font-title-kr text-2xl">{copy.confirmTitle}</h1>
           <button type="button" onClick={run} disabled={state === "busy"} className="btn btn-solid mt-8">
             {copy.confirmButton}
           </button>

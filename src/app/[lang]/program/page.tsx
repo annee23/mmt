@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Chapter, Paragraphs, Rich } from "@/components/ui";
 import { Photo } from "@/components/Photo";
+import { EmbodiedDiagram } from "@/components/EmbodiedDiagram";
 import { StateBadge } from "@/components/program";
 import { getContent } from "@/lib/content";
 import { getUI, isLang } from "@/lib/i18n";
@@ -28,7 +29,7 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
     <>
       <header className="wrap pb-10 pt-14 md:pb-16 md:pt-24">
         <Chapter no="—" label={t.program.eyebrow} />
-        <h1 className={`${titleFont} mt-6 text-[clamp(2.8rem,7vw,5.5rem)]`}>{t.program.heading}</h1>
+        <h1 className={`${titleFont} mt-6 text-[clamp(1.62rem,4.1vw,3.19rem)]`}>{t.program.heading}</h1>
         <nav aria-label={t.program.heading} className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-y border-[var(--rule)] py-4">
           {programs.map((p, i) => (
             <a key={p.id} href={`#${p.slug}`} className="link-u font-title text-lg">
@@ -43,17 +44,17 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-4">
             <Chapter no="00" label={t.program.approach.eyebrow} />
-            <h2 id="approach" className={`${titleFont} mt-5 text-3xl`}>{t.program.approach.heading}</h2>
+            <h2 id="approach" className={`${titleFont} mt-5 text-2xl`}>{t.program.approach.heading}</h2>
           </div>
           <div className="grid gap-10 md:col-span-8 md:grid-cols-2">
             <div>
-              <h3 className="font-title text-2xl italic text-burgundy">{t.program.approach.musicTherapyTitle}</h3>
+              <h3 className="font-title text-xl italic text-burgundy">{t.program.approach.musicTherapyTitle}</h3>
               <div className="prose-body mt-3">
                 {t.program.approach.musicTherapyBody.map((p, i) => <p key={i}><Rich text={p} /></p>)}
               </div>
             </div>
             <div>
-              <h3 className="font-title text-2xl italic text-burgundy">{t.program.approach.humanisticTitle}</h3>
+              <h3 className="font-title text-xl italic text-burgundy">{t.program.approach.humanisticTitle}</h3>
               <div className="prose-body mt-3">
                 {t.program.approach.humanisticBody.map((p, i) => <p key={i}><Rich text={p} /></p>)}
               </div>
@@ -70,8 +71,8 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
             </div>
             <div className={`md:col-span-7 ${i % 2 ? "md:order-1" : ""} md:pt-4`}>
               <Chapter no={String(i + 1).padStart(2, "0")} label={p.format} />
-              <h2 id={`${p.slug}-title`} className="font-title mt-6 text-[clamp(2rem,4.2vw,3.4rem)]">{p.name}</h2>
-              <p className="mt-6 max-w-xl text-[1.08rem] leading-[1.9]">{p.summary}</p>
+              <h2 id={`${p.slug}-title`} className="font-title mt-6 text-[clamp(1.28rem,2.7vw,2.18rem)]">{p.name}</h2>
+              <p className="mt-6 max-w-xl text-[1.0rem] leading-[1.9]">{p.summary}</p>
               <dl className="mt-8 grid max-w-xl gap-x-8 gap-y-3 border-t border-[var(--rule)] pt-6 text-[0.95rem] sm:grid-cols-[8rem_1fr]">
                 <dt className="text-bronze-deep">{ui.program.availability}</dt>
                 <dd><StateBadge state={p.state} ui={ui} /></dd>
@@ -90,8 +91,8 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
           </div>
           {p.slug === "embodied-listening" && (
             <div className="wrap pb-16 md:pb-24">
-              <div className="border border-bronze/60 bg-ivory p-2 md:p-3">
-                <Photo src={t.program.highlight.image} alt={t.program.highlight.alt} plain sizes="(min-width:1024px) 1100px, 100vw" />
+              <div className="border border-bronze/60 bg-paper p-5 md:p-10">
+                <EmbodiedDiagram lang={lang} />
               </div>
             </div>
           )}
@@ -107,7 +108,7 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
       <section aria-labelledby="exp-title" className="bg-olive text-paper">
         <div className="wrap py-20 md:py-28">
           <Chapter no="07" label={ui.chapters.experiences} />
-          <h2 id="exp-title" className={`${titleFont} mt-6 text-[clamp(2.1rem,4vw,3.3rem)]`}>{t.program.testimonials.heading}</h2>
+          <h2 id="exp-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>{t.program.testimonials.heading}</h2>
           <p className="mt-4 max-w-2xl text-paper/80">{t.program.testimonials.intro}</p>
           <ol className="mt-14 grid gap-x-14 gap-y-12 md:grid-cols-2">
             {t.program.testimonials.items.map((item) => (
@@ -121,7 +122,7 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
                   const secondary = isKo ? { text: q.en, lang: "en" } : { text: q.ko, lang: "ko" };
                   return (
                     <blockquote key={k} className="mt-4">
-                      <p lang={primary.lang} className={`${primary.lang === "en" ? "font-title text-[1.3rem] italic" : "font-serif-kr text-[1.1rem]"} leading-relaxed`}>“{primary.text}”</p>
+                      <p lang={primary.lang} className={`${primary.lang === "en" ? "font-title text-[1.15rem] italic" : "font-serif-kr text-[1.0rem]"} leading-relaxed`}>“{primary.text}”</p>
                       <p lang={secondary.lang} className="mt-2 text-[0.92rem] leading-relaxed text-paper/65">{secondary.text}</p>
                     </blockquote>
                   );
