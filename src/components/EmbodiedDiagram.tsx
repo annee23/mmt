@@ -128,7 +128,7 @@ export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; classNam
             </g>
           </svg>
           <ul className="mx-auto mt-6 max-w-md space-y-2 text-[0.85rem] leading-relaxed text-brown/80">
-            {[c.venn.awareness, c.venn.listening, c.venn.breath].map(([en, ko, d]) => (
+            {[c.venn.awareness, c.venn.listening, c.venn.breath].map(([en, , d]) => (
               <li key={en}>
                 <span className="font-title mr-2 text-[0.95rem] italic">{en}</span>
                 {d}

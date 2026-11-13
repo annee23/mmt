@@ -328,7 +328,7 @@ await step("CSV import (Google Form export): dry-run, import, idempotent re-impo
   assert.equal(done.imported, 1);
   const again = await (await owner.req("/api/admin/import", { method: "POST", json: { ...body, dry_run: false } })).json();
   assert.equal(again.imported, 0);
-  const rows = await (await rest(`applications?select=name,age_group,gender,heard_didgeridoo,status,source,created_at,consent_sensitive&name=eq.${encodeURIComponent("가져온 사람")}`, SERVICE)).json();
+  const rows = await (await rest(`applications?select=name,age_group,gender,heard_didgeridoo,status,source,created_at,consent_sensitive&contact=eq.${encodeURIComponent(`010-0000-${String(stamp).slice(-4)}`)}`, SERVICE)).json();
   assert.equal(rows.length, 1);
   assert.deepEqual([rows[0].age_group, rows[0].gender, rows[0].heard_didgeridoo, rows[0].status, rows[0].source], ["40s", "male", "live", "reviewing", "import"]);
   assert.ok(rows[0].created_at.startsWith("2025-03-04T15:12:45+09") || rows[0].created_at.startsWith("2025-03-04T06:12:45"), `timestamp parsed as KST: ${rows[0].created_at}`);

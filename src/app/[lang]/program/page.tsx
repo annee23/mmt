@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Chapter, Paragraphs, Rich } from "@/components/ui";
+import { Chapter, Rich } from "@/components/ui";
 import { Photo } from "@/components/Photo";
 import { EmbodiedDiagram } from "@/components/EmbodiedDiagram";
 import { StateBadge } from "@/components/program";

@@ -1,3 +1,0 @@
-module.exports=[67121,a=>{a.v({className:"hw73-a_className",variable:"hw73-a_variable"})},57363,a=>{"use strict";var b=a.i(67121);let c={className:b.default.className,style:{fontFamily:"'Cormorant Garamond', 'Cormorant Garamond Fallback'"}};null!=b.default.variable&&(c.variable=b.default.variable);var d=a.i(46709);let e={className:d.default.className,style:{fontFamily:"'nanum', 'nanum Fallback'"}};null!=d.default.variable&&(e.variable=d.default.variable);let f=`${c.variable} ${e.variable}`;a.s(["f",0,f],57363)},46709,a=>{a.v({className:"wDlBFW_className",variable:"wDlBFW_variable"})}];
-
-//# sourceMappingURL=%5Broot-of-the-server%5D__1bwbkj5ujzdta._.js.map

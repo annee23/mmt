@@ -16,6 +16,15 @@ type App = {
 };
 type History = { id: number; from_status: string | null; to_status: string; changed_by_email: string | null; created_at: string };
 
+function Row({ k, children }: { k: string; children: React.ReactNode }) {
+  return (
+    <div className="grid gap-1 border-b border-[var(--rule)] py-3 sm:grid-cols-[11rem_1fr] sm:gap-6">
+      <dt className="text-sm text-bronze-deep">{k}</dt>
+      <dd className="whitespace-pre-line">{children || <span className="text-brown/45">(미입력)</span>}</dd>
+    </div>
+  );
+}
+
 export function ApplicationDetail({ id, canWrite, canViewSensitive, isOwner }: { id: string; canWrite: boolean; canViewSensitive: boolean; isOwner: boolean }) {
   const [app, setApp] = useState<App | null>(null);
   const [history, setHistory] = useState<History[]>([]);
@@ -62,13 +71,6 @@ export function ApplicationDetail({ id, canWrite, canViewSensitive, isOwner }: {
 
   if (error) return <p role="alert" className="error-text">{error}</p>;
   if (!app) return <p className="text-brown/60">불러오는 중…</p>;
-
-  const Row = ({ k, children }: { k: string; children: React.ReactNode }) => (
-    <div className="grid gap-1 border-b border-[var(--rule)] py-3 sm:grid-cols-[11rem_1fr] sm:gap-6">
-      <dt className="text-sm text-bronze-deep">{k}</dt>
-      <dd className="whitespace-pre-line">{children || <span className="text-brown/45">(미입력)</span>}</dd>
-    </div>
-  );
 
   return (
     <div className="grid gap-12 xl:grid-cols-[1fr_22rem]">
