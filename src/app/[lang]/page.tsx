@@ -1,0 +1,369 @@
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Chapter, Paragraphs, Rich, safeHref } from "@/components/ui";
+import { Photo } from "@/components/Photo";
+import { Newsletter } from "@/components/Newsletter";
+import { LegacyHashRedirect } from "@/components/LegacyHashRedirect";
+import { StateBadge } from "@/components/program";
+import { getContent } from "@/lib/content";
+import { getUI, isLang } from "@/lib/i18n";
+import { getPrograms } from "@/lib/programs";
+import { siteUrl } from "@/lib/env";
+
+export default async function HomePage({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!isLang(lang)) notFound();
+  const [t, programs] = [await getContent(lang), await getPrograms(lang)];
+  const ui = getUI(lang);
+  const isKo = lang === "ko";
+  const ch = ui.chapters;
+  const [slogan, secondary, ...closing] = t.hero.philosophy;
+  const titleFont = isKo ? "font-title-kr" : "font-title";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Jin Sarang",
+    alternateName: "진사랑",
+    jobTitle: ["Music Therapist", "Didgeridoo Artist"],
+    url: `${siteUrl()}/${lang}`,
+    image: `${siteUrl()}/images/videos/intro.jpg`,
+    email: t.contact.email,
+    sameAs: [t.contact.instagramUrl, t.research.writing.href],
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <LegacyHashRedirect lang={lang} />
+
+      {/* HERO */}
+      <section aria-labelledby="hero-title" className="relative isolate flex min-h-[calc(100svh-4rem)] items-end overflow-hidden bg-brown text-paper md:min-h-[calc(100svh-4.75rem)]">
+        <Photo
+          src="/images/videos/intro.jpg"
+          alt={isKo ? "디저리두를 곁에 두고 먼 곳을 바라보는 진사랑" : "Jin Sarang beside her didgeridoo, looking into the distance"}
+          priority
+          sizes="100vw"
+          ratio="16/9"
+          position="68% 30%"
+          className="!absolute inset-0 -z-10 !aspect-auto h-full w-full"
+        />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-[#241b15]/85 via-[#241b15]/35 to-[#241b15]/5 md:bg-gradient-to-r md:from-[#241b15]/80 md:via-[#241b15]/30 md:to-transparent" />
+        <div className="wrap w-full pb-12 pt-32 md:pb-20">
+          <p className="rise font-title text-[0.95rem] tracking-[0.32em] text-bronze uppercase">{ui.heroNote}</p>
+          <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[11em] text-[clamp(2.6rem,6.4vw,5.8rem)] leading-[1.02] italic font-medium">
+            {slogan}
+          </h1>
+          <p className="rise rise-3 font-title mt-4 max-w-2xl text-[clamp(1.25rem,2.4vw,1.9rem)] italic text-paper/90">{secondary}</p>
+          <div className="rise rise-3 mt-8 flex flex-wrap items-end justify-between gap-8">
+            <div>
+              <p className={`${titleFont} text-3xl md:text-4xl`}>{t.hero.name}</p>
+              <p className="mt-1 text-[0.98rem] text-paper/85">{t.hero.role}</p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link href={`/${lang}/program`} className="btn btn-light">
+                {ui.explorePrograms}
+              </Link>
+              <Link href={`/${lang}/apply`} className="btn btn-light-solid">
+                {ui.apply}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div className="border-b border-[var(--rule)] bg-paper">
+        <ul className="wrap flex flex-wrap gap-x-8 gap-y-1 py-3 font-title text-[0.95rem] tracking-[0.12em] text-brown/80">
+          {t.hero.meta.map((m) => (
+            <li key={m.label} className={"dim" in m && m.dim ? "text-brown/55" : ""}>
+              {m.label}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* 01 ABOUT */}
+      <section id="journey" aria-labelledby="journey-title" className="wrap scroll-mt-24 py-20 md:py-32">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-14">
+          <div className="md:col-span-5">
+            <div className="md:sticky md:top-28">
+              <Photo src="/images/performances/perf-19.jpg" alt={isKo ? "연주 중인 진사랑" : "Jin Sarang playing the didgeridoo"} ratio="4/5" sizes="(min-width:768px) 40vw, 100vw" />
+              <p className="plate-caption mt-3">
+                {ui.plate} I — {t.hero.name}
+              </p>
+            </div>
+          </div>
+          <div className="md:col-span-7 md:pt-6">
+            <Chapter no="01" label={ch.journey} />
+            <h2 id="journey-title" className={`${titleFont} mt-6 text-[clamp(2.2rem,4.5vw,3.6rem)]`}>
+              {t.hero.name}
+              <span className="mt-2 block font-title text-[0.5em] italic font-normal text-bronze-deep">{t.hero.role}</span>
+            </h2>
+            <div className="prose-body mt-10 max-w-[38rem] text-[1.04rem] leading-[1.95]">
+              {t.hero.bio.map((p, i) => (
+                <p key={i} className={i === 0 && !isKo ? "dropcap" : i === 0 ? "text-[1.15rem]" : ""}>
+                  <Rich text={p} />
+                </p>
+              ))}
+            </div>
+            <figure className="mt-12 border-l border-burgundy pl-6">
+              <blockquote className="font-title text-[clamp(1.7rem,3vw,2.5rem)] italic leading-tight text-burgundy">
+                {closing.map((l) => (
+                  <span key={l} className="block">
+                    {l}
+                  </span>
+                ))}
+              </blockquote>
+            </figure>
+          </div>
+        </div>
+
+        <div className="mt-20 grid gap-6 md:grid-cols-2 md:gap-8">
+          {t.videos.map((v) => (
+            <a key={v.href} href={safeHref(v.href)} target="_blank" rel="noopener noreferrer" className="group block">
+              <div className="film relative aspect-video">
+                <Image src={v.image} alt={v.alt} fill sizes="(min-width:768px) 45vw, 100vw" quality={75} className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                <span aria-hidden className="absolute left-1/2 top-1/2 z-10 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-paper/80 text-paper">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+                </span>
+              </div>
+              <p className={`${titleFont} mt-4 text-xl`}>
+                {v.title} <span className="font-[family-name:var(--f-sans)] text-sm text-bronze-deep">{ui.watch}</span>
+              </p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* 02 PRACTICE */}
+      <section id="practice" aria-labelledby="practice-title" className="scroll-mt-24 bg-olive text-paper">
+        <div className="wrap grid gap-12 py-20 md:grid-cols-12 md:gap-14 md:py-32">
+          <div className="md:col-span-5">
+            <Chapter no="02" label={ch.practice} />
+            <h2 id="practice-title" className={`${titleFont} mt-6 text-[clamp(2.1rem,4vw,3.3rem)]`}>
+              {t.program.approach.heading}
+            </h2>
+            <p className="font-title mt-5 text-lg tracking-[0.2em] text-bronze uppercase">
+              {isKo ? "소리 · 호흡 · 진동 · 신체 감각" : "Sound · Breath · Vibration · Body"}
+            </p>
+            <div className="mt-10 space-y-10">
+              <div>
+                <h3 className="font-title text-2xl italic text-bronze">{t.program.approach.musicTherapyTitle}</h3>
+                <div className="prose-body mt-3 text-paper/90">
+                  {t.program.approach.musicTherapyBody.map((p, i) => (
+                    <p key={i}><Rich text={p} /></p>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h3 className="font-title text-2xl italic text-bronze">{t.program.approach.humanisticTitle}</h3>
+                <div className="prose-body mt-3 text-paper/90">
+                  {t.program.approach.humanisticBody.map((p, i) => (
+                    <p key={i}><Rich text={p} /></p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="md:col-span-7">
+            <div className="border border-bronze/60 bg-ivory p-2 md:p-3">
+              <Photo src={t.program.highlight.image} alt={t.program.highlight.alt} plain sizes="(min-width:768px) 55vw, 100vw" />
+            </div>
+            <p className="plate-caption mt-3 !text-bronze">{ui.plate} II — Didgeridoo-based Embodied Listening</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 03 RESEARCH */}
+      <section id="research" aria-labelledby="research-title" className="wrap scroll-mt-24 py-20 md:py-32">
+        <div className="grid gap-12 md:grid-cols-12 md:gap-14">
+          <div className="md:col-span-4">
+            <Chapter no="03" label={ch.research} />
+            <h2 id="research-title" className={`${titleFont} mt-6 text-[clamp(2.1rem,4vw,3.3rem)]`}>
+              {t.research.heading}
+            </h2>
+            <figure className="mt-10 max-w-xs">
+              <Photo src={t.thesis.photo} alt={ui.thesisNote} sizes="(min-width:768px) 25vw, 70vw" />
+              <figcaption className="plate-caption mt-3">
+                {ui.plate} III — {t.thesis.heading}
+              </figcaption>
+            </figure>
+            {t.thesis.summary && <Paragraphs text={t.thesis.summary} className="mt-6" />}
+          </div>
+          <div className="md:col-span-8">
+            <ol className="border-t border-[var(--rule-strong)]">
+              {t.research.items.map((item, i) => (
+                <li key={item.title} className="grid gap-3 border-b border-[var(--rule)] py-8 md:grid-cols-[4rem_1fr]">
+                  <span className="font-title text-2xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 className={`${titleFont} text-2xl`}>{item.title}</h3>
+                    <Paragraphs text={item.description} className="mt-3 max-w-2xl" />
+                    {"link" in item && item.link && (
+                      <a href={safeHref(item.link.href)} target="_blank" rel="noopener noreferrer" className="link-u mt-3 inline-block text-[0.95rem] text-burgundy">
+                        {item.link.label} ↗
+                      </a>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <Link href={`/${lang}/research`} className="btn mt-10">
+              {t.nav.research} →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 04 RECOMMENDATIONS */}
+      <section id="recommendations" aria-labelledby="rec-title" className="scroll-mt-24 bg-paper">
+        <div className="wrap py-20 md:py-32">
+          <Chapter no="04" label={ch.recommendations} />
+          <h2 id="rec-title" className={`${titleFont} mt-6 text-[clamp(2.1rem,4vw,3.3rem)]`}>
+            {t.recommendation.heading}
+          </h2>
+          <p className="mt-5 max-w-2xl text-brown/80">{t.recommendation.intro}</p>
+
+          <div className="mt-14 space-y-20">
+            {t.recommendation.letters.map((l, i) => {
+              const name = isKo ? l.nameKo : l.name;
+              const title = isKo ? l.titleKo : l.title;
+              const affiliation = isKo ? l.affiliationKo : l.affiliation;
+              const en = (
+                <div lang="en">
+                  <p className="font-title text-sm tracking-[0.2em] text-bronze-deep uppercase">{ui.originalEn}</p>
+                  <div className="prose-body mt-4 font-title text-[1.18rem] leading-[1.7]">
+                    {l.paragraphs.map((p, k) => <p key={k}>{p}</p>)}
+                  </div>
+                </div>
+              );
+              const ko = (
+                <div lang="ko">
+                  <p className="font-title text-sm tracking-[0.2em] text-bronze-deep uppercase">{ui.translationKo}</p>
+                  <div className="prose-body mt-4 leading-[1.95]">
+                    {l.paragraphsKo.map((p, k) => <p key={k}>{p}</p>)}
+                  </div>
+                </div>
+              );
+              return (
+                <article key={i} className="grid gap-8 border-t border-[var(--rule-strong)] pt-10 md:grid-cols-12 md:gap-12">
+                  <header className="md:col-span-3">
+                    {"photo" in l && l.photo && (
+                      <Photo src={l.photo} alt={name} ratio="1/1" sizes="(min-width:768px) 20vw, 60vw" className="mb-5 max-w-[14rem]" />
+                    )}
+                    <p className={`${titleFont} text-xl`}>{name}</p>
+                    <p className="mt-2 text-sm text-brown/75">{title}</p>
+                    <p className="mt-1 text-sm text-brown/75">{affiliation}</p>
+                  </header>
+                  <div className="grid gap-10 md:col-span-9 md:grid-cols-2 md:gap-12">
+                    {isKo ? <>{ko}{en}</> : <>{en}{ko}</>}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 05 ADVISORY BOARD */}
+      <section id="advisory" aria-labelledby="advisory-title" className="wrap scroll-mt-24 py-20 md:py-32">
+        <Chapter no="05" label={ch.advisory} />
+        <h2 id="advisory-title" className={`${titleFont} mt-6 max-w-3xl text-[clamp(2rem,3.6vw,3rem)]`}>
+          {t.advisoryBoard.heading}
+        </h2>
+        <p className="mt-5 max-w-2xl text-brown/80">{t.advisoryBoard.description}</p>
+        <ul className="mt-14 grid gap-10 md:grid-cols-3">
+          {t.advisoryBoard.members.map((m, i) => {
+            const [name, ...rest] = isKo ? m.linesKo : m.linesEn;
+            return (
+              <li key={i} className="border-t border-[var(--rule-strong)] pt-6">
+                <span className="font-title text-lg text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
+                <p className={`${titleFont} mt-3 text-[1.35rem]`}>{name}</p>
+                <ul className="mt-4 space-y-1.5 text-[0.95rem] text-brown/80">
+                  {rest.map((r) => <li key={r}>{r}</li>)}
+                </ul>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      {/* 06 PROGRAM PREVIEW */}
+      <section id="programs" aria-labelledby="programs-title" className="scroll-mt-24 bg-paper">
+        <div className="wrap py-20 md:py-32">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <Chapter no="06" label={ch.programs} />
+              <h2 id="programs-title" className={`${titleFont} mt-6 text-[clamp(2.1rem,4vw,3.3rem)]`}>
+                {t.program.heading}
+              </h2>
+            </div>
+            <Link href={`/${lang}/program`} className="btn">
+              {ui.viewAll} →
+            </Link>
+          </div>
+          <ol className="mt-12 border-t border-[var(--rule-strong)]">
+            {programs.map((p, i) => (
+              <li key={p.id} className="border-b border-[var(--rule)]">
+                <Link href={`/${lang}/program/${p.slug}`} className="group grid items-baseline gap-2 py-7 md:grid-cols-[4rem_1.2fr_1.4fr_auto] md:gap-8">
+                  <span className="font-title text-2xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
+                  <span>
+                    <span className="font-title block text-[1.7rem] leading-tight transition-colors group-hover:text-burgundy md:text-[2rem]">{p.name}</span>
+                    <span className="mt-1 block text-sm text-bronze-deep">{p.format}</span>
+                  </span>
+                  <span className="max-w-xl text-[0.97rem] text-brown/80">{p.summary}</span>
+                  <span className="flex items-center gap-4">
+                    <StateBadge state={p.state} ui={ui} />
+                    <span aria-hidden className="font-title text-2xl transition-transform group-hover:translate-x-1">→</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-10">
+            <Link href={`/${lang}/apply`} className="btn btn-solid">
+              {ui.apply}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* gratitude */}
+      <section aria-label={isKo ? t.culturalRespect.titleKo : t.culturalRespect.titleEn} className="wrap py-20 text-center md:py-28">
+        <p className="font-title text-lg tracking-[0.28em] text-bronze-deep uppercase">{isKo ? t.culturalRespect.titleKo : t.culturalRespect.titleEn}</p>
+        <div className="font-title mx-auto mt-6 max-w-3xl space-y-2 text-[clamp(1.4rem,2.6vw,2.1rem)] italic leading-snug">
+          {(isKo ? t.culturalRespect.bodyKo : t.culturalRespect.bodyEn).map((l) => <p key={l}>{l}</p>)}
+        </div>
+      </section>
+
+      {/* 07 NEWSLETTER + 08 CONTACT */}
+      <section id="contact" aria-label={`${ch.newsletter} / ${ch.contact}`} className="wrap grid scroll-mt-24 gap-16 border-t border-[var(--rule-strong)] py-20 md:grid-cols-2 md:py-28">
+        <div id="newsletter" className="scroll-mt-24">
+          <Chapter no="07" label={ch.newsletter} />
+          <div className="mt-8">
+            <Newsletter copy={t.hero.subscribeButton} lang={lang} />
+          </div>
+        </div>
+        <div>
+          <Chapter no="08" label={ch.contact} />
+          <h2 className={`${titleFont} mt-8 text-3xl md:text-4xl`}>{t.contact.heading}</h2>
+          <dl className="mt-6 space-y-4">
+            <div>
+              <dt className="text-sm text-bronze-deep">{ui.contact.email}</dt>
+              <dd>
+                <a className="link-u font-title text-2xl" href={`mailto:${t.contact.email}`}>{t.contact.email}</a>
+              </dd>
+            </div>
+            <div>
+              <dt className="text-sm text-bronze-deep">{ui.contact.instagram}</dt>
+              <dd>
+                <a className="link-u font-title text-2xl" href={safeHref(t.contact.instagramUrl)} target="_blank" rel="noopener noreferrer">
+                  @{t.contact.instagramHandle} ↗
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+    </>
+  );
+}
