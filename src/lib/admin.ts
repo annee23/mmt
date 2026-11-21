@@ -5,6 +5,8 @@ import { supabaseConfigured } from "@/lib/env";
 import { sessionClient } from "@/lib/supabase/session";
 import { serviceClient } from "@/lib/supabase/clients";
 import { crossSite, fail } from "@/lib/api";
+import { cookies } from "next/headers";
+import { readAdminCookie } from "@/lib/admin-cookie";
 
 export type AdminProfile = {
   user_id: string;
@@ -29,6 +31,23 @@ export type AdminCtx = {
  */
 export async function getAdmin(): Promise<AdminCtx | null> {
   if (!supabaseConfigured()) return null;
+  const signedCookie = readAdminCookie(await cookies());
+  if (signedCookie) {
+    const svc = serviceClient();
+    const { data: profile } = await svc
+      .from("admin_profiles")
+      .select("*")
+      .eq("user_id", signedCookie.userId)
+      .maybeSingle();
+    if (profile) {
+      return {
+        user: { id: signedCookie.userId, email: signedCookie.profileEmail } as User,
+        profile: profile as AdminProfile,
+        db: svc,
+        svc,
+      };
+    }
+  }
   const db = await sessionClient();
   const { data, error } = await db.auth.getUser();
   if (error || !data.user) return null;
