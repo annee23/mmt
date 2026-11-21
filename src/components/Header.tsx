@@ -53,44 +53,45 @@ export function Header({ lang, nav, brand, menuLabel, closeLabel, switchLabel }:
   );
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--rule)] bg-ivory/92 backdrop-blur-sm">
-      <div className="wrap flex h-16 items-center justify-between gap-6 md:h-[4.75rem]">
-        <Link href={`/${lang}`} aria-label={brand} className="shrink-0">
-          <Image src="/images/name.png" alt={brand} width={1084} height={439} sizes="120px" priority className="h-10 w-auto md:h-12" />
-        </Link>
+    <>
+      <header className="sticky top-0 z-40 border-b border-[var(--rule)] bg-ivory/92 backdrop-blur-sm">
+        <div className="wrap flex h-16 items-center justify-between gap-6 md:h-[4.75rem]">
+          <Link href={`/${lang}`} aria-label={brand} className="shrink-0">
+            <Image src="/images/name.png" alt={brand} width={1084} height={439} sizes="120px" priority className="h-10 w-auto md:h-12" />
+          </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
-          {nav.map((n) => (
-            <Link
-              key={n.key}
-              href={n.href}
-              aria-current={isActive(n.href) ? "page" : undefined}
-              className={`font-title text-[1.0rem] tracking-[0.14em] uppercase transition-colors hover:text-burgundy ${
-                isActive(n.href) ? "text-burgundy" : "text-brown"
-              }`}
+          <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
+            {nav.map((n) => (
+              <Link
+                key={n.key}
+                href={n.href}
+                aria-current={isActive(n.href) ? "page" : undefined}
+                className={`font-title text-[1.0rem] tracking-[0.14em] uppercase transition-colors hover:text-burgundy ${
+                  isActive(n.href) ? "text-burgundy" : "text-brown"
+                }`}
+              >
+                {n.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-5">
+            <div className="hidden lg:block">{langSwitch}</div>
+            <button
+              type="button"
+              className="-mr-2 inline-flex h-11 w-11 items-center justify-center lg:hidden"
+              aria-expanded={open}
+              aria-controls="site-menu"
+              aria-label={menuLabel}
+              onClick={() => setOpen(true)}
             >
-              {n.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-5">
-          <div className="hidden lg:block">{langSwitch}</div>
-          <button
-            type="button"
-            className="-mr-2 inline-flex h-11 w-11 items-center justify-center lg:hidden"
-            aria-expanded={open}
-            aria-controls="site-menu"
-            aria-label={menuLabel}
-            onClick={() => setOpen(true)}
-          >
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
-              <path d="M3 8h18M3 16h18" />
-            </svg>
-          </button>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+                <path d="M3 8h18M3 16h18" />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-
+      </header>
       <div
         id="site-menu"
         role="dialog"
@@ -114,15 +115,15 @@ export function Header({ lang, nav, brand, menuLabel, closeLabel, switchLabel }:
               href={n.href}
               onClick={() => setOpen(false)}
               aria-current={isActive(n.href) ? "page" : undefined}
-              className="flex items-baseline gap-4 border-b border-[var(--rule)] py-4 font-title-kr text-[1.35rem] text-brown"
+              className="flex items-baseline gap-4 border-b border-[var(--rule)] py-3.5 font-title-kr text-[1.1rem] text-brown"
             >
-              <span className="font-title w-8 text-base text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-title w-8 text-sm text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
               {n.label}
             </Link>
           ))}
         </nav>
         <div className="wrap flex items-center justify-between pb-10 pt-6">{langSwitch}</div>
       </div>
-    </header>
+    </>
   );
 }
