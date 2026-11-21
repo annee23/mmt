@@ -230,6 +230,10 @@ export async function getPrograms(lang: Lang): Promise<ProgramView[]> {
       db.from("session_availability").select("session_id, capacity, confirmed_count"),
     ]);
     if (programs.error) throw programs.error;
+    const dbPrograms = (programs.data ?? []) as ProgramRow[];
+    if (dbPrograms.length === 0) {
+      return FALLBACK_PROGRAMS.map((p) => toProgramView(lang, p, [], new Map()));
+    }
     const seats = new Map<string, { capacity: number | null; confirmed: number }>();
     for (const r of seatRows.data ?? []) seats.set(r.session_id, { capacity: r.capacity, confirmed: r.confirmed_count });
     const bySession = new Map<string, SessionRow[]>();
@@ -238,10 +242,23 @@ export async function getPrograms(lang: Lang): Promise<ProgramView[]> {
       list.push(s);
       bySession.set(s.program_id, list);
     }
-    return (programs.data as ProgramRow[]).map((p) => toProgramView(lang, p, bySession.get(p.id) ?? [], seats));
+    const publishedDbPrograms = dbPrograms.filter((p) => p.is_published);
+    const dbSlugs = new Set(publishedDbPrograms.map((p) => p.slug));
+    const fallbackMissing = FALLBACK_PROGRAMS
+      .filter((p) => !dbSlugs.has(p.slug))
+      .map((p) => toProgramView(lang, p, [], new Map()));
+
+    return [
+      ...publishedDbPrograms.map((p) => toProgramView(lang, p, bySession.get(p.id) ?? [], seats)),
+      ...fallbackMissing,
+    ].sort((a, b) => {
+      const bySlug = FALLBACK_PROGRAMS.findIndex((p) => p.slug === a.slug);
+      const bBySlug = FALLBACK_PROGRAMS.findIndex((p) => p.slug === b.slug);
+      return (bySlug === -1 ? 99 : bySlug) - (bBySlug === -1 ? 99 : bBySlug);
+    });
   } catch (err) {
     console.error("getPrograms failed", err);
-    return [];
+    return FALLBACK_PROGRAMS.map((p) => toProgramView(lang, p, [], new Map()));
   }
 }
 

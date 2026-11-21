@@ -5,7 +5,6 @@ import { ApplyLink } from "@/components/ApplyLink";
 import { notFound } from "next/navigation";
 import { Chapter, Paragraphs, Rich, safeHref } from "@/components/ui";
 import { Photo } from "@/components/Photo";
-import { EmbodiedDiagram } from "@/components/EmbodiedDiagram";
 import { Newsletter } from "@/components/Newsletter";
 import { LegacyHashRedirect } from "@/components/LegacyHashRedirect";
 import { StateBadge } from "@/components/program";
@@ -138,40 +137,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      {/* 02 PRACTICE */}
-      <section id="practice" aria-labelledby="practice-title" className="scroll-mt-24 border-y border-[var(--rule)] bg-paper">
-        <div className="wrap py-20 md:py-28">
-          <Chapter no="02" label={ch.practice} />
-          <h2 id="practice-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
-            {t.program.approach.heading}
-          </h2>
-          <div className="mt-12 grid gap-12 border-t border-[var(--rule-strong)] pt-10 lg:grid-cols-12 lg:gap-16">
-            <div className="space-y-10 lg:col-span-4">
-              {[
-                [t.program.approach.musicTherapyTitle, t.program.approach.musicTherapyBody],
-                [t.program.approach.humanisticTitle, t.program.approach.humanisticBody],
-              ].map(([title, body]) => (
-                <div key={title as string}>
-                  <h3 className="font-title text-xl italic">{title as string}</h3>
-                  <div className="prose-body mt-3 text-brown/85">
-                    {(body as string[]).map((p, i) => (
-                      <p key={i}>
-                        <Rich text={p} />
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="lg:col-span-8">
-              <div className="border border-[var(--rule)] bg-ivory p-5 md:p-8">
-                <EmbodiedDiagram lang={lang} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* 03 RESEARCH */}
       <section id="research" aria-labelledby="research-title" className="wrap scroll-mt-24 py-20 md:py-32">
         <div className="grid gap-12 md:grid-cols-12 md:gap-14">
@@ -210,65 +175,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             </Link>
           </div>
         </div>
-      </section>
-
-      {/* 04 RECOMMENDATIONS */}
-      <section id="recommendations" aria-labelledby="rec-title" className="scroll-mt-24 bg-paper">
-        <div className="wrap py-20 md:py-32">
-          <Chapter no="04" label={ch.recommendations} />
-          <h2 id="rec-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
-            {t.recommendation.heading}
-          </h2>
-          <p className="mt-5 max-w-2xl text-brown/80">{t.recommendation.intro}</p>
-
-          <div className="mt-14 space-y-20">
-            {t.recommendation.letters.map((l, i) => {
-              const name = isKo ? l.nameKo : l.name;
-              const title = isKo ? l.titleKo : l.title;
-              const affiliation = isKo ? l.affiliationKo : l.affiliation;
-              return (
-                <article key={i} className="grid gap-8 border-t border-[var(--rule-strong)] pt-10 md:grid-cols-12 md:gap-12">
-                  <header className="md:col-span-3">
-                    {"photo" in l && l.photo && (
-                      <Photo src={l.photo} alt={name} ratio="1/1" sizes="(min-width:768px) 20vw, 60vw" className="mb-5 max-w-[14rem]" />
-                    )}
-                    <p className={`${titleFont} text-xl`}>{name}</p>
-                    <p className="mt-2 text-sm text-brown/75">{title}</p>
-                    <p className="mt-1 text-sm text-brown/75">{affiliation}</p>
-                  </header>
-                  <div lang={lang} className={`prose-body md:col-span-9 md:max-w-3xl ${isKo ? "leading-[1.95]" : "font-title text-[1.15rem] leading-[1.7]"}`}>
-                    {(isKo ? l.paragraphsKo : l.paragraphs).map((p, k) => (
-                      <p key={k}>{p}</p>
-                    ))}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 05 ADVISORY BOARD */}
-      <section id="advisory" aria-labelledby="advisory-title" className="wrap scroll-mt-24 py-20 md:py-32">
-        <Chapter no="05" label={ch.advisory} />
-        <h2 id="advisory-title" className={`${titleFont} mt-6 max-w-3xl text-[clamp(1.28rem,2.3vw,1.92rem)]`}>
-          {t.advisoryBoard.heading}
-        </h2>
-        <p className="mt-5 max-w-2xl text-brown/80">{t.advisoryBoard.description}</p>
-        <ul className="mt-14 grid gap-10 md:grid-cols-3">
-          {t.advisoryBoard.members.map((m, i) => {
-            const [name, ...rest] = isKo ? m.linesKo : m.linesEn;
-            return (
-              <li key={i} className="border-t border-[var(--rule-strong)] pt-6">
-                <span className="font-title text-lg text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
-                <p className={`${titleFont} mt-3 text-[1.2rem]`}>{name}</p>
-                <ul className="mt-4 space-y-1.5 text-[0.95rem] text-brown/80">
-                  {rest.map((r) => <li key={r}>{r}</li>)}
-                </ul>
-              </li>
-            );
-          })}
-        </ul>
       </section>
 
       {/* 06 PROGRAM PREVIEW */}
