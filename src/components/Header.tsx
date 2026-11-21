@@ -108,7 +108,7 @@ export function Header({ lang, nav, brand, menuLabel, closeLabel, switchLabel }:
             </svg>
           </button>
         </div>
-        <nav aria-label="Mobile" className="wrap flex flex-1 flex-col justify-center gap-1">
+        <nav aria-label="Mobile" className="wrap flex flex-1 flex-col justify-start gap-1 pt-8">
           {nav.map((n, i) => (
             <Link
               key={n.key}
