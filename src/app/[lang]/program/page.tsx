@@ -71,7 +71,7 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
               <Photo src={p.image} alt={p.name} ratio="4/5" sizes="(min-width:768px) 40vw, 100vw" />
             </div>
             <div className={`md:col-span-7 ${i % 2 ? "md:order-1" : ""} md:pt-4`}>
-              <Chapter no={String(i + 1).padStart(2, "0")} label={p.format} />
+              <Chapter no="06" label={p.format} />
               <h2 id={`${p.slug}-title`} className="font-title mt-6 text-[clamp(1.28rem,2.7vw,2.18rem)]">{p.name}</h2>
               <p className="mt-6 max-w-xl text-[1.0rem] leading-[1.9]">{p.summary}</p>
               <dl className="mt-8 grid max-w-xl gap-x-8 gap-y-3 border-t border-[var(--rule)] pt-6 text-[0.95rem] sm:grid-cols-[8rem_1fr]">

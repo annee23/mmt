@@ -21,7 +21,7 @@ export default async function WorkshopsPage({ params }: PageProps<"/[lang]/works
   return (
     <div className="wrap pb-24 pt-14 md:pt-24">
       <header>
-        <Chapter no="04" label={t.workshops.eyebrow} />
+        <Chapter no="07" label={t.workshops.eyebrow} />
         <h1 className={`${titleFont} mt-6 text-[clamp(1.62rem,4.1vw,3.19rem)]`}>{t.workshops.heading}</h1>
       </header>
       <ol className="mt-16">

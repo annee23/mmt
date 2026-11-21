@@ -53,6 +53,28 @@ export default async function RecommendationsPage({ params }: PageProps<"/[lang]
           );
         })}
       </div>
+
+      <section aria-labelledby="advisory-title" className="mt-20 border-t border-[var(--rule-strong)] pt-10">
+        <Chapter no="05" label={t.advisoryBoard.eyebrow} />
+        <h2 id="advisory-title" className={`${titleFont} mt-6 text-[clamp(2rem,4vw,3rem)]`}>
+          {t.advisoryBoard.heading}
+        </h2>
+        <p className="mt-5 max-w-3xl text-brown/80">{t.advisoryBoard.description}</p>
+        <ul className="mt-10 grid gap-10 md:grid-cols-3">
+          {t.advisoryBoard.members.map((member, i) => {
+            const [name, ...rest] = isKo ? member.linesKo : member.linesEn;
+            return (
+              <li key={i} className="border-t border-[var(--rule)] pt-6">
+                <span className="font-title text-lg text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
+                <p className={`${titleFont} mt-3 text-xl`}>{name}</p>
+                <ul className="mt-4 space-y-1.5 text-[0.95rem] text-brown/80">
+                  {rest.map((line) => <li key={line}>{line}</li>)}
+                </ul>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
     </div>
   );
 }

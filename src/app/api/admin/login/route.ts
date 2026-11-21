@@ -4,7 +4,7 @@ import { supabaseConfigured } from "@/lib/env";
 import { sessionClient } from "@/lib/supabase/session";
 import { serviceClient } from "@/lib/supabase/clients";
 
-const schema = z.object({ email: z.email().max(254), password: z.string().min(1).max(200) });
+const schema = z.object({ password: z.string().min(1).max(200) });
 
 export async function POST(req: Request) {
   if (crossSite(req)) return fail(403, "forbidden_origin");
@@ -12,8 +12,13 @@ export async function POST(req: Request) {
   const parsed = schema.safeParse(await readJson(req, 2_000));
   if (!parsed.success) return fail(400, "invalid");
 
+  const password = parsed.data.password;
+  const configuredPassword = process.env.ADMIN_PASSWORD;
+  if (configuredPassword && password !== configuredPassword) return fail(401, "invalid_credentials");
+
+  const email = process.env.ADMIN_AUTH_EMAIL ?? "admin@mmt.local";
   const db = await sessionClient();
-  const { data, error } = await db.auth.signInWithPassword(parsed.data);
+  const { data, error } = await db.auth.signInWithPassword({ email, password });
   if (error || !data.user) return fail(401, "invalid_credentials");
 
   // A valid Auth account is not enough – it must also be registered as an admin.

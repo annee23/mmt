@@ -9,8 +9,8 @@ const [email, password, roleArg, ...flags] = process.argv.slice(2);
 const role = ["owner", "manager", "viewer"].includes(roleArg) ? roleArg : "owner";
 const sensitive = [roleArg, ...flags].includes("--sensitive");
 
-if (!email || !password || password.length < 10) {
-  console.error("usage: create-admin.mjs <email> <password (min 10 chars)> [owner|manager|viewer] [--sensitive]");
+if (!email || !password || password.length < 8) {
+  console.error("usage: create-admin.mjs <email> <password (min 8 chars)> [owner|manager|viewer] [--sensitive]");
   process.exit(1);
 }
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

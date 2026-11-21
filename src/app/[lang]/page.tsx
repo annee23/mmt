@@ -141,7 +141,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <section id="research" aria-labelledby="research-title" className="wrap scroll-mt-24 py-20 md:py-32">
         <div className="grid gap-12 md:grid-cols-12 md:gap-14">
           <div className="md:col-span-4">
-            <Chapter no="03" label={ch.research} />
+            <Chapter no="02" label={ch.research} />
             <h2 id="research-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
               {t.research.heading}
             </h2>
@@ -182,7 +182,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         <div className="wrap py-20 md:py-32">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <Chapter no="06" label={ch.programs} />
+              <Chapter no="03" label={ch.programs} />
               <h2 id="programs-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
                 {t.program.heading}
               </h2>

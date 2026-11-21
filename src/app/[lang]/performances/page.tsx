@@ -21,7 +21,7 @@ export default async function PerformancesPage({ params }: PageProps<"/[lang]/pe
   return (
     <div className="wrap pb-24 pt-14 md:pt-24">
       <header>
-        <Chapter no="05" label={t.performances.eyebrow} />
+        <Chapter no="08" label={t.performances.eyebrow} />
         <h1 className={`${titleFont} mt-6 text-[clamp(1.62rem,4.1vw,3.19rem)]`}>{t.performances.heading}</h1>
         {t.performances.intro && <Paragraphs text={t.performances.intro} className="mt-6 max-w-2xl" />}
       </header>
