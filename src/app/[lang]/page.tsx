@@ -7,16 +7,14 @@ import { Chapter, Paragraphs, Rich, safeHref } from "@/components/ui";
 import { Photo } from "@/components/Photo";
 import { Newsletter } from "@/components/Newsletter";
 import { LegacyHashRedirect } from "@/components/LegacyHashRedirect";
-import { StateBadge } from "@/components/program";
 import { getContent } from "@/lib/content";
 import { getUI, isLang } from "@/lib/i18n";
-import { getPrograms } from "@/lib/programs";
 import { siteUrl } from "@/lib/env";
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!isLang(lang)) notFound();
-  const [t, programs] = [await getContent(lang), await getPrograms(lang)];
+  const t = await getContent(lang);
   const ui = getUI(lang);
   const isKo = lang === "ko";
   const ch = ui.chapters;
@@ -171,43 +169,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             <Link href={`/${lang}/research`} className="btn mt-10">
               {t.nav.research} →
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 06 PROGRAM PREVIEW */}
-      <section id="programs" aria-labelledby="programs-title" className="scroll-mt-24 bg-paper">
-        <div className="wrap py-20 md:py-32">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <Chapter no="03" label={ch.programs} />
-              <h2 id="programs-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
-                {t.program.heading}
-              </h2>
-            </div>
-            <Link href={`/${lang}/program`} className="btn">
-              {ui.viewAll} →
-            </Link>
-          </div>
-          <ol className="mt-12 border-t border-[var(--rule-strong)]">
-            {programs.map((p, i) => (
-              <li key={p.id} className="border-b border-[var(--rule)]">
-                <div className="grid items-baseline gap-2 py-7 md:grid-cols-[4rem_1.2fr_1.4fr_auto] md:gap-8">
-                  <span className="font-title text-xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
-                  <span>
-                    <span className="font-title block text-[1.35rem] leading-tight md:text-[1.45rem]">{p.name}</span>
-                    <span className="mt-1 block text-sm text-bronze-deep">{p.format}</span>
-                  </span>
-                  <span className="max-w-xl text-[0.97rem] text-brown/80">{p.summary}</span>
-                  <span className="flex items-center gap-4"><StateBadge state={p.state} ui={ui} /></span>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-10">
-            <ApplyLink lang={lang} className="btn btn-solid">
-              {ui.apply}
-            </ApplyLink>
           </div>
         </div>
       </section>
