@@ -131,11 +131,11 @@ export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; classNam
               <text x="355" y="222" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">vibration and the</text>
               <text x="355" y="242" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">present moments.</text>
 
-              <text x="260" y="340" fontFamily="Cormorant Garamond, serif" fontSize="25">Breath &amp; Vibration</text>
-              <text x="260" y="368" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="22">호흡과 진동</text>
-              <text x="260" y="398" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="15" fill="#7d6a4b">디저리두의 드론 소리와 함께</text>
-              <text x="260" y="418" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="15" fill="#7d6a4b">이완된 호흡과 진동을 경험</text>
-              <text x="260" y="448" fontFamily="Cormorant Garamond, serif" fontSize="14" fontStyle="italic" fill="#7d6a4b">Connect through breath, sound and resonance.</text>
+              <text x="260" y="350" fontFamily="Cormorant Garamond, serif" fontSize="19">Breath &amp; Vibration</text>
+              <text x="260" y="372" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="17">호흡과 진동</text>
+              <text x="260" y="396" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="12" fill="#7d6a4b">디저리두의 드론 소리와 함께</text>
+              <text x="260" y="412" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="12" fill="#7d6a4b">이완된 호흡과 진동을 경험</text>
+              <text x="260" y="438" fontFamily="Cormorant Garamond, serif" fontSize="11" fontStyle="italic" fill="#7d6a4b">Connect through breath, sound and resonance.</text>
 
               <text x="260" y="220" fontFamily="Cormorant Garamond, serif" fontSize="17" fontWeight="400" letterSpacing="1">EMBODIED</text>
               <text x="260" y="240" fontFamily="Cormorant Garamond, serif" fontSize="17" fontWeight="400" letterSpacing="1">LISTENING</text>
