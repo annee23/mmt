@@ -60,8 +60,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         />
         <div className="wrap w-full pb-12 pt-32 md:pb-20">
           <p className="rise font-title text-[0.8rem] tracking-[0.2em] text-paper/80 uppercase sm:text-[0.95rem] sm:tracking-[0.3em]">{ui.heroNote}</p>
-          <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[16em] text-[clamp(1.9rem,4.2vw,3.6rem)] leading-[1.02] italic font-medium">
-            {t.hero.philosophy.join(" ")}
+          <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[16em] text-[clamp(1.75rem,3.8vw,3.25rem)] leading-[1.08] italic font-medium">
+            {t.hero.philosophy.map((line) => (
+              <span key={line} className="block">{line}</span>
+            ))}
           </h1>
           <div className="rise rise-3 mt-8 flex flex-wrap items-end justify-between gap-8">
             <div>

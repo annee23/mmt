@@ -104,43 +104,43 @@ export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; classNam
       <div className="mt-8 grid gap-10 md:grid-cols-[1.15fr_1fr] md:gap-12">
         <div>
           <svg
-            viewBox="0 0 520 440"
+            viewBox="0 0 520 500"
             role="img"
             aria-label={c.title}
             className="mx-auto h-auto w-full max-w-[720px] overflow-visible"
           >
             <g fill="none" stroke="#a78e6a" strokeWidth="2">
-              <circle cx="170" cy="150" r="118" />
-              <circle cx="350" cy="150" r="118" />
-              <circle cx="260" cy="280" r="118" />
+              <circle cx="165" cy="155" r="125" />
+              <circle cx="355" cy="155" r="125" />
+              <circle cx="260" cy="300" r="125" />
             </g>
             <g fill="#3e3129" textAnchor="middle">
-              <text x="170" y="74" fontFamily="Cormorant Garamond, serif" fontSize="28">Awareness</text>
-              <text x="170" y="102" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="21">{isKo ? "알아차림" : "Awareness"}</text>
-              <text x="170" y="132" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="15" fill="#7d6a4b">{isKo ? "감각, 감정, 신체적 반응을" : "Senses, emotions and bodily"}</text>
-              <text x="170" y="152" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="15" fill="#7d6a4b">{isKo ? "알아차림" : "responses"}</text>
-              <text x="170" y="180" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">Notice your sensations,</text>
-              <text x="170" y="200" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">emotions and bodily</text>
-              <text x="170" y="220" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">responses.</text>
+              <text x="165" y="82" fontFamily="Cormorant Garamond, serif" fontSize="28">Awareness</text>
+              <text x="165" y="112" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="22">알아차림</text>
+              <text x="165" y="142" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="16" fill="#7d6a4b">감각, 감정, 신체적 반응을</text>
+              <text x="165" y="162" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="16" fill="#7d6a4b">알아차림</text>
+              <text x="165" y="202" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">Notice your sensations,</text>
+              <text x="165" y="222" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">emotions and bodily</text>
+              <text x="165" y="242" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">responses.</text>
 
-              <text x="350" y="74" fontFamily="Cormorant Garamond, serif" fontSize="28">Listening</text>
-              <text x="350" y="102" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="21">듣기</text>
-              <text x="350" y="132" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="15" fill="#7d6a4b">소리와 진동을 통해</text>
-              <text x="350" y="152" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="15" fill="#7d6a4b">지금 이 순간에 머묾</text>
-              <text x="350" y="180" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">Open to the sound,</text>
-              <text x="350" y="200" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">vibration and the</text>
-              <text x="350" y="220" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">present moments.</text>
+              <text x="355" y="82" fontFamily="Cormorant Garamond, serif" fontSize="28">Listening</text>
+              <text x="355" y="112" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="22">듣기</text>
+              <text x="355" y="142" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="16" fill="#7d6a4b">소리와 진동을 통해</text>
+              <text x="355" y="162" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="16" fill="#7d6a4b">지금 이 순간에 머묾</text>
+              <text x="355" y="202" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">Open to the sound,</text>
+              <text x="355" y="222" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">vibration and the</text>
+              <text x="355" y="242" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">present moments.</text>
 
-              <text x="260" y="310" fontFamily="Cormorant Garamond, serif" fontSize="25">Breath &amp; Vibration</text>
-              <text x="260" y="338" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="21">호흡과 진동</text>
-              <text x="260" y="368" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="15" fill="#7d6a4b">디저리두의 드론 소리와 함께</text>
-              <text x="260" y="388" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="15" fill="#7d6a4b">이완된 호흡과 진동을 경험</text>
-              <text x="260" y="412" fontFamily="Cormorant Garamond, serif" fontSize="14" fontStyle="italic" fill="#7d6a4b">Connect through breath, sound and resonance.</text>
+              <text x="260" y="340" fontFamily="Cormorant Garamond, serif" fontSize="25">Breath &amp; Vibration</text>
+              <text x="260" y="368" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="22">호흡과 진동</text>
+              <text x="260" y="398" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="15" fill="#7d6a4b">디저리두의 드론 소리와 함께</text>
+              <text x="260" y="418" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="15" fill="#7d6a4b">이완된 호흡과 진동을 경험</text>
+              <text x="260" y="448" fontFamily="Cormorant Garamond, serif" fontSize="14" fontStyle="italic" fill="#7d6a4b">Connect through breath, sound and resonance.</text>
 
-              <text x="260" y="210" fontFamily="Cormorant Garamond, serif" fontSize="17" fontWeight="400" letterSpacing="1">EMBODIED</text>
-              <text x="260" y="230" fontFamily="Cormorant Garamond, serif" fontSize="17" fontWeight="400" letterSpacing="1">LISTENING</text>
-              <text x="260" y="252" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="18" fontWeight="400">체화된 경청</text>
-              <text x="260" y="272" fontFamily="Cormorant Garamond, serif" fontSize="14" fontStyle="italic" fill="#7d6a4b">Listening to sound and body.</text>
+              <text x="260" y="220" fontFamily="Cormorant Garamond, serif" fontSize="17" fontWeight="400" letterSpacing="1">EMBODIED</text>
+              <text x="260" y="240" fontFamily="Cormorant Garamond, serif" fontSize="17" fontWeight="400" letterSpacing="1">LISTENING</text>
+              <text x="260" y="264" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="18" fontWeight="400">체화된 경청</text>
+              <text x="260" y="284" fontFamily="Cormorant Garamond, serif" fontSize="13" fontStyle="italic" fill="#7d6a4b">Listening to sound and body.</text>
             </g>
           </svg>
           <ul className="mx-auto mt-6 max-w-md space-y-2 text-[0.85rem] leading-relaxed text-brown/80">
