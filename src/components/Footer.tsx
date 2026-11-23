@@ -17,10 +17,7 @@ export function Footer({ lang, t, ui }: { lang: Lang; t: Content; ui: UI }) {
     <footer className="mt-24 bg-olive text-paper">
       <div className="wrap grid gap-12 py-16 md:grid-cols-12 md:py-20">
         <div className="md:col-span-5">
-          <div className="flex items-center gap-4">
-            <Image src="/images/brand/heart-snake.png" alt="" width={700} height={700} sizes="64px" className="h-14 w-14 object-contain brightness-0 invert" />
-            <Image src="/images/name.png" alt={t.hero.name} width={1084} height={439} sizes="160px" className="h-16 w-auto brightness-0 invert" />
-          </div>
+          <Image src="/images/brand/heart-snake.png" alt="" width={700} height={700} sizes="64px" className="h-14 w-14 object-contain brightness-0 invert" />
           <p className="font-title mt-6 text-lg italic text-bronze">{ui.footer.archive}</p>
           <p className="mt-3 text-xs text-paper/70">{t.hero.role}</p>
         </div>
