@@ -79,15 +79,15 @@ export default async function WorkshopsPage({ params }: PageProps<"/[lang]/works
             <li key={item.title} className="grid items-center gap-8 md:grid-cols-12">
               <div className={
                 reverse
-                  ? `md:col-start-7 ${wide ? "md:col-span-7" : "md:col-span-6"}`
-                  : `${wide ? "md:col-span-7" : "md:col-span-6"}`
+                  ? `order-2 md:order-none md:col-start-7 ${wide ? "md:col-span-7" : "md:col-span-6"}`
+                  : `order-2 md:order-none ${wide ? "md:col-span-7" : "md:col-span-6"}`
               }>
                 {media}
               </div>
               <div className={
                 reverse
-                  ? "md:col-start-1 md:col-span-4 md:row-start-1"
-                  : `${wide ? "md:col-start-9 md:col-span-3" : "md:col-start-8 md:col-span-4"}`
+                  ? "order-1 md:order-none md:col-start-1 md:col-span-4 md:row-start-1"
+                  : `order-1 md:order-none ${wide ? "md:col-start-9 md:col-span-3" : "md:col-start-8 md:col-span-4"}`
               }>
                 {text}
               </div>
