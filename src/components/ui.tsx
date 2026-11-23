@@ -29,8 +29,6 @@ export function Paragraphs({ text, className = "" }: { text: string; className?:
 export function Chapter({ no, label, children }: { no: string; label: string; children?: ReactNode }) {
   return (
     <p className="chapter">
-      <b>{no}</b>
-      <span aria-hidden>/</span>
       <span>{label}</span>
       {children}
     </p>
