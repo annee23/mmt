@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Chapter, Paragraphs } from "@/components/ui";
-import { Photo, dimsOf } from "@/components/Photo";
+import { Photo } from "@/components/Photo";
 import { getContent } from "@/lib/content";
 import { isLang } from "@/lib/i18n";
 
@@ -28,18 +28,12 @@ export default async function WorkshopsPage({ params }: PageProps<"/[lang]/works
         {t.workshops.items.map((item, i) => {
           const below = "captionBelow" in item && item.captionBelow;
           const images = item.images;
-          // Portrait documents (e.g. certificate letters) stay small next to the larger photos.
           const gallery = (
-            <div className="flex flex-wrap items-start gap-3 md:gap-4">
+            <div className={below ? "grid gap-6 md:grid-cols-3" : "grid gap-4 sm:grid-cols-2"}>
               {images.map((src, k) => {
-                const [w, h] = dimsOf(src);
-                const portrait = h / w > 1.2;
-                const cls = images.length > 1
-                  ? (portrait ? "w-full sm:max-w-md sm:basis-80" : "min-w-[14rem] flex-1 basis-64")
-                  : portrait ? "w-full max-w-md" : "w-full";
                 return (
-                  <div key={src} className={cls}>
-                    <Photo src={src} alt={`${item.title} ${k + 1}`} sizes={portrait ? "200px" : "(min-width:768px) 40vw, 100vw"} />
+                  <div key={src}>
+                    <Photo src={src} alt={`${item.title} ${k + 1}`} sizes="(min-width:768px) 40vw, 100vw" plain />
                   </div>
                 );
               })}
@@ -47,9 +41,14 @@ export default async function WorkshopsPage({ params }: PageProps<"/[lang]/works
           );
           const text = (
             <>
-              <span className="font-title text-xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
-              <h2 className={`${titleFont} mt-3 text-[clamp(1.15rem,2.0vw,1.66rem)]`}>{item.title}</h2>
-              <Paragraphs text={item.description} className="mt-5 max-w-xl" />
+              <span
+                aria-label={String(i + 1).padStart(2, "0")}
+                className="block font-title text-[clamp(64px,9vw,120px)] font-light leading-[0.9] text-transparent [-webkit-text-stroke:1px_var(--text-display)]"
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h2 className={`${titleFont} mt-8 text-[28px] leading-[1.2]`}>{item.title}</h2>
+              <Paragraphs text={item.description} className="mt-6 max-w-[62ch] text-[13.5px] leading-[1.45]" />
             </>
           );
           return (

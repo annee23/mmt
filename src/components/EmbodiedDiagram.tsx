@@ -1,4 +1,5 @@
 import type { Lang } from "@/lib/i18n";
+import Image from "next/image";
 
 const COPY = {
   ko: {
@@ -93,12 +94,6 @@ function Pictogram({ i }: { i: number }) {
 export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; className?: string }) {
   const c = COPY[lang];
   const isKo = lang === "ko";
-  const label = (en: string, ko: string, x: number, y: number) => (
-    <text x={x} y={y} textAnchor="middle" fill="currentColor">
-      <tspan fontFamily="var(--f-display)" fontSize="18" fontStyle="italic" x={x} dy="0">{en}</tspan>
-      <tspan fontFamily="var(--f-sans)" fontSize="14" fontWeight="700" x={x} dy="20">{ko}</tspan>
-    </text>
-  );
   return (
     <figure className={`text-brown ${className}`} aria-label={c.title}>
       <div className="mx-auto max-w-3xl text-center">
@@ -109,24 +104,16 @@ export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; classNam
 
       <div className="mt-8 grid gap-10 md:grid-cols-[1.15fr_1fr] md:gap-12">
         <div>
-          <svg viewBox="0 0 520 440" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Awareness · Listening · Breath & Vibration" className="mx-auto w-full max-w-lg overflow-visible text-brown/70">
-            <g fill="none" stroke="currentColor" strokeWidth="1.3">
-              <circle cx="170" cy="150" r="118" />
-              <circle cx="350" cy="150" r="118" />
-              <circle cx="260" cy="280" r="118" />
-            </g>
-            <path d="M260 105c-28 22-43 50-43 78 0 33 16 58 43 70 27-12 43-37 43-70 0-28-15-56-43-78z" fill="rgb(246 169 194 / .16)" stroke="currentColor" strokeWidth="1.3" />
-            <g className="text-brown">
-              {label(c.venn.awareness[0], c.venn.awareness[1], 122, 104)}
-              {label(c.venn.listening[0], c.venn.listening[1], 398, 104)}
-              {label(c.venn.breath[0], c.venn.breath[1], 260, 370)}
-              <text x="260" y="188" textAnchor="middle" fill="currentColor">
-                <tspan fontFamily="var(--f-display)" fontSize="13" letterSpacing="1.4" x="260">{c.venn.center[0]}</tspan>
-                <tspan fontFamily="var(--f-display)" fontSize="13" letterSpacing="1.4" x="260" dy="16">{c.venn.center[1]}</tspan>
-                <tspan fontFamily="var(--f-sans)" fontSize="12" fontWeight="700" x="260" dy="18">{c.venn.center[2]}</tspan>
-              </text>
-            </g>
-          </svg>
+          <Image
+            src="/images/program/embodied-listening-ko.png"
+            alt={c.title}
+            width={1870}
+            height={1536}
+            sizes="(min-width: 768px) 44vw, 100vw"
+            quality={100}
+            priority
+            className="mx-auto h-auto w-full max-w-[720px]"
+          />
           <ul className="mx-auto mt-6 max-w-md space-y-2 text-[0.85rem] leading-relaxed text-brown/80">
             {[c.venn.awareness, c.venn.listening, c.venn.breath].map(([en, , d]) => (
               <li key={en}>
