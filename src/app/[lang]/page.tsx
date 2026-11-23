@@ -53,7 +53,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-[#241b15]/85 via-[#241b15]/35 to-[#241b15]/5 md:bg-gradient-to-r md:from-[#241b15]/80 md:via-[#241b15]/30 md:to-transparent" />
         <div className="wrap w-full pb-12 pt-32 md:pb-20">
           <p className="rise font-title text-[0.8rem] tracking-[0.2em] text-paper/80 uppercase sm:text-[0.95rem] sm:tracking-[0.3em]">{ui.heroNote}</p>
-          <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[18em] text-[clamp(1.9rem,4.2vw,3.6rem)] leading-[1.02] italic font-medium">
+          <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[16em] text-[clamp(1.9rem,4.2vw,3.6rem)] leading-[1.02] italic font-medium">
             {t.hero.philosophy.map((line) => (
               <span key={line} className="block">{line}</span>
             ))}
@@ -185,18 +185,15 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           <ol className="mt-12 border-t border-[var(--rule-strong)]">
             {programs.map((p, i) => (
               <li key={p.id} className="border-b border-[var(--rule)]">
-                <Link href={`/${lang}/program/${p.slug}`} className="group grid items-baseline gap-2 py-7 md:grid-cols-[4rem_1.2fr_1.4fr_auto] md:gap-8">
+                <div className="grid items-baseline gap-2 py-7 md:grid-cols-[4rem_1.2fr_1.4fr_auto] md:gap-8">
                   <span className="font-title text-xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
                   <span>
-                    <span className="font-title block text-[1.35rem] leading-tight transition-colors group-hover:text-burgundy md:text-[1.45rem]">{p.name}</span>
+                    <span className="font-title block text-[1.35rem] leading-tight md:text-[1.45rem]">{p.name}</span>
                     <span className="mt-1 block text-sm text-bronze-deep">{p.format}</span>
                   </span>
                   <span className="max-w-xl text-[0.97rem] text-brown/80">{p.summary}</span>
-                  <span className="flex items-center gap-4">
-                    <StateBadge state={p.state} ui={ui} />
-                    <span aria-hidden className="font-title text-xl transition-transform group-hover:translate-x-1">→</span>
-                  </span>
-                </Link>
+                  <span className="flex items-center gap-4"><StateBadge state={p.state} ui={ui} /></span>
+                </div>
               </li>
             ))}
           </ol>
@@ -214,10 +211,12 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           {t.culturalRespect.titleKo} / {t.culturalRespect.titleEn}
         </p>
         <div className="font-title mx-auto mt-6 max-w-3xl space-y-3 text-[clamp(1.15rem,2.1vw,1.72rem)] italic leading-snug">
-          {t.culturalRespect.bodyKo.map((l, i) => (
-            <div key={l}>
-              <p lang="ko">{l}</p>
-              {t.culturalRespect.bodyEn[i] && <p lang="en" className="mt-1 text-[0.72em] not-italic text-brown/70">{t.culturalRespect.bodyEn[i]}</p>}
+          {t.culturalRespect.bodyKo.map((line, i) => (
+            <div key={line}>
+              <p lang="ko">{line}</p>
+              {t.culturalRespect.bodyEn[i] && (
+                <p lang="en" className="mt-1 text-[0.72em] not-italic text-brown/70">{t.culturalRespect.bodyEn[i]}</p>
+              )}
             </div>
           ))}
         </div>

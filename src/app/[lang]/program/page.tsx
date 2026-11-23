@@ -74,6 +74,7 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
                 <dt className="text-bronze-deep">{ui.program.fee}</dt>
                 <dd>{p.fee || ui.toBeAnnounced}</dd>
               </dl>
+              <h3 className="sr-only">{p.name}</h3>
             </div>
           </div>
           {p.slug === "embodied-listening" && (
@@ -85,9 +86,10 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
           )}
         </section>
       ))}
+
       <section className="wrap py-14 text-center">
         <ApplyLink lang={lang} className="btn btn-solid">{t.program.highlight.applyLabel}</ApplyLink>
-        <a href={`mailto:${t.contact.email}?subject=${subject}`} className="link-u ml-5 inline-block text-sm">
+        <a href={`mailto:${t.contact.email}?subject=${subject}`} className="btn">
           {ui.inquiry}
         </a>
       </section>

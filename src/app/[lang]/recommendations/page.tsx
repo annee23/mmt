@@ -62,22 +62,18 @@ export default async function RecommendationsPage({ params }: PageProps<"/[lang]
         <p className="mt-5 max-w-3xl text-brown/80">{t.advisoryBoard.description}</p>
         <ul className="mt-10 grid gap-10 md:grid-cols-3">
           {t.advisoryBoard.members.map((member, i) => {
-            const koName = member.linesKo[0];
-            const enName = member.linesEn[0];
             return (
               <li key={i} className="border-t border-[var(--rule)] pt-6">
                 <span className="font-title text-lg text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
-                <p className={`${titleFont} mt-3 text-xl`}>{isKo ? koName : enName}</p>
-                <p className="mt-1 text-base text-brown/65" lang={isKo ? "en" : "ko"}>
-                  {isKo ? enName : koName}
-                </p>
+                <p className={`${titleFont} mt-3 text-xl`} lang="ko">{member.linesKo[0]}</p>
+                <p className="mt-1 font-title text-base text-brown/65" lang="en">{member.linesEn[0]}</p>
                 <ul className="mt-4 space-y-1.5 text-[0.95rem] text-brown/80">
-                  {isKo
-                    ? member.linesKo.slice(1).map((line) => <li key={`ko-${line}`}>{line}</li>)
-                    : member.linesEn.slice(1).map((line) => <li key={`en-${line}`}>{line}</li>)}
-                  {member.linesEn.slice(1).map((line, k) => (
-                    <li key={`en-${k}`} lang="en" className="text-brown/60">
-                      {isKo ? line : member.linesKo.slice(1)[k]}
+                  {member.linesKo.slice(1).map((line, k) => (
+                    <li key={`ko-${k}`} lang="ko">
+                      {line}
+                      {member.linesEn[k + 1] && (
+                        <span lang="en" className="mt-1 block text-brown/60">{member.linesEn[k + 1]}</span>
+                      )}
                     </li>
                   ))}
                 </ul>

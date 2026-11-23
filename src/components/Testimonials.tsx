@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import { useState } from "react";
 
@@ -24,9 +24,7 @@ export function Testimonials({ items, isKo }: { items: Item[]; isKo: boolean }) 
           const secondary = isKo ? { text: q.en, lang: "en" } : { text: q.ko, lang: "ko" };
           return (
             <blockquote key={k} className="mt-4">
-              <p lang={primary.lang} className={`${primary.lang === "en" ? "font-title text-[1.15rem] italic" : "font-serif-kr text-[1.0rem]"} leading-relaxed`}>
-                “{primary.text}”
-              </p>
+              <p lang={primary.lang} className={`${primary.lang === "en" ? "font-title text-[1.15rem] italic" : "font-serif-kr text-[1.0rem]"} leading-relaxed`}>“{primary.text}”</p>
               <p lang={secondary.lang} className="mt-2 text-[0.92rem] leading-relaxed text-paper/65">{secondary.text}</p>
             </blockquote>
           );
@@ -35,8 +33,8 @@ export function Testimonials({ items, isKo }: { items: Item[]; isKo: boolean }) 
       <div className="mt-8 flex items-center justify-between">
         <span className="text-sm text-paper/60">{index + 1} / {items.length}</span>
         <div className="flex gap-3">
-          <button type="button" onClick={previous} className="btn btn-light h-11 min-h-11 px-4" aria-label="Previous">←</button>
-          <button type="button" onClick={next} className="btn btn-light h-11 min-h-11 px-4" aria-label="Next">→</button>
+          <button type="button" onClick={previous} className="btn btn-light h-11 min-h-11 px-4" aria-label={isKo ? "이전 후기" : "Previous testimonial"}>←</button>
+          <button type="button" onClick={next} className="btn btn-light h-11 min-h-11 px-4" aria-label={isKo ? "다음 후기" : "Next testimonial"}>→</button>
         </div>
       </div>
     </div>
