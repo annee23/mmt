@@ -154,7 +154,7 @@ export function ContentEditor({ canWrite }: { canWrite: boolean }) {
         <span className="flex-1" />
         {canWrite && <button type="button" className="btn btn-solid" disabled={busy || !dirty} onClick={save}>{busy ? "저장 중…" : dirty ? "저장하기" : "변경 없음"}</button>}
       </div>
-      {msg && <p role="status" className={`mt-4 text-sm ${msg.tone === "ok" ? "text-olive" : "text-burgundy"}`}>{msg.text}</p>}
+      {msg && <p role="status" className={`mt-4 text-sm ${msg.tone === "ok" ? "text-brown" : "text-burgundy"}`}>{msg.text}</p>}
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[14rem_1fr]">
         <nav aria-label="섹션">

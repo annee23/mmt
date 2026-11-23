@@ -123,7 +123,7 @@ export function ApplicationDetail({ id, canWrite, canViewSensitive, isOwner }: {
           <textarea id="memo" className="input" value={memo} onChange={(e) => setMemo(e.target.value)} disabled={!canWrite} maxLength={5000} />
           <button type="button" className="btn btn-sm mt-3" disabled={!canWrite || busy || memo === app.internal_memo} onClick={() => save({ internal_memo: memo }, "메모가")}>메모 저장</button>
 
-          {msg && <p role="status" className={`mt-4 text-sm ${msg.tone === "ok" ? "text-olive" : "text-burgundy"}`}>{msg.text}</p>}
+          {msg && <p role="status" className={`mt-4 text-sm ${msg.tone === "ok" ? "text-brown" : "text-burgundy"}`}>{msg.text}</p>}
           {!canWrite && <p className="mt-4 text-sm text-brown/60">조회 전용 계정은 수정할 수 없습니다.</p>}
         </div>
 

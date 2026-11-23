@@ -94,7 +94,7 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
         </a>
       </section>
 
-      <section aria-labelledby="exp-title" className="bg-olive text-paper">
+      <section aria-labelledby="exp-title" className="bg-brown text-paper">
         <div className="wrap py-20 md:py-28">
           <Chapter no="07" label={ui.chapters.experiences} />
           <h2 id="exp-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>{t.program.testimonials.heading}</h2>

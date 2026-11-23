@@ -5,7 +5,7 @@ import type { ProgramView, SessionView } from "@/lib/programs";
 
 export function StateBadge({ state, ui }: { state: ProgramView["state"] | SessionView["state"]; ui: UI }) {
   const map = {
-    open: [ui.program.open, "text-olive"],
+    open: [ui.program.open, "text-glow-pink"],
     full: [ui.program.seatsFull, "text-bronze-deep"],
     closed: [ui.program.closed, "text-brown/55"],
     upcoming: [ui.program.upcoming, "text-bronze-deep"],

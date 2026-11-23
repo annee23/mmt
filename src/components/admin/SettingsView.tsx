@@ -75,7 +75,7 @@ export function SettingsView({ canWrite, isOwner }: { canWrite: boolean; isOwner
             </div>
           ))}
         </section>
-        {msg && <p role="status" className={`text-sm ${msg.tone === "ok" ? "text-olive" : "text-burgundy"}`}>{msg.text}</p>}
+        {msg && <p role="status" className={`text-sm ${msg.tone === "ok" ? "text-brown" : "text-burgundy"}`}>{msg.text}</p>}
         {canWrite && <button type="submit" className="btn btn-solid" disabled={busy}>{busy ? "저장 중…" : "저장"}</button>}
       </form>
 

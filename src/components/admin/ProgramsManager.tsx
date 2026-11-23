@@ -154,7 +154,7 @@ export function ProgramsManager({ canWrite }: { canWrite: boolean }) {
       </nav>
 
       <div className="min-w-0">
-        {msg && <p role="status" className={`mb-4 text-sm ${msg.tone === "ok" ? "text-olive" : "text-burgundy"}`}>{msg.text}</p>}
+        {msg && <p role="status" className={`mb-4 text-sm ${msg.tone === "ok" ? "text-brown" : "text-burgundy"}`}>{msg.text}</p>}
         {!draft ? <p className="text-brown/60">왼쪽에서 프로그램을 선택하세요.</p> : (
           <div className="space-y-12">
             <form onSubmit={(e) => { e.preventDefault(); saveProgram(); }} className="space-y-6" aria-label="프로그램 정보">

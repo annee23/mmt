@@ -246,7 +246,7 @@ export function ApplyFlow({
                     <span>
                       <span className="font-title-kr block text-lg">{s.dateText}</span>
                       <span className="block text-sm text-brown/75">{[s.timeText, s.location, s.fee].filter(Boolean).join(" · ")}</span>
-                      <span className={`mt-1 block text-sm ${s.state === "full" ? "text-bronze-deep" : "text-olive"}`}>{s.state === "full" ? copy.sessionFull : s.seatsText}</span>
+                      <span className={`mt-1 block text-sm ${s.state === "full" ? "text-bronze-deep" : "text-glow-pink"}`}>{s.state === "full" ? copy.sessionFull : s.seatsText}</span>
                     </span>
                   </label>
                 );

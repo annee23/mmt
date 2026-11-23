@@ -53,7 +53,7 @@ export function SubscribersView({ canWrite }: { canWrite: boolean }) {
             {shown.map((s) => (
               <tr key={s.id}>
                 <td>{s.email}</td>
-                <td><span className={`badge ${s.status === "active" ? "text-olive" : "text-brown/55"}`}>{s.status === "active" ? "구독 중" : "구독 취소"}</span></td>
+                <td><span className={`badge ${s.status === "active" ? "text-brown" : "text-brown/55"}`}>{s.status === "active" ? "구독 중" : "구독 취소"}</span></td>
                 <td>{s.lang.toUpperCase()}</td>
                 <td>{fmtDate(s.subscribed_at)}</td>
                 <td>{fmtDate(s.unsubscribed_at)}</td>

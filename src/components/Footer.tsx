@@ -14,7 +14,7 @@ export function Footer({ lang, t, ui }: { lang: Lang; t: Content; ui: UI }) {
     [t.nav.performances, `/${lang}/performances`],
   ] as const;
   return (
-    <footer className="mt-24 bg-olive text-paper">
+    <footer className="mt-24 bg-brown text-paper">
       <div className="wrap grid gap-12 py-16 md:grid-cols-12 md:py-20">
         <div className="md:col-span-5">
           <Image src="/images/brand/heart-snake.png" alt="" width={700} height={700} sizes="64px" className="h-14 w-14 object-contain brightness-0 invert" />

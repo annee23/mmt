@@ -58,7 +58,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           height={700}
           sizes="72px"
           priority
-          className="absolute left-1/2 top-5 z-20 h-16 w-16 -translate-x-1/2 object-contain md:top-8 md:h-20 md:w-20"
+          className="absolute left-1/2 top-5 z-20 h-16 w-16 -translate-x-1/2 object-contain brightness-0 invert md:top-8 md:h-20 md:w-20"
         />
         <div className="wrap w-full pb-12 pt-32 md:pb-20">
           <p className="rise font-title text-[0.8rem] tracking-[0.2em] text-paper/80 uppercase sm:text-[0.95rem] sm:tracking-[0.3em]">{ui.heroNote}</p>

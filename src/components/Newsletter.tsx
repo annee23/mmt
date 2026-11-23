@@ -67,7 +67,7 @@ export function Newsletter({ copy, lang }: { copy: Copy; lang: "ko" | "en" }) {
           {state === "sending" ? copy.sending : copy.submit}
         </button>
       </div>
-      <p id="newsletter-status" role="status" aria-live="polite" className={`mt-3 min-h-6 text-sm ${state === "ok" ? "text-olive" : "text-burgundy"}`}>
+      <p id="newsletter-status" role="status" aria-live="polite" className={`mt-3 min-h-6 text-sm ${state === "ok" ? "text-brown" : "text-burgundy"}`}>
         {message}
       </p>
       <p className="text-xs text-brown/60">{copy.privacy}</p>
