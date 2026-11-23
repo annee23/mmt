@@ -353,7 +353,10 @@
     "writing": {
       "title": "Medium",
       "cta": "Read on Medium",
-      "href": "https://medium.com/@medicalmusictherapist.sarang"
+      "href": "https://medium.com/@medicalmusictherapist.sarang",
+      "naverTitle": "Naver Blog",
+      "naverCta": "Read on Naver Blog",
+      "naverHref": ""
     }
   },
   "workshops": {

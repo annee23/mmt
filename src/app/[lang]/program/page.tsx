@@ -5,10 +5,10 @@ import { Chapter, Rich } from "@/components/ui";
 import { Photo } from "@/components/Photo";
 import { EmbodiedDiagram } from "@/components/EmbodiedDiagram";
 import { StateBadge } from "@/components/program";
+import { Testimonials } from "@/components/Testimonials";
 import { getContent } from "@/lib/content";
 import { getUI, isLang } from "@/lib/i18n";
 import { getPrograms } from "@/lib/programs";
-import { Testimonials } from "@/components/Testimonials";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/program">): Promise<Metadata> {
   const { lang } = await params;
@@ -31,14 +31,6 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
       <header className="wrap pb-10 pt-14 md:pb-16 md:pt-24">
         <Chapter no="—" label={t.program.eyebrow} />
         <h1 className={`${titleFont} mt-6 text-[clamp(1.62rem,4.1vw,3.19rem)]`}>{t.program.heading}</h1>
-        <div aria-label={t.program.heading} className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-y border-[var(--rule)] py-4">
-          {programs.map((p, i) => (
-            <span key={p.id} className="font-title text-lg">
-              <span className="mr-2 text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
-              {p.name}
-            </span>
-          ))}
-        </div>
       </header>
 
       <section aria-labelledby="approach" className="wrap pb-16 md:pb-24">
@@ -93,12 +85,9 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
           )}
         </section>
       ))}
-
       <section className="wrap py-14 text-center">
-        <ApplyLink lang={lang} className="btn btn-solid">
-          {t.program.highlight.applyLabel}
-        </ApplyLink>
-        <a href={`mailto:${t.contact.email}?subject=${subject}`} className="btn">
+        <ApplyLink lang={lang} className="btn btn-solid">{t.program.highlight.applyLabel}</ApplyLink>
+        <a href={`mailto:${t.contact.email}?subject=${subject}`} className="link-u ml-5 inline-block text-sm">
           {ui.inquiry}
         </a>
       </section>

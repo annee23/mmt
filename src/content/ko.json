@@ -353,7 +353,10 @@
     "writing": {
       "title": "Medium",
       "cta": "Medium에서 글 읽기",
-      "href": "https://medium.com/@medicalmusictherapist.sarang"
+      "href": "https://medium.com/@medicalmusictherapist.sarang",
+      "naverTitle": "네이버 블로그",
+      "naverCta": "네이버 블로그에서 글 읽기",
+      "naverHref": ""
     }
   },
   "workshops": {

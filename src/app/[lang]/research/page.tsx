@@ -116,6 +116,11 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
         <a href={safeHref(t.research.writing.href)} target="_blank" rel="noopener noreferrer" className="btn mt-8">
           {t.research.writing.cta} ↗
         </a>
+        {"naverHref" in t.research.writing && t.research.writing.naverHref && (
+          <a href={safeHref(t.research.writing.naverHref)} target="_blank" rel="noopener noreferrer" className="btn ml-3 mt-8">
+            {t.research.writing.naverCta} ↗
+          </a>
+        )}
       </section>
     </div>
   );

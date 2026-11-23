@@ -62,21 +62,25 @@ export default async function RecommendationsPage({ params }: PageProps<"/[lang]
         <p className="mt-5 max-w-3xl text-brown/80">{t.advisoryBoard.description}</p>
         <ul className="mt-10 grid gap-10 md:grid-cols-3">
           {t.advisoryBoard.members.map((member, i) => {
-            const [nameKo, ...restKo] = member.linesKo;
-            const [nameEn, ...restEn] = member.linesEn;
+            const koName = member.linesKo[0];
+            const enName = member.linesEn[0];
             return (
               <li key={i} className="border-t border-[var(--rule)] pt-6">
                 <span className="font-title text-lg text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
-                <p className="font-title-kr mt-3 text-xl">{nameKo}</p>
-                <p className="font-title mt-1 text-lg text-brown/75">{nameEn}</p>
-                <div className="mt-4 grid gap-4 md:grid-cols-1">
-                  <ul className="space-y-1.5 text-[0.95rem] text-brown/80">
-                    {restKo.map((line) => <li key={line}>{line}</li>)}
-                  </ul>
-                  <ul className="space-y-1.5 text-[0.95rem] text-brown/65">
-                    {restEn.map((line) => <li key={line}>{line}</li>)}
-                  </ul>
-                </div>
+                <p className={`${titleFont} mt-3 text-xl`}>{isKo ? koName : enName}</p>
+                <p className="mt-1 text-base text-brown/65" lang={isKo ? "en" : "ko"}>
+                  {isKo ? enName : koName}
+                </p>
+                <ul className="mt-4 space-y-1.5 text-[0.95rem] text-brown/80">
+                  {isKo
+                    ? member.linesKo.slice(1).map((line) => <li key={`ko-${line}`}>{line}</li>)
+                    : member.linesEn.slice(1).map((line) => <li key={`en-${line}`}>{line}</li>)}
+                  {member.linesEn.slice(1).map((line, k) => (
+                    <li key={`en-${k}`} lang="en" className="text-brown/60">
+                      {isKo ? line : member.linesKo.slice(1)[k]}
+                    </li>
+                  ))}
+                </ul>
               </li>
             );
           })}

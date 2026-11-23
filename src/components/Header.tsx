@@ -57,10 +57,10 @@ export function Header({ lang, nav, brand, menuLabel, closeLabel, switchLabel }:
       <header className="sticky top-0 z-40 border-b border-[var(--rule)] bg-ivory/92 backdrop-blur-sm">
         <div className="wrap flex h-16 items-center justify-between gap-6 md:h-[4.75rem]">
         <Link href={`/${lang}`} aria-label={brand} className="shrink-0">
-          <Image src="/images/name.png" alt={brand} width={1084} height={439} sizes="120px" priority className="h-10 w-auto md:h-12" />
-        </Link>
-        <Link href={`/${lang}`} aria-label={brand} className="mr-auto ml-1 shrink-0">
-          <Image src="/images/brand/heart-snake.png" alt="" width={640} height={640} sizes="44px" priority className="h-9 w-9 object-contain md:h-11 md:w-11" />
+          <span className="flex items-center gap-2">
+            <Image src="/images/brand/heart-snake.png" alt="" width={700} height={700} sizes="40px" priority className="h-9 w-9 object-contain md:h-10 md:w-10" />
+            <Image src="/images/name.png" alt={brand} width={1084} height={439} sizes="120px" priority className="h-10 w-auto md:h-12" />
+          </span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">

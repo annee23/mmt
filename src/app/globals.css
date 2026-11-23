@@ -8,12 +8,14 @@
   --color-bronze: #a78e6a;
   --color-burgundy: #704a49;
   --color-bronze-deep: #7d6a4b;
+  --color-cobalt: #3156a5;
+  --color-baby-pink: #efcfd9;
 }
 
 :root {
   --f-display: var(--font-cormorant), var(--font-nanum), "NanumSquare", sans-serif;
   --f-serif-kr: var(--font-nanum), "NanumSquare", system-ui, sans-serif;
-  --f-sans: "Avenir Next", Avenir, var(--font-nanum), "NanumSquare", system-ui, sans-serif;
+  --f-sans: var(--font-nanum), "NanumSquare", system-ui, sans-serif;
   --rule: rgb(167 142 106 / 0.45);
   --rule-strong: rgb(62 49 41 / 0.85);
 }
@@ -39,9 +41,8 @@ body {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.24  0 0 0 0 0.19  0 0 0 0 0.16  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-.prose-body,
 .prose-body p,
-main p {
+.prose-body li {
   text-align: justify;
   text-justify: inter-word;
 }
