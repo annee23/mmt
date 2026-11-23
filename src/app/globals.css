@@ -1,9 +1,17 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/woff2/PretendardVariable.woff2") format("woff2-variations");
+}
+
 @theme static {
-  --color-ivory: #fff;
+  --color-ivory: #f7f6f1;
   --color-paper: #fff;
-  --color-brown: #3e3129;
+  --color-brown: #2a2a28;
   --color-bronze: #a78e6a;
   --color-burgundy: #704a49;
   --color-bronze-deep: #7d6a4b;
@@ -14,8 +22,8 @@
 
 :root {
   --f-display: var(--font-cormorant), var(--font-nanum), "NanumSquare", sans-serif;
-  --f-serif-kr: var(--font-nanum), "NanumSquare", system-ui, sans-serif;
-  --f-sans: "Avenir Next", Avenir, var(--font-nanum), "NanumSquare", system-ui, sans-serif;
+  --f-serif-kr: "Noto Serif KR", "Pretendard Variable", "NanumSquare", system-ui, sans-serif;
+  --f-sans: "Avenir Next", "Pretendard Variable", "Century Gothic", "Helvetica Neue", Helvetica, sans-serif;
   --rule: rgb(167 142 106 / 0.45);
   --rule-strong: rgb(62 49 41 / 0.85);
 }
@@ -33,8 +41,8 @@ body {
   background-color: var(--color-ivory);
   color: var(--color-brown);
   font-family: var(--f-sans);
-  font-size: 0.94rem;
-  line-height: 1.8;
+  font-size: 13.5px;
+  line-height: 1.45;
   word-break: keep-all;
   overflow-wrap: break-word;
   background-image: none;
@@ -59,8 +67,8 @@ body {
   .font-title { font-variant-numeric: lining-nums; font-family: var(--f-display); font-weight: 500; letter-spacing: -0.01em; line-height: 1.08; }
   .font-title-kr { font-family: var(--f-serif-kr); font-weight: 700; letter-spacing: -0.03em; line-height: 1.3; }
 
-  .wrap { width: 100%; max-width: 78rem; margin-inline: auto; padding-inline: 1.25rem; }
-  @media (min-width: 768px) { .wrap { padding-inline: 2.5rem; } }
+  .wrap { width: 100%; max-width: 87.5rem; margin-inline: auto; padding-inline: 28px; }
+  @media (min-width: 720px) { .wrap { padding-inline: 48px; } }
 
   /* "01 / THE JOURNEY" chapter label */
   .chapter { font-variant-numeric: lining-nums;

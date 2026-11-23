@@ -53,6 +53,14 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[la
   ];
   return (
     <html lang={lang} className={fontVars}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Noto+Serif+KR:wght@400;500;600;700&display=swap"
+        />
+      </head>
       <body className="flex min-h-screen flex-col">
         <a
           href="#main"
