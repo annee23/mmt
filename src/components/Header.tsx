@@ -98,7 +98,7 @@ export function Header({ lang, nav, brand, menuLabel, closeLabel, switchLabel }:
         aria-modal="true"
         aria-label={menuLabel}
         hidden={!open}
-        className="fixed inset-0 z-50 flex flex-col overflow-y-auto overscroll-contain bg-[#FBF8F2] opacity-100 lg:hidden"
+        className="fixed inset-0 z-50 flex flex-col overflow-y-auto overscroll-contain bg-white opacity-100 lg:hidden"
       >
         <div className="wrap flex h-16 items-center justify-between">
           <span className="chapter">Index</span>

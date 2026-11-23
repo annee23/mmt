@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 @theme static {
-  --color-ivory: #f3efe5;
-  --color-paper: #fbf8f2;
+  --color-ivory: #fff;
+  --color-paper: #fff;
   --color-brown: #3e3129;
   --color-olive: #454b3a;
   --color-bronze: #a78e6a;
   --color-burgundy: #704a49;
   --color-bronze-deep: #7d6a4b;
   --color-cobalt: #3156a5;
-  --color-baby-pink: #efcfd9;
+  --color-baby-pink: #f7c8d8;
+  --color-glow-pink: #f6a9c2;
 }
 
 :root {
@@ -37,11 +38,10 @@ body {
   line-height: 1.8;
   word-break: keep-all;
   overflow-wrap: break-word;
-  /* faint paper grain */
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.24  0 0 0 0 0.19  0 0 0 0 0.16  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-image: none;
 }
 
-::selection { background: var(--color-bronze); color: var(--color-paper); }
+::selection { background: var(--color-glow-pink); color: var(--color-brown); }
 
 .prose-body p,
 .prose-body li,
@@ -70,7 +70,7 @@ body {
     text-transform: uppercase; color: var(--color-bronze-deep);
   }
   .chapter::after { content: ""; height: 1px; flex: 1; background: var(--rule); max-width: 9rem; }
-  .chapter b { font-weight: 600; color: var(--color-burgundy); }
+  .chapter b { font-weight: 600; color: var(--color-glow-pink); }
 
   .rule { border: 0; border-top: 1px solid var(--rule); }
   .rule-strong { border: 0; border-top: 1px solid var(--rule-strong); }
@@ -102,8 +102,8 @@ body {
     cursor: pointer; text-align: center;
   }
   .btn:hover { background: var(--color-brown); color: var(--color-paper); }
-  .btn-solid { background: var(--color-brown); color: var(--color-paper); }
-  .btn-solid:hover { background: var(--color-burgundy); border-color: var(--color-burgundy); }
+  .btn-solid { background: var(--color-glow-pink); color: var(--color-brown); border-color: var(--color-glow-pink); box-shadow: 0 8px 24px rgb(246 169 194 / 0.32); }
+  .btn-solid:hover { background: #ffd1df; border-color: #ffd1df; box-shadow: 0 10px 30px rgb(246 169 194 / 0.48); }
   .btn-light { color: var(--color-paper); border-color: var(--color-paper); }
   .btn-light:hover { background: var(--color-paper); color: var(--color-brown); }
   .btn-light-solid { background: var(--color-paper); color: var(--color-brown); border-color: var(--color-paper); }
