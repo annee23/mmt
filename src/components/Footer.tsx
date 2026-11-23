@@ -18,6 +18,7 @@ export function Footer({ lang, t, ui }: { lang: Lang; t: Content; ui: UI }) {
       <div className="wrap grid gap-12 py-16 md:grid-cols-12 md:py-20">
         <div className="md:col-span-5">
           <Image src="/images/name.png" alt={t.hero.name} width={1084} height={439} sizes="160px" className="h-16 w-auto brightness-0 invert" />
+          <Image src="/images/brand/heart-snake.png" alt="" width={640} height={640} sizes="56px" className="mt-5 h-14 w-14 object-contain" />
           <p className="font-title mt-6 text-lg italic text-bronze">{ui.footer.archive}</p>
           <p className="mt-3 text-xs text-paper/70">{t.hero.role}</p>
         </div>
