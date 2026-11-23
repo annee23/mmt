@@ -11,7 +11,7 @@
 @theme static {
   --color-ivory: #fff;
   --color-paper: #fff;
-  --color-brown: #2a2a28;
+  --color-brown: #3e3129;
   --color-bronze: #a78e6a;
   --color-burgundy: #704a49;
   --color-bronze-deep: #7d6a4b;
@@ -48,6 +48,14 @@ body {
   background-image: none;
 }
 
+.font-bold,
+.font-semibold,
+.font-extrabold,
+strong,
+b {
+  font-weight: 400 !important;
+}
+
 ::selection { background: var(--color-glow-pink); color: var(--color-brown); }
 
 .prose-body p,
@@ -64,8 +72,8 @@ body {
 
 @layer components {
   .font-serif-kr { font-family: var(--f-serif-kr); }
-  .font-title { font-variant-numeric: lining-nums; font-family: var(--f-display); font-weight: 500; letter-spacing: -0.01em; line-height: 1.08; }
-  .font-title-kr { font-family: var(--f-serif-kr); font-weight: 700; letter-spacing: -0.03em; line-height: 1.3; }
+  .font-title { font-variant-numeric: lining-nums; font-family: var(--f-display); font-weight: 400; letter-spacing: -0.01em; line-height: 1.08; }
+  .font-title-kr { font-family: var(--f-serif-kr); font-weight: 400; letter-spacing: -0.03em; line-height: 1.3; }
 
   .wrap { width: 100%; max-width: 87.5rem; margin-inline: auto; padding-inline: 28px; }
   @media (min-width: 720px) { .wrap { padding-inline: 48px; } }
@@ -102,7 +110,7 @@ body {
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
     min-height: 3rem; padding: 0.7rem 1.7rem;
-    font-family: var(--f-display); font-size: 0.95rem; font-weight: 600;
+    font-family: var(--f-display); font-size: 0.95rem; font-weight: 400;
     letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.2;
     border: 1px solid var(--color-brown); color: var(--color-brown); background: transparent;
     transition: background-color .25s ease, color .25s ease, border-color .25s ease;

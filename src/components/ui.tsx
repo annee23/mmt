@@ -6,7 +6,7 @@ export function Rich({ text }: { text: string }) {
   return (
     <>
       {parts.map((p, i) =>
-        p.startsWith("**") && p.endsWith("**") ? <strong key={i}>{p.slice(2, -2)}</strong> : <span key={i}>{p}</span>,
+        p.startsWith("**") && p.endsWith("**") ? <span key={i}>{p.slice(2, -2)}</span> : <span key={i}>{p}</span>,
       )}
     </>
   );
