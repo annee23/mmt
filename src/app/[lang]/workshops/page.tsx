@@ -35,8 +35,8 @@ export default async function WorkshopsPage({ params }: PageProps<"/[lang]/works
                 const [w, h] = dimsOf(src);
                 const portrait = h / w > 1.2;
                 const cls = images.length > 1
-                  ? (portrait ? "w-full sm:max-w-md sm:basis-80" : "min-w-[14rem] flex-1 basis-64")
-                  : portrait ? "w-full max-w-md" : "w-full";
+                  ? (portrait ? "w-full sm:max-w-xl sm:basis-96" : "min-w-[14rem] flex-1 basis-64")
+                  : portrait ? "w-full max-w-xl" : "w-full";
                 return (
                   <div key={src} className={cls}>
                     <Photo src={src} alt={`${item.title} ${k + 1}`} sizes={portrait ? "200px" : "(min-width:768px) 40vw, 100vw"} />

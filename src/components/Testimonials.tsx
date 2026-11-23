@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 type Quote = { en: string; ko: string };
-type Item = { number: number; name: string; location: string | null; quotes: Quote[] };
+type Item = { number: number; name: string; location: string | null; reversed?: boolean; quotes: Quote[] };
 
 export function Testimonials({ items, isKo }: { items: Item[]; isKo: boolean }) {
   const [index, setIndex] = useState(0);
@@ -20,8 +20,9 @@ export function Testimonials({ items, isKo }: { items: Item[]; isKo: boolean }) 
           {item.location ? <span className="text-paper/70">, {item.location}</span> : null}
         </p>
         {item.quotes.map((q, k) => {
-          const primary = isKo ? { text: q.ko, lang: "ko" } : { text: q.en, lang: "en" };
-          const secondary = isKo ? { text: q.en, lang: "en" } : { text: q.ko, lang: "ko" };
+          const koreanSpeaker = item.reversed;
+          const primary = koreanSpeaker ? { text: q.ko, lang: "ko" } : { text: q.en, lang: "en" };
+          const secondary = koreanSpeaker ? { text: q.en, lang: "en" } : { text: q.ko, lang: "ko" };
           return (
             <blockquote key={k} className="mt-4">
               <p lang={primary.lang} className={`${primary.lang === "en" ? "font-title text-[1.15rem] italic" : "font-serif-kr text-[1.0rem]"} leading-relaxed`}>“{primary.text}”</p>

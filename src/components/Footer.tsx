@@ -9,7 +9,6 @@ export function Footer({ lang, t, ui }: { lang: Lang; t: Content; ui: UI }) {
   const nav = [
     [t.nav.program, `/${lang}/program`],
     [t.nav.research, `/${lang}/research`],
-    [lang === "ko" ? "추천사" : "Recommendations", `/${lang}/recommendations`],
     [t.nav.workshops, `/${lang}/workshops`],
     [t.nav.performances, `/${lang}/performances`],
   ] as const;

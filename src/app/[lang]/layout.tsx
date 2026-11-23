@@ -48,7 +48,6 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[la
   const nav = [
     { key: "program", label: t.nav.program, href: `/${lang}/program` },
     { key: "research", label: t.nav.research, href: `/${lang}/research` },
-    { key: "recommendations", label: lang === "ko" ? "추천사" : "Recommendations", href: `/${lang}/recommendations` },
     { key: "workshops", label: t.nav.workshops, href: `/${lang}/workshops` },
     { key: "performances", label: t.nav.performances, href: `/${lang}/performances` },
   ];

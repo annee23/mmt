@@ -63,9 +63,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         <div className="wrap w-full pb-12 pt-32 md:pb-20">
           <p className="rise font-title text-[0.8rem] tracking-[0.2em] text-paper/80 uppercase sm:text-[0.95rem] sm:tracking-[0.3em]">{ui.heroNote}</p>
           <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[16em] text-[clamp(1.9rem,4.2vw,3.6rem)] leading-[1.02] italic font-medium">
-            {t.hero.philosophy.map((line) => (
-              <span key={line} className="block">{line}</span>
-            ))}
+            {t.hero.philosophy.join(" ")}
           </h1>
           <div className="rise rise-3 mt-8 flex flex-wrap items-end justify-between gap-8">
             <div>
@@ -211,6 +209,59 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
               {ui.apply}
             </ApplyLink>
           </div>
+        </div>
+      </section>
+
+      {/* recommendations and advisory board */}
+      <section id="recommendations" aria-labelledby="recommendations-title" className="wrap scroll-mt-24 py-20 md:py-32">
+        <Chapter no="04" label={isKo ? "RECOMMENDATION" : "RECOMMENDATIONS"} />
+        <h2 id="recommendations-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
+          {t.recommendation.heading}
+        </h2>
+        <p className="mt-5 max-w-3xl text-brown/80">{t.recommendation.intro}</p>
+        <div className="mt-12 space-y-14">
+          {t.recommendation.letters.map((letter, i) => {
+            const paragraphs = isKo ? letter.paragraphsKo : letter.paragraphs;
+            const name = isKo ? letter.nameKo : letter.name;
+            const role = isKo ? letter.titleKo : letter.title;
+            const affiliation = isKo ? letter.affiliationKo : letter.affiliation;
+            return (
+              <article key={i} className="grid gap-8 border-t border-[var(--rule-strong)] pt-8 md:grid-cols-12 md:gap-12">
+                <header className="md:col-span-3">
+                  {letter.photo && <Photo src={letter.photo} alt={name} ratio="1/1" sizes="(min-width:768px) 20vw, 60vw" className="mb-5 max-w-[14rem]" />}
+                  <p className={`${titleFont} text-xl`}>{name}</p>
+                  <p className="mt-2 text-sm text-brown/75">{role}</p>
+                  <p className="mt-1 text-sm text-brown/75">{affiliation}</p>
+                </header>
+                <div className={`prose-body md:col-span-9 md:max-w-3xl ${isKo ? "leading-[1.95]" : "font-title text-[1.15rem] leading-[1.7]"}`}>
+                  {paragraphs.map((paragraph, k) => <p key={k}>{paragraph}</p>)}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="mt-20 border-t border-[var(--rule-strong)] pt-10">
+          <Chapter no="05" label="ADVISORY BOARD" />
+          <h3 className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>{t.advisoryBoard.heading}</h3>
+          <p className="mt-5 max-w-3xl text-brown/80">{t.advisoryBoard.description}</p>
+          <ul className="mt-10 grid gap-10 md:grid-cols-3">
+            {t.advisoryBoard.members.map((member, i) => (
+              <li key={i} className="border-t border-[var(--rule)] pt-6">
+                <span className="font-title text-lg text-glow-pink">{String(i + 1).padStart(2, "0")}</span>
+                <p className={`${titleFont} mt-3 text-xl`} lang="ko">{member.linesKo[0]}</p>
+                <p className="mt-1 font-title text-base text-brown/65" lang="en">{member.linesEn[0]}</p>
+                <ul className="mt-4 space-y-1.5 text-[0.95rem] text-brown/80">
+                  {member.linesKo.slice(1).map((line, k) => (
+                    <li key={`ko-${k}`} lang="ko">
+                      {line}
+                      {member.linesEn[k + 1] && <span lang="en" className="mt-1 block text-brown/60">{member.linesEn[k + 1]}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
