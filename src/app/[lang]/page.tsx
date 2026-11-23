@@ -228,10 +228,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
       {/* gratitude */}
       <section aria-label={isKo ? t.culturalRespect.titleKo : t.culturalRespect.titleEn} className="wrap py-20 text-center md:py-28">
-        <p className="font-title text-lg tracking-[0.28em] text-bronze-deep uppercase">
+        <p className="font-title text-base tracking-[0.2em] text-bronze-deep uppercase">
           {t.culturalRespect.titleKo} / {t.culturalRespect.titleEn}
         </p>
-        <div className="font-title mx-auto mt-6 max-w-3xl space-y-3 text-[clamp(1.15rem,2.1vw,1.72rem)] italic leading-snug">
+        <div className="font-title mx-auto mt-5 max-w-3xl space-y-2 text-[1.05rem] italic leading-[1.45]">
           {t.culturalRespect.bodyKo.map((line, i) => (
             <div key={line}>
               <p lang="ko">{line}</p>
