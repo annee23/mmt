@@ -95,8 +95,8 @@ export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; classNam
   const isKo = lang === "ko";
   const label = (en: string, ko: string, x: number, y: number) => (
     <text x={x} y={y} textAnchor="middle" fill="currentColor">
-      <tspan fontFamily="var(--f-display)" fontSize="21" fontStyle="italic" x={x} dy="0">{en}</tspan>
-      <tspan fontFamily="var(--f-sans)" fontSize="16" fontWeight="700" x={x} dy="22">{ko}</tspan>
+      <tspan fontFamily="var(--f-display)" fontSize="18" fontStyle="italic" x={x} dy="0">{en}</tspan>
+      <tspan fontFamily="var(--f-sans)" fontSize="14" fontWeight="700" x={x} dy="20">{ko}</tspan>
     </text>
   );
   return (
@@ -109,21 +109,21 @@ export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; classNam
 
       <div className="mt-8 grid gap-10 md:grid-cols-[1.15fr_1fr] md:gap-12">
         <div>
-          <svg viewBox="0 0 420 400" role="img" aria-label="Awareness · Listening · Breath & Vibration" className="mx-auto w-full max-w-md text-brown/70">
+          <svg viewBox="0 0 520 440" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Awareness · Listening · Breath & Vibration" className="mx-auto w-full max-w-lg overflow-visible text-brown/70">
             <g fill="none" stroke="currentColor" strokeWidth="1.3">
-              <circle cx="150" cy="140" r="125" />
-              <circle cx="270" cy="140" r="125" />
-              <circle cx="210" cy="244" r="125" />
+              <circle cx="170" cy="150" r="118" />
+              <circle cx="350" cy="150" r="118" />
+              <circle cx="260" cy="280" r="118" />
             </g>
-            <path d="M210 100c-26 18-40 46-40 70 0 30 16 52 40 62 24-10 40-32 40-62 0-24-14-52-40-70z" fill="rgb(62 49 41 / .07)" stroke="currentColor" strokeWidth="1.3" />
+            <path d="M260 105c-28 22-43 50-43 78 0 33 16 58 43 70 27-12 43-37 43-70 0-28-15-56-43-78z" fill="rgb(246 169 194 / .16)" stroke="currentColor" strokeWidth="1.3" />
             <g className="text-brown">
-              {label(c.venn.awareness[0], c.venn.awareness[1], 100, 98)}
-              {label(c.venn.listening[0], c.venn.listening[1], 320, 98)}
-              {label(c.venn.breath[0], c.venn.breath[1], 210, 330)}
-              <text x="210" y="160" textAnchor="middle" fill="currentColor">
-                <tspan fontFamily="var(--f-display)" fontSize="14" letterSpacing="1.5" x="210">{c.venn.center[0]}</tspan>
-                <tspan fontFamily="var(--f-display)" fontSize="14" letterSpacing="1.5" x="210" dy="17">{c.venn.center[1]}</tspan>
-                <tspan fontFamily="var(--f-sans)" fontSize="14" fontWeight="700" x="210" dy="19">{c.venn.center[2]}</tspan>
+              {label(c.venn.awareness[0], c.venn.awareness[1], 122, 104)}
+              {label(c.venn.listening[0], c.venn.listening[1], 398, 104)}
+              {label(c.venn.breath[0], c.venn.breath[1], 260, 370)}
+              <text x="260" y="188" textAnchor="middle" fill="currentColor">
+                <tspan fontFamily="var(--f-display)" fontSize="13" letterSpacing="1.4" x="260">{c.venn.center[0]}</tspan>
+                <tspan fontFamily="var(--f-display)" fontSize="13" letterSpacing="1.4" x="260" dy="16">{c.venn.center[1]}</tspan>
+                <tspan fontFamily="var(--f-sans)" fontSize="12" fontWeight="700" x="260" dy="18">{c.venn.center[2]}</tspan>
               </text>
             </g>
           </svg>
