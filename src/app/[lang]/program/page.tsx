@@ -79,7 +79,7 @@ export default async function ProgramPage({ params }: PageProps<"/[lang]/program
         </section>
       )}
 
-      <section className="wrap py-14 text-center">
+      <section className="wrap flex flex-wrap justify-center gap-3 py-14 text-center">
         <ApplyLink lang={lang} className="btn btn-solid">{t.program.highlight.applyLabel}</ApplyLink>
         <a href={`mailto:${t.contact.email}?subject=${subject}`} className="btn">
           {ui.inquiry}
