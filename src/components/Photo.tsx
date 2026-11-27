@@ -9,6 +9,7 @@ type Props = {
   alt: string;
   /** Crop to a fixed aspect ratio (e.g. "4/5"). Omit to keep the photo's natural proportions. */
   ratio?: string;
+  fill?: boolean;
   sizes?: string;
   priority?: boolean;
   className?: string;
@@ -18,19 +19,11 @@ type Props = {
 };
 
 /** Every photograph passes through here so the warm film treatment stays consistent. */
-export function Photo({ src, alt, ratio, sizes = "(min-width: 1024px) 50vw, 100vw", priority, className = "", position, plain, contain }: Props) {
+export function Photo({ src, alt, ratio, fill, sizes = "(min-width: 1024px) 50vw, 100vw", priority, className = "", position, plain, contain }: Props) {
   const cls = `film ${plain ? "film--plain" : ""} ${className}`;
-  if (plain) {
+  if (ratio || fill) {
     return (
-      <div className={cls}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={alt} loading={priority ? "eager" : "lazy"} sizes={sizes} className="block h-auto w-full" />
-      </div>
-    );
-  }
-  if (ratio) {
-    return (
-      <div className={cls} style={{ aspectRatio: ratio }}>
+      <div className={cls} style={ratio ? { aspectRatio: ratio } : undefined}>
         <Image
           src={src}
           alt={alt}
@@ -41,6 +34,14 @@ export function Photo({ src, alt, ratio, sizes = "(min-width: 1024px) 50vw, 100v
           className={contain ? "object-contain" : "object-cover"}
           style={position ? { objectPosition: position } : undefined}
         />
+      </div>
+    );
+  }
+  if (plain) {
+    return (
+      <div className={cls}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={alt} loading={priority ? "eager" : "lazy"} sizes={sizes} className="block h-auto w-full" />
       </div>
     );
   }

@@ -189,15 +189,39 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             const role = isKo ? letter.titleKo : letter.title;
             const affiliation = isKo ? letter.affiliationKo : letter.affiliation;
             return (
-              <article key={i} className="grid gap-8 border-t border-[var(--rule-strong)] pt-8 md:grid-cols-12 md:gap-12">
-                <header className="md:col-span-3">
-                  {letter.photo && <Photo src={letter.photo} alt={name} ratio="1/1" sizes="(min-width:768px) 20vw, 60vw" className="mb-5 max-w-[14rem]" />}
-                  <p className={`${titleFont} text-xl`}>{name}</p>
-                  <p className="mt-2 text-sm text-brown/75">{role}</p>
-                  <p className="mt-1 text-sm text-brown/75">{affiliation}</p>
-                </header>
-                <div className={`prose-body md:col-span-9 md:max-w-3xl ${isKo ? "" : "font-title text-[1.15rem] leading-[1.7]"}`}>
+              <article
+                key={i}
+                className={`grid gap-8 border-t border-[var(--rule-strong)] pt-8 ${
+                  letter.photo
+                    ? "max-[1024px]:grid-cols-1 min-[1025px]:grid-cols-[minmax(380px,1fr)_minmax(0,62ch)] min-[1025px]:gap-10"
+                    : "md:grid-cols-12 md:gap-12"
+                }`}
+              >
+                {letter.photo ? (
+                  <Photo
+                    src={letter.photo}
+                    alt={name}
+                    fill
+                    plain
+                    sizes="(min-width:1025px) 45vw, (min-width:768px) 420px, 100vw"
+                    className="max-[1024px]:mx-auto max-[1024px]:aspect-[4/5] max-[1024px]:w-full max-[1024px]:max-w-[420px]"
+                  />
+                ) : (
+                  <header className="md:col-span-3">
+                    <p className={`${titleFont} text-xl`}>{name}</p>
+                    <p className="mt-2 text-sm text-brown/75">{role}</p>
+                    <p className="mt-1 text-sm text-brown/75">{affiliation}</p>
+                  </header>
+                )}
+                <div className={`prose-body ${letter.photo ? "max-w-[62ch]" : "md:col-span-9 md:max-w-3xl"} ${isKo ? "" : "font-title text-[1.15rem] leading-[1.7]"}`}>
                   {paragraphs.map((paragraph, k) => <p key={k}>{paragraph}</p>)}
+                  {letter.photo && (
+                    <div className="mt-7 border-t border-[var(--rule)] pt-5">
+                      <p className={`${titleFont} text-xl`}>{name}</p>
+                      <p className="mt-2 text-sm text-brown/75">{role}</p>
+                      <p className="mt-1 text-sm text-brown/75">{affiliation}</p>
+                    </div>
+                  )}
                 </div>
               </article>
             );
