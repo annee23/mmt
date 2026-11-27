@@ -44,7 +44,7 @@ export function Header({ lang, nav, brand, menuLabel, closeLabel, switchLabel }:
       hrefLang={other}
       lang={other}
       aria-label={switchLabel}
-      className="font-title text-[1.05rem] tracking-[0.18em] text-brown"
+      className="font-[family-name:var(--f-sans)] text-[9.5px] tracking-[0.16em] text-brown"
     >
       <span className={lang === "ko" ? "text-burgundy" : "opacity-60"}>KO</span>
       <span className="mx-1.5 opacity-40">/</span>
@@ -67,7 +67,7 @@ export function Header({ lang, nav, brand, menuLabel, closeLabel, switchLabel }:
               key={n.key}
               href={n.href}
               aria-current={isActive(n.href) ? "page" : undefined}
-              className={`font-title text-[1.0rem] tracking-[0.14em] uppercase transition-colors hover:text-burgundy ${
+              className={`font-title text-[14px] tracking-[0.14em] uppercase transition-colors hover:text-burgundy ${
                 isActive(n.href) ? "text-burgundy" : "text-brown"
               }`}
             >
@@ -116,7 +116,7 @@ export function Header({ lang, nav, brand, menuLabel, closeLabel, switchLabel }:
               href={n.href}
               onClick={() => setOpen(false)}
               aria-current={isActive(n.href) ? "page" : undefined}
-              className="flex items-baseline gap-4 border-b border-[var(--rule)] py-3 font-title-kr text-[1rem] text-brown"
+              className="flex items-baseline gap-4 border-b border-[var(--rule)] py-3 font-title-kr text-[14px] text-brown"
             >
               <span className="font-title w-8 text-sm text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
               {n.label}

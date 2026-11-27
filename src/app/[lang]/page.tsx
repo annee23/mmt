@@ -60,15 +60,15 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         />
         <div className="wrap w-full pb-12 pt-32 md:pb-20">
           <p className="rise font-title text-[0.8rem] tracking-[0.2em] text-paper/80 uppercase sm:text-[0.95rem] sm:tracking-[0.3em]">{ui.heroNote}</p>
-          <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[16em] text-right text-[clamp(1.75rem,3.8vw,3.25rem)] leading-[1.08] italic font-medium md:text-left">
+          <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[16em] text-right text-[clamp(16px,2.2vw,30px)] leading-[1.45] italic font-medium max-[640px]:text-[15px] md:text-left">
             {t.hero.philosophy.map((line) => (
               <span key={line} className="block">{line}</span>
             ))}
           </h1>
           <div className="rise rise-3 mt-8 flex flex-wrap items-end justify-between gap-8">
             <div>
-              <p className={`${titleFont} text-2xl md:text-2xl`}>{t.hero.name}</p>
-              <p className="mt-1 text-[0.98rem] text-paper/85">{t.hero.role}</p>
+              <p className={`${titleFont} text-[clamp(48px,7.5vw,112px)] leading-[0.86]`}>{t.hero.name}</p>
+              <p className="mt-1 text-[14px] text-paper/85">{t.hero.role}</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Link href={`/${lang}/program`} className="btn btn-light">
@@ -104,13 +104,13 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           </div>
           <div className="md:col-span-7 md:pt-6">
             <Chapter no="01" label={ch.journey} />
-            <h2 id="journey-title" className={`${titleFont} mt-6 text-[clamp(1.41rem,2.9vw,2.3rem)]`}>
+            <h2 id="journey-title" className={`${titleFont} mt-6 text-[var(--display-md)]`}>
               {t.hero.name}
               <span className="mt-2 block font-title text-[0.5em] italic font-normal text-bronze-deep">{t.hero.role}</span>
             </h2>
-            <div className="prose-body mt-10 max-w-[38rem] text-[0.97rem] leading-[1.95]">
+            <div className="prose-body mt-10 max-w-[38rem]">
               {t.hero.bio.map((p, i) => (
-                <p key={i} className={i === 0 && !isKo ? "dropcap" : i === 0 ? "text-[1.05rem]" : ""}>
+                <p key={i} className={i === 0 && !isKo ? "dropcap" : ""}>
                   <Rich text={p} />
                 </p>
               ))}
@@ -140,7 +140,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         <div className="grid gap-12 md:grid-cols-12 md:gap-14">
           <div className="md:col-span-4">
             <Chapter no="02" label={ch.research} />
-            <h2 id="research-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
+            <h2 id="research-title" className={`${titleFont} mt-6 text-[var(--display-md)]`}>
               {t.research.heading}
             </h2>
             <figure className="mt-10 max-w-xs">
@@ -178,7 +178,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       {/* recommendations and advisory board */}
       <section id="recommendations" aria-labelledby="recommendations-title" className="wrap scroll-mt-24 py-20 md:py-32">
         <Chapter no="04" label={isKo ? "RECOMMENDATION" : "RECOMMENDATIONS"} />
-        <h2 id="recommendations-title" className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>
+        <h2 id="recommendations-title" className={`${titleFont} mt-6 text-[var(--display-md)]`}>
           {t.recommendation.heading}
         </h2>
         <p className="mt-5 max-w-3xl text-brown/80">{t.recommendation.intro}</p>
@@ -196,7 +196,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                   <p className="mt-2 text-sm text-brown/75">{role}</p>
                   <p className="mt-1 text-sm text-brown/75">{affiliation}</p>
                 </header>
-                <div className={`prose-body md:col-span-9 md:max-w-3xl ${isKo ? "leading-[1.95]" : "font-title text-[1.15rem] leading-[1.7]"}`}>
+                <div className={`prose-body md:col-span-9 md:max-w-3xl ${isKo ? "" : "font-title text-[1.15rem] leading-[1.7]"}`}>
                   {paragraphs.map((paragraph, k) => <p key={k}>{paragraph}</p>)}
                 </div>
               </article>
@@ -206,7 +206,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
         <div className="mt-20 border-t border-[var(--rule-strong)] pt-10">
           <Chapter no="05" label="ADVISORY BOARD" />
-          <h3 className={`${titleFont} mt-6 text-[clamp(1.34rem,2.6vw,2.11rem)]`}>{t.advisoryBoard.heading}</h3>
+          <h3 className={`${titleFont} mt-6 text-[var(--display-md)]`}>{t.advisoryBoard.heading}</h3>
           <p className="mt-5 max-w-3xl text-brown/80">{t.advisoryBoard.description}</p>
           <ul className="mt-10 grid gap-10 md:grid-cols-3">
             {t.advisoryBoard.members.map((member, i) => (
@@ -214,7 +214,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                 <span className="font-title text-lg text-glow-pink">{String(i + 1).padStart(2, "0")}</span>
                 <p className={`${titleFont} mt-3 text-xl`} lang="ko">{member.linesKo[0]}</p>
                 <p className="mt-1 font-title text-base text-brown/65" lang="en">{member.linesEn[0]}</p>
-                <ul className="mt-4 space-y-1.5 text-[0.95rem] text-brown/80">
+                <ul className="mt-4 space-y-1.5 text-sm text-brown/80">
                   {member.linesKo.slice(1).map((line, k) => (
                     <li key={`ko-${k}`} lang="ko">
                       {line}

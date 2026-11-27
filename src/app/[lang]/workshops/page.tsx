@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Chapter, Paragraphs } from "@/components/ui";
-import { Photo, dimsOf } from "@/components/Photo";
+import { Photo } from "@/components/Photo";
 import { getContent } from "@/lib/content";
 import { isLang } from "@/lib/i18n";
 
@@ -22,7 +22,7 @@ export default async function WorkshopsPage({ params }: PageProps<"/[lang]/works
     <div className="wrap pb-24 pt-14 md:pt-24">
       <header>
         <Chapter no="07" label={t.workshops.eyebrow} />
-        <h1 className={`${titleFont} mt-6 text-[clamp(1.62rem,4.1vw,3.19rem)]`}>{t.workshops.heading}</h1>
+        <h1 className={`${titleFont} mt-6 text-[var(--display-md)]`}>{t.workshops.heading}</h1>
       </header>
       <ol className="mt-16 flex flex-col gap-[104px] md:mt-[104px]">
         {t.workshops.items.map((item, i) => {
@@ -33,26 +33,12 @@ export default async function WorkshopsPage({ params }: PageProps<"/[lang]/works
 
           const media = stacked ? (
             <div className="flex flex-col gap-6">
-              {(() => {
-                const largestIndex = images.reduce((best, src, k) => {
-                  const [bw, bh] = dimsOf(images[best]);
-                  const [w, h] = dimsOf(src);
-                  return w * h > bw * bh ? k : best;
-                }, 0);
-                const smaller = images.filter((_, k) => k !== largestIndex);
-                return (
-                  <>
-                    {smaller.length > 1 && (
-                      <div className="grid grid-cols-2 gap-6">
-                        {smaller.map((src, k) => (
-                          <Photo key={src} src={src} alt={`${item.title} ${k + 1}`} sizes="(min-width:768px) 22vw, 50vw" plain />
-                        ))}
-                      </div>
-                    )}
-                    <Photo src={images[largestIndex]} alt={`${item.title} ${largestIndex + 1}`} sizes="(min-width:768px) 40vw, 100vw" plain />
-                  </>
-                );
-              })()}
+              <div className="grid grid-cols-2 gap-6">
+                {images.slice(0, -1).map((src, k) => (
+                  <Photo key={src} src={src} alt={`${item.title} ${k + 1}`} sizes="(min-width:768px) 22vw, 50vw" plain />
+                ))}
+              </div>
+              <Photo src={images[images.length - 1]} alt={`${item.title} ${images.length}`} sizes="(min-width:768px) 40vw, 100vw" plain />
             </div>
           ) : (
             <div className={wide ? "flex items-start gap-6" : ""}>
