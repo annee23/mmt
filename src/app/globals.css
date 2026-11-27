@@ -156,13 +156,12 @@ b {
 
   .research-gallery {
     display: grid;
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
   @media (min-width: 48rem) {
     .research-gallery {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.5rem;
+      grid-template-columns: var(--research-gallery-columns);
       max-width: 70%;
     }
   }
