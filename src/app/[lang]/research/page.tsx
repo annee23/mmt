@@ -38,7 +38,15 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
                 <>
                   <div className="research-gallery">
                     {images.map((src, k) => (
-                      <Photo key={src} src={src} alt={`${item.title} ${k + 1}`} sizes="(min-width:768px) 40vw, 100vw" plain className="p-0" />
+                      <Photo
+                        key={src}
+                        src={src}
+                        alt={`${item.title} ${k + 1}`}
+                        sizes="(min-width:768px) 40vw, 100vw"
+                        plain
+                        className="w-full p-0 md:w-fit md:min-w-0 md:max-w-full md:flex-[0_1_auto]"
+                        imageClassName="block h-auto w-full object-contain md:h-[29rem] md:w-auto md:max-w-full"
+                      />
                     ))}
                   </div>
                   <div className="mt-8">
@@ -47,8 +55,8 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
                   </div>
                 </>
               ) : (
-                <div className="grid gap-8 md:grid-cols-12 md:gap-14">
-                  <div className="md:col-span-4">
+                <div className="grid gap-8 md:grid-cols-[minmax(0,36fr)_minmax(0,64fr)] md:gap-16">
+                  <div>
                     {images.map((src, k) => (
                       <Photo key={src} src={src} alt={`${item.title} ${k + 1}`} sizes="(min-width:768px) 35vw, 100vw" plain className="p-0" />
                     ))}

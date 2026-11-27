@@ -165,19 +165,6 @@ b {
       gap: 1.5rem;
       max-width: 70%;
     }
-    .research-gallery .film {
-      flex: 0 1 auto;
-      width: fit-content;
-      min-width: 0;
-      max-width: 100%;
-      padding: 0;
-    }
-    .research-gallery .film img {
-      width: auto;
-      height: 30rem;
-      max-width: 100%;
-      object-fit: contain;
-    }
   }
 
   .plate-caption {
