@@ -59,15 +59,15 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           className="absolute left-1/2 top-5 z-20 h-16 w-16 -translate-x-1/2 object-contain brightness-0 invert md:top-8 md:h-20 md:w-20"
         />
         <div className="wrap w-full pb-12 pt-32 md:pb-20">
-          <p className="rise font-title text-[0.8rem] tracking-[0.2em] text-paper/80 uppercase sm:text-[0.95rem] sm:tracking-[0.3em]">{ui.heroNote}</p>
-          <h1 id="hero-title" className="rise rise-2 font-title mt-5 max-w-[16em] text-right text-[clamp(16px,2.2vw,30px)] leading-[1.45] italic font-medium max-[640px]:text-[15px] md:text-left">
+          <p className="rise font-title text-right text-[0.8rem] tracking-[0.2em] text-paper/80 uppercase sm:text-[0.95rem] sm:tracking-[0.3em] md:text-left">{ui.heroNote}</p>
+          <h1 id="hero-title" className="rise rise-2 font-title mt-5 ml-auto max-w-[16em] text-right text-[clamp(16px,2.2vw,30px)] leading-[1.45] italic font-medium max-[640px]:text-[15px] md:ml-0 md:text-left">
             {t.hero.philosophy.map((line) => (
               <span key={line} className="block">{line}</span>
             ))}
           </h1>
           <div className="rise rise-3 mt-8 flex flex-wrap items-end justify-between gap-8">
             <div>
-              <p className={`${titleFont} text-[clamp(48px,7.5vw,112px)] leading-[0.86]`}>{t.hero.name}</p>
+              <p className={`${titleFont} text-[clamp(40px,6.2vw,88px)] leading-[0.86]`}>{t.hero.name}</p>
               <p className="mt-1 text-[14px] text-paper/85">{t.hero.role}</p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -92,22 +92,13 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       </div>
 
       {/* 01 ABOUT */}
-      <section id="journey" aria-labelledby="journey-title" className="wrap scroll-mt-24 py-20 md:py-32">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-14">
+      <section id="journey" aria-label={ch.journey} className="wrap scroll-mt-24 py-20 md:py-32">
+        <div className="grid gap-8 md:grid-cols-12 md:gap-14">
           <div className="md:col-span-5">
-            <div className="md:sticky md:top-28">
-              <Photo src="/images/performances/perf-19.jpg" alt={isKo ? "연주 중인 진사랑" : "Jin Sarang playing the didgeridoo"} ratio="4/5" sizes="(min-width:768px) 40vw, 100vw" />
-              <p className="plate-caption mt-3">
-                {ui.plate} I — {t.hero.name}
-              </p>
-            </div>
+            <p className={`${titleFont} text-[clamp(48px,8vw,96px)] leading-none`}>{t.hero.name}</p>
           </div>
-          <div className="md:col-span-7 md:pt-6">
+          <div className="md:col-span-7">
             <Chapter no="01" label={ch.journey} />
-            <h2 id="journey-title" className={`${titleFont} mt-6 text-[var(--display-md)]`}>
-              {t.hero.name}
-              <span className="mt-2 block font-title text-[0.5em] italic font-normal text-bronze-deep">{t.hero.role}</span>
-            </h2>
             <div className="prose-body mt-10 max-w-[38rem]">
               {t.hero.bio.map((p, i) => (
                 <p key={i} className={i === 0 && !isKo ? "dropcap" : ""}>
@@ -201,10 +192,11 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                   <Photo
                     src={letter.photo}
                     alt={name}
+                    ratio="4/5"
                     fill
                     plain
                     sizes="(min-width:1025px) 45vw, (min-width:768px) 420px, 100vw"
-                    className="max-[1024px]:mx-auto max-[1024px]:aspect-[4/5] max-[1024px]:w-full max-[1024px]:max-w-[420px]"
+                    className="mx-auto w-full max-[1024px]:max-w-[420px]"
                   />
                 ) : (
                   <header className="md:col-span-3">

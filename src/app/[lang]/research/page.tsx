@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Chapter, Paragraphs, safeHref } from "@/components/ui";
 import { Photo } from "@/components/Photo";
-import { EmbodiedDiagram } from "@/components/EmbodiedDiagram";
 import { getContent } from "@/lib/content";
 import { getUI, isLang } from "@/lib/i18n";
 import { getMediumPosts } from "@/lib/medium";
@@ -30,34 +29,7 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
         <h1 className={`${titleFont} mt-6 text-[clamp(1.62rem,4.1vw,3.19rem)]`}>{t.research.heading}</h1>
       </header>
 
-      <section aria-label={t.program.approach.heading} className="mt-12 border-y border-[var(--rule)] py-10 md:py-14">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
-          <div className="lg:col-span-4">
-            <Chapter no="02" label={ui.chapters.practice} />
-            <h2 className={`${titleFont} mt-5 text-2xl`}>{t.program.approach.heading}</h2>
-            <div className="mt-7 space-y-7">
-              {[
-                [t.program.approach.musicTherapyTitle, t.program.approach.musicTherapyBody],
-                [t.program.approach.humanisticTitle, t.program.approach.humanisticBody],
-              ].map(([title, body]) => (
-                <div key={title as string}>
-                  <h3 className="font-title text-lg italic">{title as string}</h3>
-                  <div className="prose-body mt-2 text-[0.95rem]">
-                    {(body as string[]).map((paragraph, i) => (
-                      <p key={i}>{paragraph}</p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="lg:col-span-8">
-            <EmbodiedDiagram lang={lang} />
-          </div>
-        </div>
-      </section>
-
-      <section aria-label={t.thesis.heading} className="mt-16 grid gap-10 border-t border-[var(--rule-strong)] pt-10 md:grid-cols-12 md:gap-14">
+      <section aria-label={t.thesis.heading} className="mt-12 grid gap-10 border-t border-[var(--rule-strong)] pt-10 md:grid-cols-12 md:gap-14">
         <div className="md:col-span-4">
           <h2 className={`${titleFont} text-2xl`}>{t.thesis.heading}</h2>
           {t.thesis.eyebrow && <p className="font-title mt-2 tracking-[0.2em] text-bronze-deep uppercase">{t.thesis.eyebrow}</p>}

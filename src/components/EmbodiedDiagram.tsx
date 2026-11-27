@@ -1,15 +1,10 @@
+import Image from "next/image";
 import type { Lang } from "@/lib/i18n";
 
 const COPY = {
   ko: {
     title: "디저리두 기반 체화된 경청",
     subtitle: "호흡 · 소리 · 진동 · 알아차림",
-    venn: {
-      awareness: ["Awareness", "알아차림", "감각, 감정, 신체적 반응을 알아차림"],
-      listening: ["Listening", "듣기", "소리와 진동을 통해 지금 이 순간에 머묾"],
-      breath: ["Breath & Vibration", "호흡과 진동", "디저리두의 드론 소리와 함께 이완된 호흡과 진동을 경험"],
-      center: ["EMBODIED", "LISTENING", "체화된 경청"],
-    },
     processTitle: "체화된 경청의 과정",
     steps: [
       ["BREATH", "호흡", "호흡과 함께 움직이는 신체를 알아차립니다."],
@@ -24,12 +19,6 @@ const COPY = {
   en: {
     title: "Didgeridoo-based Embodied Listening",
     subtitle: "Breath · Sound · Vibration · Awareness",
-    venn: {
-      awareness: ["Awareness", "알아차림", "Notice your sensations, emotions and bodily responses."],
-      listening: ["Listening", "듣기", "Open to the sound, vibration and the present moments."],
-      breath: ["Breath & Vibration", "호흡과 진동", "Connect through your breath, sounds and bodily resonance."],
-      center: ["EMBODIED", "LISTENING", "체화된 경청"],
-    },
     processTitle: "The Process of Embodied Listening",
     steps: [
       ["BREATH", "호흡", "Notice how the body moves with the breath."],
@@ -89,10 +78,12 @@ function Pictogram({ i }: { i: number }) {
   );
 }
 
-/** Original pictogram-style redraw of the "Embodied Listening" diagram (vector, bilingual, responsive). */
 export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; className?: string }) {
   const c = COPY[lang];
   const isKo = lang === "ko";
+  const diagramAlt = isKo
+    ? "알아차림, 듣기, 호흡과 진동이 체화된 경청으로 연결되는 다이어그램"
+    : "Diagram showing awareness, listening, breath and vibration coming together as embodied listening.";
   return (
     <figure className={`text-brown ${className}`} aria-label={c.title}>
       <div className="mx-auto max-w-3xl text-center">
@@ -103,54 +94,14 @@ export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; classNam
 
       <div className="mt-8 grid gap-10 md:grid-cols-[1.15fr_1fr] md:gap-12">
         <div>
-          <svg
-            viewBox="0 0 520 500"
-            role="img"
-            aria-label={c.title}
-            className="mx-auto h-auto w-full max-w-[720px] overflow-visible"
-          >
-            <g fill="none" stroke="#a78e6a" strokeWidth="2">
-              <circle cx="165" cy="155" r="125" />
-              <circle cx="355" cy="155" r="125" />
-              <circle cx="260" cy="300" r="125" />
-            </g>
-            <g fill="#3e3129" textAnchor="middle">
-              <text x="165" y="82" fontFamily="Cormorant Garamond, serif" fontSize="28">Awareness</text>
-              <text x="165" y="112" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="22">알아차림</text>
-              <text x="165" y="142" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="16" fill="#7d6a4b">감각, 감정, 신체적 반응을</text>
-              <text x="165" y="162" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="16" fill="#7d6a4b">알아차림</text>
-              <text x="165" y="202" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">Notice your sensations,</text>
-              <text x="165" y="222" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">emotions and bodily</text>
-              <text x="165" y="242" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">responses.</text>
-
-              <text x="355" y="82" fontFamily="Cormorant Garamond, serif" fontSize="28">Listening</text>
-              <text x="355" y="112" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="22">듣기</text>
-              <text x="355" y="142" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="16" fill="#7d6a4b">소리와 진동을 통해</text>
-              <text x="355" y="162" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="16" fill="#7d6a4b">지금 이 순간에 머묾</text>
-              <text x="355" y="202" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">Open to the sound,</text>
-              <text x="355" y="222" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">vibration and the</text>
-              <text x="355" y="242" fontFamily="Cormorant Garamond, serif" fontSize="15" fontStyle="italic" fill="#7d6a4b">present moments.</text>
-
-              <text x="260" y="350" fontFamily="Cormorant Garamond, serif" fontSize="19">Breath &amp; Vibration</text>
-              <text x="260" y="372" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="17">호흡과 진동</text>
-              <text x="260" y="396" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="12" fill="#7d6a4b">디저리두의 드론 소리와 함께</text>
-              <text x="260" y="412" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="12" fill="#7d6a4b">이완된 호흡과 진동을 경험</text>
-              <text x="260" y="438" fontFamily="Cormorant Garamond, serif" fontSize="11" fontStyle="italic" fill="#7d6a4b">Connect through breath, sound and resonance.</text>
-
-              <text x="260" y="220" fontFamily="Cormorant Garamond, serif" fontSize="17" fontWeight="400" letterSpacing="1">EMBODIED</text>
-              <text x="260" y="240" fontFamily="Cormorant Garamond, serif" fontSize="17" fontWeight="400" letterSpacing="1">LISTENING</text>
-              <text x="260" y="264" fontFamily="Noto Serif KR, Pretendard Variable, sans-serif" fontSize="18" fontWeight="400">체화된 경청</text>
-              <text x="260" y="284" fontFamily="Cormorant Garamond, serif" fontSize="13" fontStyle="italic" fill="#7d6a4b">Listening to sound and body.</text>
-            </g>
-          </svg>
-          <ul className="mx-auto mt-6 max-w-md space-y-2 text-[0.85rem] leading-relaxed text-brown/80">
-            {[c.venn.awareness, c.venn.listening, c.venn.breath].map(([en, , d]) => (
-              <li key={en}>
-                <span className="font-title mr-2 text-[0.95rem] italic">{en}</span>
-                {d}
-              </li>
-            ))}
-          </ul>
+          <Image
+            src="/images/program/embodied-listening-diagram.png"
+            alt={diagramAlt}
+            width={835}
+            height={768}
+            sizes="(min-width: 768px) 55vw, 100vw"
+            className="mx-auto h-auto w-full max-w-[720px] object-contain"
+          />
         </div>
 
         <div>

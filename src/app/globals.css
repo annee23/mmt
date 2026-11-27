@@ -100,8 +100,16 @@ b {
 .prose-body p,
 .prose-body li,
 .prose-body blockquote {
-  text-align: justify;
-  text-justify: inter-word;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .prose-body p,
+  .prose-body li,
+  .prose-body blockquote {
+    text-align: justify;
+    text-justify: inter-word;
+  }
 }
 
 .prose-body {
