@@ -41,7 +41,7 @@ export default async function WorkshopsPage({ params }: PageProps<"/[lang]/works
             </div>
           ) : stacked ? (
             <div className="flex flex-col gap-6">
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 items-start gap-6">
                 {images.slice(0, -1).map((src, k) => (
                   <Photo key={src} src={src} alt={`${item.title} ${k + 1}`} sizes="(min-width:768px) 22vw, 50vw" plain />
                 ))}
