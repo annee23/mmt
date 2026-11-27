@@ -270,14 +270,14 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* gratitude */}
-      <section aria-label="Cultural respect and gratitude" className="wrap py-20 text-center md:py-28">
-        <div lang="en">
+      <section aria-label="Cultural respect and gratitude" className="wrap flex flex-col border-t border-[var(--rule-strong)] py-20 text-center md:py-28">
+        <div lang="en" className={lang === "ko" ? "order-2 mt-12" : ""}>
           <h2 className="font-title text-xl tracking-[0.08em] text-bronze-deep md:text-2xl">{enContent.culturalRespect.titleEn}</h2>
           <div className="font-title mx-auto mt-6 max-w-4xl space-y-4 text-[1.05rem] leading-[1.6] text-brown/80">
             {enContent.culturalRespect.bodyEn.map((line) => <p key={line}>{line}</p>)}
           </div>
         </div>
-        <div lang="ko" className="mt-12">
+        <div lang="ko" className={lang === "ko" ? "" : "mt-12"}>
           <h2 className="font-title-kr text-xl tracking-[0.08em] text-bronze-deep md:text-2xl">{koContent.culturalRespect.titleKo}</h2>
           <div className="font-title-kr mx-auto mt-6 max-w-4xl space-y-4 text-[1.05rem] leading-[1.6] text-brown/80">
             {koContent.culturalRespect.bodyKo.map((line) => <p key={line}>{line}</p>)}
