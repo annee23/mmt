@@ -232,15 +232,37 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                 <span className="grid h-14 w-14 place-items-center rounded-full border border-brown font-title text-base">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="font-title mt-5 text-lg uppercase" lang="en">{member.linesEn[0]}</p>
-                <ul className="mt-4 space-y-1.5 text-sm leading-relaxed text-brown/75" lang="en">
-                  {member.linesEn.slice(1).map((line) => <li key={line}>{line}</li>)}
-                </ul>
+                {isKo ? (
+                  <div className="md:min-h-[14rem]" lang="ko">
+                    <p className={`${titleFont} mt-5 text-sm`}>{member.linesKo[0]}</p>
+                    <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-brown/75">
+                      {member.linesKo.slice(1).map((line) => <li key={line}>{line}</li>)}
+                    </ul>
+                  </div>
+                ) : (
+                  <div className="md:min-h-[14rem]" lang="en">
+                    <p className="font-title mt-5 text-lg uppercase">{member.linesEn[0]}</p>
+                    <ul className="mt-4 space-y-1.5 text-sm leading-relaxed text-brown/75">
+                      {member.linesEn.slice(1).map((line) => <li key={line}>{line}</li>)}
+                    </ul>
+                  </div>
+                )}
                 <hr className="my-5 border-[var(--rule)]" />
-                <p className={`${titleFont} text-sm`} lang="ko">{member.linesKo[0]}</p>
-                <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-brown/75" lang="ko">
-                  {member.linesKo.slice(1).map((line) => <li key={line}>{line}</li>)}
-                </ul>
+                {isKo ? (
+                  <div lang="en">
+                    <p className="font-title text-lg uppercase">{member.linesEn[0]}</p>
+                    <ul className="mt-4 space-y-1.5 text-sm leading-relaxed text-brown/75">
+                      {member.linesEn.slice(1).map((line) => <li key={line}>{line}</li>)}
+                    </ul>
+                  </div>
+                ) : (
+                  <div lang="ko">
+                    <p className={`${titleFont} text-sm`}>{member.linesKo[0]}</p>
+                    <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-brown/75">
+                      {member.linesKo.slice(1).map((line) => <li key={line}>{line}</li>)}
+                    </ul>
+                  </div>
+                )}
               </li>
             ))}
           </ul>

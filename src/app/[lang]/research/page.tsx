@@ -48,7 +48,7 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
               <div className="grid gap-10 md:grid-cols-12 md:gap-14">
                 <div className="md:col-span-5">
                   <span className="font-title text-xl text-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
-                  <h2 className={`${titleFont} mt-3 text-[clamp(1.22rem,2.2vw,1.73rem)]`}>{item.title}</h2>
+                  <h2 className={`${titleFont} mt-3 text-2xl`}>{item.title}</h2>
                   <Paragraphs text={item.description} className="mt-5" />
                   {"link" in item && item.link && (
                     <a href={safeHref(item.link.href)} target="_blank" rel="noopener noreferrer" className="link-u mt-5 inline-block text-[0.95rem] text-burgundy">
