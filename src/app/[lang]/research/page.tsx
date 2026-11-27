@@ -66,7 +66,7 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
                   </div>
                 </>
               ) : (
-                <div className="grid gap-8 md:grid-cols-[minmax(0,36fr)_minmax(0,64fr)] md:gap-5">
+                <div className="grid gap-8 md:grid-cols-[minmax(0,36fr)_minmax(0,64fr)] md:gap-16">
                   <div>
                     {images.map((src, k) => (
                       <Photo key={src} src={src} alt={`${item.title} ${k + 1}`} sizes="(min-width:768px) 35vw, 100vw" plain className="p-0" />
