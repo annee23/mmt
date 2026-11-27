@@ -26,7 +26,7 @@ export default async function RecommendationsPage({ params }: PageProps<"/[lang]
     <div className="wrap pb-24 pt-14 md:pt-24">
       <header>
         <Chapter no="04" label={t.recommendation.eyebrow} />
-        <h1 className={`${titleFont} mt-6 text-[clamp(2.8rem,7vw,5.5rem)]`}>{t.recommendation.heading}</h1>
+        <h1 className={`${titleFont} mt-6 text-[clamp(3.25rem,8vw,6rem)]`}>{t.recommendation.heading}</h1>
         <p className="mt-5 max-w-3xl text-brown/80">{t.recommendation.intro}</p>
       </header>
 
@@ -42,7 +42,7 @@ export default async function RecommendationsPage({ params }: PageProps<"/[lang]
                 {letter.photo && (
                   <Photo src={letter.photo} alt={name} ratio="1/1" sizes="(min-width:768px) 20vw, 60vw" className="mb-5 max-w-[14rem]" />
                 )}
-                <p className={`${titleFont} text-xl`}>{name}</p>
+                <p className={`${titleFont} text-2xl`}>{name}</p>
                 <p className="mt-2 text-sm text-brown/75">{role}</p>
                 <p className="mt-1 text-sm text-brown/75">{affiliation}</p>
               </header>
@@ -56,7 +56,7 @@ export default async function RecommendationsPage({ params }: PageProps<"/[lang]
 
       <section aria-labelledby="advisory-title" className="mt-20 border-t border-[var(--rule-strong)] pt-10">
         <Chapter no="05" label={t.advisoryBoard.eyebrow} />
-        <h2 id="advisory-title" className={`${titleFont} mt-6 text-[clamp(2rem,4vw,3rem)]`}>
+        <h2 id="advisory-title" className={`${titleFont} mt-6 text-[clamp(2.25rem,4.5vw,3.25rem)]`}>
           {t.advisoryBoard.heading}
         </h2>
         <p className="mt-5 max-w-3xl text-brown/80">{t.advisoryBoard.description}</p>
