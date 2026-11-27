@@ -14,7 +14,8 @@ import { siteUrl } from "@/lib/env";
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!isLang(lang)) notFound();
-  const t = await getContent(lang);
+  const [koContent, enContent] = await Promise.all([getContent("ko"), getContent("en")]);
+  const t = lang === "ko" ? koContent : enContent;
   const ui = getUI(lang);
   const isKo = lang === "ko";
   const ch = ui.chapters;
@@ -67,7 +68,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           </h1>
           <div className="rise rise-3 mt-8 flex flex-wrap items-end justify-between gap-8">
             <div>
-              <p className={`${titleFont} text-[clamp(40px,6.2vw,88px)] leading-[0.86]`}>{t.hero.name}</p>
+              <p className={`${titleFont} text-[clamp(32px,5vw,64px)] leading-[0.86]`}>{t.hero.name}</p>
               <p className="mt-1 text-[14px] text-paper/85">{t.hero.role}</p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -95,7 +96,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <section id="journey" aria-label={ch.journey} className="wrap scroll-mt-24 py-20 md:py-32">
         <div className="grid gap-8 md:grid-cols-12 md:gap-14">
           <div className="md:col-span-5">
-            <p className={`${titleFont} text-[clamp(48px,8vw,96px)] leading-none`}>{t.hero.name}</p>
+            <p className={`${titleFont} text-[clamp(36px,5vw,64px)] leading-none`}>{t.hero.name}</p>
           </div>
           <div className="md:col-span-7">
             <Chapter no="01" label={ch.journey} />
@@ -222,42 +223,53 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
         <div className="mt-20 border-t border-[var(--rule-strong)] pt-10">
           <Chapter no="05" label="ADVISORY BOARD" />
-          <h3 className={`${titleFont} mt-6 text-[var(--display-md)]`}>{t.advisoryBoard.heading}</h3>
-          <p className="mt-5 max-w-3xl text-brown/80">{t.advisoryBoard.description}</p>
-          <ul className="mt-10 grid gap-10 md:grid-cols-3">
-            {t.advisoryBoard.members.map((member, i) => (
-              <li key={i} className="border-t border-[var(--rule)] pt-6">
-                <span className="font-title text-lg text-glow-pink">{String(i + 1).padStart(2, "0")}</span>
-                <p className={`${titleFont} mt-3 text-xl`} lang="ko">{member.linesKo[0]}</p>
-                <p className="mt-1 font-title text-base text-brown/65" lang="en">{member.linesEn[0]}</p>
-                <ul className="mt-4 space-y-1.5 text-sm text-brown/80">
-                  {member.linesKo.slice(1).map((line, k) => (
-                    <li key={`ko-${k}`} lang="ko">
-                      {line}
-                      {member.linesEn[k + 1] && <span lang="en" className="mt-1 block text-brown/60">{member.linesEn[k + 1]}</span>}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
+          <section aria-labelledby="advisory-title-en">
+            <h3 id="advisory-title-en" className="font-title mt-6 text-[var(--display-md)]" lang="en">{enContent.advisoryBoard.heading}</h3>
+            <p className="mt-5 max-w-3xl text-brown/80" lang="en">{enContent.advisoryBoard.description}</p>
+            <ul className="mt-10 grid gap-10 md:grid-cols-3">
+              {enContent.advisoryBoard.members.map((member, i) => (
+                <li key={i} className="border-t border-[var(--rule)] pt-6" lang="en">
+                  <span className="font-title text-lg text-glow-pink">{String(i + 1).padStart(2, "0")}</span>
+                  <p className="font-title mt-3 text-xl">{member.linesEn[0]}</p>
+                  <ul className="mt-4 space-y-1.5 text-sm text-brown/80">
+                    {member.linesEn.slice(1).map((line) => <li key={line}>{line}</li>)}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section aria-labelledby="advisory-title-ko" className="mt-12 border-t border-[var(--rule-strong)] pt-10">
+            <h3 id="advisory-title-ko" className="font-title-kr text-[var(--display-md)]" lang="ko">{koContent.advisoryBoard.heading}</h3>
+            <p className="mt-5 max-w-3xl text-brown/80" lang="ko">{koContent.advisoryBoard.description}</p>
+            <ul className="mt-10 grid gap-10 md:grid-cols-3">
+              {koContent.advisoryBoard.members.map((member, i) => (
+                <li key={i} className="border-t border-[var(--rule)] pt-6" lang="ko">
+                  <span className="font-title text-lg text-glow-pink">{String(i + 1).padStart(2, "0")}</span>
+                  <p className="font-title-kr mt-3 text-xl">{member.linesKo[0]}</p>
+                  <ul className="mt-4 space-y-1.5 text-sm text-brown/80">
+                    {member.linesKo.slice(1).map((line) => <li key={line}>{line}</li>)}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </section>
         </div>
       </section>
 
       {/* gratitude */}
-      <section aria-label={isKo ? t.culturalRespect.titleKo : t.culturalRespect.titleEn} className="wrap py-20 text-center md:py-28">
-        <p className="font-title text-base tracking-[0.2em] text-bronze-deep uppercase">
-          {t.culturalRespect.titleKo} / {t.culturalRespect.titleEn}
-        </p>
-        <div className="font-title mx-auto mt-5 max-w-3xl space-y-2 text-[1.05rem] italic leading-[1.45]">
-          {t.culturalRespect.bodyKo.map((line, i) => (
-            <div key={line}>
-              <p lang="ko">{line}</p>
-              {t.culturalRespect.bodyEn[i] && (
-                <p lang="en" className="mt-1 text-[0.72em] not-italic text-brown/70">{t.culturalRespect.bodyEn[i]}</p>
-              )}
-            </div>
-          ))}
+      <section aria-label="Cultural respect and gratitude" className="wrap py-20 text-center md:py-28">
+        <div lang="en">
+          <h2 className="font-title text-base tracking-[0.08em] text-bronze-deep">{enContent.culturalRespect.titleEn}</h2>
+          <div className="font-title mx-auto mt-6 max-w-4xl space-y-4 text-[1.05rem] leading-[1.6] text-brown/80">
+            {enContent.culturalRespect.bodyEn.map((line) => <p key={line}>{line}</p>)}
+          </div>
+        </div>
+        <hr className="my-10 border-[var(--rule-strong)]" />
+        <div lang="ko">
+          <h2 className="font-title-kr text-base tracking-[0.08em] text-bronze-deep">{koContent.culturalRespect.titleKo}</h2>
+          <div className="font-title-kr mx-auto mt-6 max-w-4xl space-y-4 text-[1.05rem] leading-[1.6] text-brown/80">
+            {koContent.culturalRespect.bodyKo.map((line) => <p key={line}>{line}</p>)}
+          </div>
         </div>
       </section>
 

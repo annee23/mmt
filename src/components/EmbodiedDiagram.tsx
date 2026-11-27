@@ -97,7 +97,7 @@ export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; classNam
           <Image
             src="/images/program/embodied-listening-diagram.png"
             alt={diagramAlt}
-            width={835}
+            width={840}
             height={768}
             sizes="(min-width: 768px) 55vw, 100vw"
             className="mx-auto h-auto w-full max-w-[720px] object-contain"

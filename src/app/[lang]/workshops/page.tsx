@@ -31,7 +31,15 @@ export default async function WorkshopsPage({ params }: PageProps<"/[lang]/works
           const wide = images.length > 1 && !stacked;
           const reverse = i % 2 === 1;
 
-          const media = stacked ? (
+          const media = i === 0 && images.length >= 3 ? (
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-[3fr_5fr] gap-4">
+                <Photo src={images[0]} alt={`${item.title} 1`} ratio="4/5" sizes="(min-width:768px) 18vw, 35vw" />
+                <Photo src={images[1]} alt={`${item.title} 2`} ratio="4/3" sizes="(min-width:768px) 30vw, 60vw" />
+              </div>
+              <Photo src={images[2]} alt={`${item.title} 3`} sizes="(min-width:768px) 55vw, 100vw" plain />
+            </div>
+          ) : stacked ? (
             <div className="flex flex-col gap-6">
               <div className="grid grid-cols-2 gap-6">
                 {images.slice(0, -1).map((src, k) => (
