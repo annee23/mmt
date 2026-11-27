@@ -17,11 +17,12 @@ export function Footer({ lang, t, ui }: { lang: Lang; t: Content; ui: UI }) {
       <div className="wrap grid gap-12 py-16 md:grid-cols-12 md:py-20">
         <div className="md:col-span-5">
           <Image
-            src="/images/brand/jin-sarang-logo-white.png"
+            src="/images/brand/jin-sarang-logo-white.webp"
             alt="Jin Sarang, medical music therapist and didgeridoo practitioner"
             width={485}
             height={615}
             sizes="152px"
+            unoptimized
             className="h-48 w-auto object-contain"
           />
           <p className="font-title mt-6 text-lg italic text-bronze">{ui.footer.archive}</p>

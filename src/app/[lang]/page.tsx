@@ -51,12 +51,13 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         />
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-[#241b15]/85 via-[#241b15]/35 to-[#241b15]/5 md:bg-gradient-to-r md:from-[#241b15]/80 md:via-[#241b15]/30 md:to-transparent" />
         <Image
-          src="/images/brand/heart-snake.png"
+          src="/images/brand/heart-snake.webp"
           alt=""
           width={700}
           height={700}
           sizes="72px"
           priority
+          unoptimized
           className="absolute left-1/2 top-5 z-20 h-16 w-16 -translate-x-1/2 object-contain brightness-0 invert md:top-8 md:h-20 md:w-20"
         />
         <div className="wrap w-full pb-12 pt-32 md:pb-20">
@@ -69,7 +70,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           <div className="rise rise-3 mt-8 flex flex-wrap items-end justify-between gap-8">
             <div>
               <p className={`${titleFont} text-[clamp(32px,5vw,64px)] leading-[0.86]`}>{t.hero.name}</p>
-              <p className="mt-1 text-[14px] text-paper/85">{t.hero.role}</p>
+              <p className="mt-4 text-[14px] text-paper/85">{t.hero.role}</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Link href={`/${lang}/program`} className="btn btn-light">
@@ -197,7 +198,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                     fill
                     plain
                     sizes="(min-width:1025px) 45vw, (min-width:768px) 420px, 100vw"
-                    className="mx-auto w-full max-[1024px]:max-w-[420px]"
+                    className="mx-auto w-full max-[1024px]:max-w-[380px] min-[1025px]:max-w-[720px]"
                   />
                 ) : (
                   <header className="md:col-span-3">
@@ -223,50 +224,39 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
         <div className="mt-20 border-t border-[var(--rule-strong)] pt-10">
           <Chapter no="05" label="ADVISORY BOARD" />
-          <section aria-labelledby="advisory-title-en">
-            <h3 id="advisory-title-en" className="font-title mt-6 text-[var(--display-md)]" lang="en">{enContent.advisoryBoard.heading}</h3>
-            <p className="mt-5 max-w-3xl text-brown/80" lang="en">{enContent.advisoryBoard.description}</p>
-            <ul className="mt-10 grid gap-10 md:grid-cols-3">
-              {enContent.advisoryBoard.members.map((member, i) => (
-                <li key={i} className="border-t border-[var(--rule)] pt-6" lang="en">
-                  <span className="font-title text-lg text-glow-pink">{String(i + 1).padStart(2, "0")}</span>
-                  <p className="font-title mt-3 text-xl">{member.linesEn[0]}</p>
-                  <ul className="mt-4 space-y-1.5 text-sm text-brown/80">
-                    {member.linesEn.slice(1).map((line) => <li key={line}>{line}</li>)}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </section>
-          <section aria-labelledby="advisory-title-ko" className="mt-12 border-t border-[var(--rule-strong)] pt-10">
-            <h3 id="advisory-title-ko" className="font-title-kr text-[var(--display-md)]" lang="ko">{koContent.advisoryBoard.heading}</h3>
-            <p className="mt-5 max-w-3xl text-brown/80" lang="ko">{koContent.advisoryBoard.description}</p>
-            <ul className="mt-10 grid gap-10 md:grid-cols-3">
-              {koContent.advisoryBoard.members.map((member, i) => (
-                <li key={i} className="border-t border-[var(--rule)] pt-6" lang="ko">
-                  <span className="font-title text-lg text-glow-pink">{String(i + 1).padStart(2, "0")}</span>
-                  <p className="font-title-kr mt-3 text-xl">{member.linesKo[0]}</p>
-                  <ul className="mt-4 space-y-1.5 text-sm text-brown/80">
-                    {member.linesKo.slice(1).map((line) => <li key={line}>{line}</li>)}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </section>
+          <h3 className={`${titleFont} mt-6 text-[var(--display-md)] font-bold`}>{t.advisoryBoard.heading}</h3>
+          <p className="mt-5 max-w-3xl text-brown/80">{t.advisoryBoard.description}</p>
+          <ul className="mt-10 grid gap-10 md:grid-cols-3">
+            {t.advisoryBoard.members.map((member, i) => (
+              <li key={i} className="border-t border-[var(--rule-strong)] pt-5">
+                <span className="grid h-14 w-14 place-items-center rounded-full border border-brown font-title text-base">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="font-title mt-5 text-lg uppercase" lang="en">{member.linesEn[0]}</p>
+                <ul className="mt-4 space-y-1.5 text-sm leading-relaxed text-brown/75" lang="en">
+                  {member.linesEn.slice(1).map((line) => <li key={line}>{line}</li>)}
+                </ul>
+                <hr className="my-5 border-[var(--rule)]" />
+                <p className={`${titleFont} text-sm`} lang="ko">{member.linesKo[0]}</p>
+                <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-brown/75" lang="ko">
+                  {member.linesKo.slice(1).map((line) => <li key={line}>{line}</li>)}
+                </ul>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
       {/* gratitude */}
       <section aria-label="Cultural respect and gratitude" className="wrap py-20 text-center md:py-28">
         <div lang="en">
-          <h2 className="font-title text-base tracking-[0.08em] text-bronze-deep">{enContent.culturalRespect.titleEn}</h2>
+          <h2 className="font-title text-xl tracking-[0.08em] text-bronze-deep md:text-2xl">{enContent.culturalRespect.titleEn}</h2>
           <div className="font-title mx-auto mt-6 max-w-4xl space-y-4 text-[1.05rem] leading-[1.6] text-brown/80">
             {enContent.culturalRespect.bodyEn.map((line) => <p key={line}>{line}</p>)}
           </div>
         </div>
-        <hr className="my-10 border-[var(--rule-strong)]" />
-        <div lang="ko">
-          <h2 className="font-title-kr text-base tracking-[0.08em] text-bronze-deep">{koContent.culturalRespect.titleKo}</h2>
+        <div lang="ko" className="mt-12">
+          <h2 className="font-title-kr text-xl tracking-[0.08em] text-bronze-deep md:text-2xl">{koContent.culturalRespect.titleKo}</h2>
           <div className="font-title-kr mx-auto mt-6 max-w-4xl space-y-4 text-[1.05rem] leading-[1.6] text-brown/80">
             {koContent.culturalRespect.bodyKo.map((line) => <p key={line}>{line}</p>)}
           </div>

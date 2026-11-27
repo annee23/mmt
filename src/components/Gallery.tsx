@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { dimsOf } from "@/components/Photo";
+import { dimsOf, displayImageSrc } from "@/components/Photo";
 
 type Props = { images: string[]; alt: string; labels: { open: string; prev: string; next: string; close: string } };
 
@@ -56,13 +56,14 @@ export function Gallery({ images, alt, labels }: Props) {
                 }}
               >
                 <Image
-                  src={src}
+                  src={displayImageSrc(src)}
                   alt={`${alt} ${i + 1}`}
                   width={w}
                   height={h}
                   sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                   quality={60}
                   loading={i < 4 ? "eager" : "lazy"}
+                  unoptimized={src.startsWith("/images/")}
                   className="block h-auto w-full"
                 />
               </button>
@@ -82,12 +83,13 @@ export function Gallery({ images, alt, labels }: Props) {
           <div className="flex h-full w-full flex-col items-center justify-center p-4 md:p-10" onClick={(e) => e.target === e.currentTarget && close()}>
             <div className="film film--plain relative max-h-[82vh] max-w-full">
               <Image
-                src={current}
+                src={displayImageSrc(current)}
                 alt={`${alt} ${index! + 1}`}
                 width={cw}
                 height={ch}
                 sizes="100vw"
                 quality={85}
+                unoptimized={current.startsWith("/images/")}
                 className="block max-h-[82vh] w-auto max-w-full object-contain"
               />
             </div>

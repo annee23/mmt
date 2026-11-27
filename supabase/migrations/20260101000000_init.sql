@@ -11,7 +11,7 @@ create schema if not exists private;
 revoke all on schema private from public;
 grant usage on schema private to anon, authenticated, service_role;
 
-create table public.admin_profiles (
+create table if not exists public.admin_profiles (
   user_id uuid primary key references auth.users (id) on delete cascade,
   email text not null,
   display_name text,

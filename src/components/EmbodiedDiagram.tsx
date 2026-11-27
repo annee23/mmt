@@ -95,11 +95,12 @@ export function EmbodiedDiagram({ lang, className = "" }: { lang: Lang; classNam
       <div className="mt-8 grid gap-10 md:grid-cols-[1.15fr_1fr] md:gap-12">
         <div>
           <Image
-            src="/images/program/embodied-listening-diagram.png"
+            src="/images/program/embodied-listening-diagram.webp"
             alt={diagramAlt}
             width={840}
             height={768}
             sizes="(min-width: 768px) 55vw, 100vw"
+            unoptimized
             className="mx-auto h-auto w-full max-w-[720px] object-contain"
           />
         </div>

@@ -85,14 +85,16 @@ export default async function ResearchPage({ params }: PageProps<"/[lang]/resear
             ))}
           </ul>
         ) : null}
-        <a href={safeHref(t.research.writing.href)} target="_blank" rel="noopener noreferrer" className="btn mt-8">
-          {t.research.writing.cta} ↗
-        </a>
-        {"naverHref" in t.research.writing && t.research.writing.naverHref && (
-          <a href={safeHref(t.research.writing.naverHref)} target="_blank" rel="noopener noreferrer" className="btn ml-3 mt-8">
-            {t.research.writing.naverCta} ↗
+        <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap">
+          <a href={safeHref(t.research.writing.href)} target="_blank" rel="noopener noreferrer" className="btn">
+            {t.research.writing.cta} ↗
           </a>
-        )}
+          {"naverHref" in t.research.writing && t.research.writing.naverHref && (
+            <a href={safeHref(t.research.writing.naverHref)} target="_blank" rel="noopener noreferrer" className="btn">
+              {t.research.writing.naverCta} ↗
+            </a>
+          )}
+        </div>
       </section>
     </div>
   );

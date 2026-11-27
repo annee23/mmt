@@ -58,7 +58,7 @@ export function Header({ lang, nav, brand, menuLabel, closeLabel, switchLabel }:
         <div className="wrap flex h-14 items-center justify-between gap-6 md:h-16">
         <Link href={`/${lang}`} aria-label={brand} className="shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/name.png" alt={brand} width={1084} height={439} sizes="120px" className="h-[38px] w-auto md:h-[48px]" />
+          <img src="/images/name.webp" alt={brand} width={1084} height={439} sizes="120px" className="h-[38px] w-auto md:h-[48px]" />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
